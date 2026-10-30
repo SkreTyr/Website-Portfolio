@@ -1,0 +1,3 @@
+<SlidingLogoMarquee className='' reverse /><SlidingLogoMarquee className=''/>
+
+import { SlidingLogoMarquee } from "@/components/lightswind/sliding-logo-marquee"; 

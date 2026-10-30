@@ -10,8 +10,8 @@ interface TooltipContextType {
   content: React.ReactNode;
   config: TooltipConfig;
   triggerRef: React.MutableRefObject<HTMLElement | null>;
-  showTimeoutRef: React.MutableRefObject<NodeJS.Timeout | null>;
-  hideTimeoutRef: React.MutableRefObject<NodeJS.Timeout | null>;
+  showTimeoutRef: React.MutableRefObject<ReturnType<typeof setTimeout> | null>;
+  hideTimeoutRef: React.MutableRefObject<ReturnType<typeof setTimeout> | null>;
   handleMouseEnter: () => void;
   handleMouseLeave: () => void;
 }

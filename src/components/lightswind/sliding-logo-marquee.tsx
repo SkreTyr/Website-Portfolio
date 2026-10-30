@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import LogoImg from "../../assets/CSSlogo.png";
+import LogoImgTwo from "../../assets/HTMLlogo.jpg";
 // Import your actual utility
-import { cn } from "@/lib/utils"; // Assuming this is your actual path
+
 import { Pause, Play } from "lucide-react";
 
 // --- Interfaces (Kept for completeness) ---
@@ -13,7 +16,7 @@ export interface SlidingLogoMarqueeItem {
 }
 
 export interface SlidingLogoMarqueeProps {
-  items: SlidingLogoMarqueeItem[];
+  items?: SlidingLogoMarqueeItem[];
   speed?: number;
   pauseOnHover?: boolean;
   enableBlur?: boolean;
@@ -30,34 +33,41 @@ export interface SlidingLogoMarqueeProps {
   onItemClick?: (item: SlidingLogoMarqueeItem) => void;
   enableSpillEffect?: boolean;
   animationSteps?: number;
+  reverse?: boolean;
   showControls?: boolean;
 }
 
 export function SlidingLogoMarquee({
-  items,
-  speed = 1,
-  pauseOnHover = true,
+  items = [{ id: '1', content: <img src={LogoImg} alt="logo" className="h-10" /> },  {
+    id: "2", 
+    content: <img src={LogoImgTwo} alt="Logo" className="h-10" />
+  },  {
+    id: "2", 
+    content: <img src={LogoImgTwo} alt="Logo" className="h-10" />
+  }],
+  speed = 10,
+  pauseOnHover = false,
   enableBlur = true,
-  blurIntensity = 1,
+  blurIntensity = 5,
   height = "100px",
   width = "100%",
-  gap = "2rem",
+  gap = "1rem",
   scale = 1,
   direction = "horizontal",
   autoPlay = true,
   backgroundColor = '!transparent',
-  showGridBackground = false,
+  showGridBackground = true,
   className,
   onItemClick,
-  enableSpillEffect = false,
-  animationSteps = 8,
-  showControls = true,
+  enableSpillEffect = true,
+  animationSteps = 2,
+  reverse = false,
+  showControls = false,
 }: SlidingLogoMarqueeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
 
-  // CORE FIX: Duplicating the items for a seamless loop
-  const duplicatedItems = useMemo(() => [...items, ...items], [items]);
+
 
   const handleItemClick = (item: SlidingLogoMarqueeItem) => {
     if (item.href) {
@@ -167,6 +177,10 @@ export function SlidingLogoMarquee({
           animation-play-state: paused !important;
         }
 
+        .sliding-marquee-resizable[data-reverse="true"] .sliding-marquee-list {
+          animation-direction: reverse !important;
+        }
+
         /* --- Layout & Effects (Tailwind-Ready/Hybrid) --- */
         .sliding-marquee-resizable {
           overflow: hidden;
@@ -227,6 +241,7 @@ export function SlidingLogoMarquee({
           data-blurring={enableBlur}
           data-play-state={isPlaying ? "running" : "paused"}
           data-spill={enableSpillEffect}
+          data-reverse={reverse}
         >
           <div className="sliding-marquee-inner">
             {enableBlur && (

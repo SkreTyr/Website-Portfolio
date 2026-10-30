@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Phone } from "lucide-react";
+import AutoReveal from '@/components/AutoReveal'; 
 
 interface VisualItem {
   key: number;
@@ -56,6 +57,7 @@ const ImageReveal: React.FC = () => {
       onMouseLeave={onHoverDeactivate}
     >
       {visualData.map((item) => (
+        <AutoReveal>
         <div
           key={item.key}
           className="inline-flex items-center gap-2 rounded-md border border-white/30 bg-white/5 px-5 py-3 text-sm/6 font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer"
@@ -66,6 +68,7 @@ const ImageReveal: React.FC = () => {
             {item.label}
           </span>
         </div>
+        </AutoReveal>
       ))}
 
       {isLargeScreen && focusedItem && (
