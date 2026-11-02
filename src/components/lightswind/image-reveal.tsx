@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Phone } from "lucide-react";
+import contactImage from "@/assets/ContactImageWhite.png";
 import AutoReveal from '@/components/AutoReveal'; 
 
 interface VisualItem {
@@ -14,7 +15,7 @@ interface VisualItem {
 const visualData: VisualItem[] = [
   {
     key: 1,
-    url: "src/assets/ContactImageWhite.png",
+    url: contactImage,
     label: "Get In Touch",
   },
 ];
