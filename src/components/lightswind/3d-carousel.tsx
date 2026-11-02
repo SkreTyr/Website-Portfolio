@@ -1,7 +1,7 @@
 // components/ThreeDCarousel.tsx
 "use client";
 
-import React, {
+import {
   useRef,
   useEffect,
   useState,
@@ -9,7 +9,6 @@ import React, {
 } from "react";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "./card";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export interface ThreeDCarouselItem {
   id: number;
@@ -37,8 +36,8 @@ const ThreeDCarousel = ({
     {
       id: 1,
       title: "Active Wear Innovation",
-      brand: "Nike",
-      description: "Integrating flexible sensors into performance gear to monitor muscle fatigue and heart rate in real-time.",
+      brand: "VEYNS",
+      description: "Order your favorite meals directly from our kitchen for lower prices, exclusive deals, and fast local delivery.",
       tags: ["Sports", "Health", "IoT"],
       imageUrl: "https://images.unsplash.com/photo-1515243061678-14fc18b93935?q=80&w=2940&auto=format&fit=crop",
       link: "#",
@@ -65,10 +64,6 @@ const ThreeDCarousel = ({
   autoRotate = true,
   rotateInterval = 4000,
   cardHeight = 500,
-  title = "From Textile to Intelligence",
-  subtitle = "Customer Cases",
-  tagline = "Explore how our textile sensor technology is revolutionizing multiple industries with intelligent fabric solutions tailored to specific needs.",
-  isMobileSwipe = true,
 }: ThreeDCarouselProps) => {
   const [active, setActive] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -76,7 +71,6 @@ const ThreeDCarousel = ({
   const [isHovering, setIsHovering] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const isMobile = useIsMobile();
   const minSwipeDistance = 50;
 
   useEffect(() => {
@@ -162,19 +156,12 @@ const ThreeDCarousel = ({
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
-                  >
-                    
-                    <div className="relative z-10 text-center text-white">
-                      <h3 className="text-2xl font-bold mb-2">
-                        {item.brand.toUpperCase()}
-                      </h3>
-                      <div className="w-12 h-1 bg-white mx-auto mb-2" />
-                      <p className="text-sm ">{item.title}</p>
-                    </div>
-                  </div>
+>
+
+                   </div>
 
                   <CardContent className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-xl font-bold mb-1 text-foreground text-white">
+                    <h3 className="text-xl font-bold mb-1 text-white">
                       {item.title}
                     </h3>
                     <p className="text-gray-500 text-sm font-medium mb-2">
@@ -198,6 +185,8 @@ const ThreeDCarousel = ({
 
                       <a
                         href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-gray-500 flex items-center relative group"
                         onClick={() => {
                           if (item.link.startsWith("/")) {

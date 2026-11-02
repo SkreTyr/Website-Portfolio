@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import Button from './Button'
 import { TypingText } from './components/lightswind/typing-text'
 import profileImg from './assets/Profile3.jpg'
+import ciscoLogo from './assets/Ciscologo.png'
 import { UserRoundPen } from 'lucide-react'
-import { CornerDownRight } from 'lucide-react';
+import { CornerDownRight, ArrowUpRight } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 import { MailDot } from 'lucide-react';
 import { GraduationCap } from 'lucide-react';
@@ -20,6 +21,7 @@ import Background from '@/Background'
 
 function App() {
   const [atTop, setAtTop] = useState(true)
+  const [typingDone, setTypingDone] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setAtTop(window.scrollY === 0)
@@ -72,17 +74,20 @@ function App() {
             color=""
             letterSpacing=""
             align="center"
-            duration={4}
+            duration={3}
             lockScroll
+            onComplete={() => setTypingDone(true)}
           >
 As a dedicated computer engineering student, I combine a strong technical foundation with a true passion for full stack development.<br />
 I love building responsive web applications, mastering new coding frameworks, and turning creative concepts into vibrant digital reality.
           </TypingText>
           </AutoReveal>
 
-<Button />
+<div className={`transition-opacity duration-300 ${typingDone ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}>
+  <Button />
+</div>
 
-<div className={`transition-opacity duration-300 ease-out ${atTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+<div className={`transition-opacity duration-300 ease-out ${atTop && typingDone ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}>
                   <h3 className='text-[#d4d4d4] font-mono opacity-4 text-sm'>Scroll Down</h3>
                   <ChevronDown className='text-[#d1d1d1] w-4 h-4 animate-bounce md:mt-2 block mx-auto' />
                 </div>
@@ -207,9 +212,9 @@ I love building responsive web applications, mastering new coding frameworks, an
                 <p className='text-gray-500'>2021-Present</p>
               </div>
             </div>
-            <div className='flex-col text-sm mt-5 md:mb-4 font-mono text-center'>
+              <div className='flex items-center justify-center gap-1 text-sm mt-5 md:mb-4 font-mono text-center group'>
               
-              <a href="#" className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a>                        
+              <a href="#" className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/>
             </div>
           </div>
         </div>
@@ -235,53 +240,69 @@ I love building responsive web applications, mastering new coding frameworks, an
         </section>
 
 
-             <section className=" h-auto w-full flex justify-center">
-                <div className="w-full p-5 flex flex-col items-center justify-center sm:w-3/4 md:w-full lg:w-4/5">
+             <section className=" h-auto w-full flex justify-center pb-80 pt-32">
+                <div className="w-full flex flex-col items-center justify-center sm:w-full md:w-full lg:w-4/5">
                 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             Certifications
           </h1>
 </AutoReveal>
-<GlowingCards className=''>
-    <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4">
+<GlowingCards>
+         <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
       
-      <div className='bg-blue-500 w-2/5 h-14 '>
-            <img src='https://images.seeklogo.com/logo-png/21/2/cisco-logo-png_seeklogo-212506.pnghttps://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/3840px-Cisco_logo_blue_2016.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnailhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl1oUI0kORbJaWwIZ5gkc54bQWXUFsEpY6rOnsPR7ktS1bzIzrG2Dp-5o&s=10https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxc5YU3yBQ0R0w_7jSsq7wcpe1vDeZueUQPODIkWGrC70GImQX36QtkuSn&s=10https://translatorswithoutborders.org/wp-content/uploads/2021/12/Cisco-logo.png?ver=1789727092' alt='Logo' />
-      </div>
-    <div className=" flex items-center space-x-2">
-       <BadgeCheck className="w-6 h-6 text-blue-500 font-mono" />
-      <h3>CISCO</h3>
+    
+<div className="grid grid-cols-2 grid-rows-2 gap-4">
+    <div  className=' flex space-x-2 items-center'>
+      <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
+      <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
-    <p className='font-mono text-gray-400 pb-4'>CISCO NETWORKING ACADEMY</p>
+    <div className=' w-20 md:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
+      <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
+    </div>
+    <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
+</div>
+    
     <hr className="border border-[#ffffff38] w-full mt-2 " />
-              <a href="#" className='text-gray-200 hover:text-blue-600 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'>Learn More</a>    
+              <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
   </GlowingCard>
 
-
-      <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md">
+         <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
       
-      <div className='bg-blue-500 w-2/5 h-14 '>
-      </div>
-    <div className=" flex items-center space-x-2">
-       <BadgeCheck className="w-6 h-6 text-blue-500 font-mono" />
-      <h3>CISCO</h3>
+    
+<div className="grid grid-cols-2 grid-rows-2 gap-4">
+    <div  className=' flex space-x-2 items-center'>
+      <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
+      <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
-    <p className='font-mono text-gray-400'>CISCO NETWORKING ACADEMY</p>
+    <div className=' w-20 md:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
+      <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
+    </div>
+    <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
+</div>
+    
     <hr className="border border-[#ffffff38] w-full mt-2 " />
-              <a href="#" className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a>    
+              <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
   </GlowingCard>
 
-      <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md">
+         <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
       
-      <div className='bg-blue-500 w-2/5 h-14 '></div>
-    <div className=" flex items-center space-x-2">
-       <BadgeCheck className="w-6 h-6 text-blue-500 font-mono" />
-      <h3>CISCO</h3>
+    
+<div className="grid grid-cols-2 grid-rows-2 gap-4">
+    <div  className=' flex space-x-2 items-center'>
+      <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
+      <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
-    <p className='font-mono text-gray-400'>CISCO NETWORKING ACADEMY</p>
+    <div className=' w-20 md:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
+      <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
+    </div>
+    <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
+</div>
+    
     <hr className="border border-[#ffffff38] w-full mt-2 " />
-              <a href="#" className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a>    
+              <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
   </GlowingCard>
+     
+
 </GlowingCards>
 
                 </div>

@@ -22,6 +22,7 @@ export interface TypingTextProps {
   align?: "left" | "center" | "right";
   loop?: boolean;
   lockScroll?: boolean;
+  onComplete?: () => void;
 }
 
 export const TypingText = ({
@@ -37,8 +38,16 @@ export const TypingText = ({
   align = "left",
   loop: _loop = false,
   lockScroll = false,
+  onComplete,
 }: TypingTextProps) => {
   const [textContent, setTextContent] = useState<string>("");
+
+  useEffect(() => {
+    if (!onComplete) return
+    const total = (delay + duration) * 1000
+    const t = setTimeout(() => onComplete(), total)
+    return () => clearTimeout(t)
+  }, [delay, duration, onComplete])
 
   useEffect(() => {
     if (!lockScroll) return

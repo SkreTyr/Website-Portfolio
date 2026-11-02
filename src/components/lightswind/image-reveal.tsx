@@ -15,7 +15,7 @@ interface VisualItem {
 const visualData: VisualItem[] = [
   {
     key: 1,
-    url: contactImage,
+    url: contactImage, 
     label: "Get In Touch",
   },
 ];

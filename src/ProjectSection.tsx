@@ -1,14 +1,15 @@
 import ThreeDCarousel from "@/components/lightswind/3d-carousel";
+import veynsImage from "./assets/VeynsWebsite.jpg";
 
 export default function ProjectSection() {
   return <div className=''><ThreeDCarousel items={[  {
       id: 1,
-      title: "Active Wear Innovation",
-      brand: "Nike",
-      description: "Integrating flexible sensors into performance gear to monitor muscle fatigue and heart rate in real-time.",
-      tags: ["Sports", "Health", "IoT"],
-      imageUrl: "https://images.unsplash.com/photo-1515243061678-14fc18b93935?q=80&w=2940&auto=format&fit=crop",
-      link: "#",
+      title: "VEYNS",
+      brand: "Food | Health | Direct Dispatch",
+      description: "A dedicated online ordering system connecting local kitchens directly to customers for fast delivery, real-time tracking, and commission-free ordering.",
+      tags: ["Quality Assurance", "Front-End"],
+      imageUrl: veynsImage,
+      link: "https://veyns-ubec.vercel.app/",
     },
     {
       id: 2,
@@ -27,5 +28,5 @@ export default function ProjectSection() {
       tags: ["Auto", "Safety", "Smart"],
       imageUrl: "https://images.unsplash.com/photo-1561580125-028ce3bfcb25?q=80&w=2940&auto=format&fit=crop",
       link: "#",
-    },]} /></div>
+    },]} isMobileSwipe /></div>
 }
