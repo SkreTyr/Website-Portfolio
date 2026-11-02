@@ -49,10 +49,10 @@ export function AutoReveal({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-[1300ms] ease-out ${
+      className={`transition-all duration-[1500ms] ease-out ${
         isVisible ? visibleTransform : (translate ? `${hiddenTransform} blur-md` : 'opacity-0 blur-md')
       } ${className}`}
-      style={{ filter: isVisible ? 'blur(0px)' : 'blur(5px)' }}
+      style={{ filter: isVisible ? 'blur(0px)' : 'blur(8px)' }}
     >
       {children}
     </div>

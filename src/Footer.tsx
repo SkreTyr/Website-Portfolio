@@ -1,5 +1,5 @@
 function Footer() {
-  return <footer>&copy; {new Date().getFullYear()} Jane Doe</footer>;
+  return <footer className='flex w-2/4 justify-center bg-gray-600'>&copy; {new Date().getFullYear()} Shann Agang</footer>;
 }
 
 export default Footer

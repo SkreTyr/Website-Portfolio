@@ -7,7 +7,7 @@ import React, {
   useState,
   TouchEvent,
 } from "react";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "./card";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -116,11 +116,11 @@ const ThreeDCarousel = ({
   };
 
   const getCardAnimationClass = (index: number) => {
-    if (index === active) return "scale-100 opacity-100 z-20";
+    if (index === active) return "scale-100 z-20";
     if (index === (active + 1) % items.length)
-      return "translate-x-[40%] scale-95 opacity-60 z-10";
+      return "translate-x-[40%] scale-95 opacity-100 z-10";
     if (index === (active - 1 + items.length) % items.length)
-      return "translate-x-[-40%] scale-95 opacity-60 z-10";
+      return "translate-x-[-40%] scale-95 opacity-100 z-10";
     return "scale-90 opacity-0";
   };
 
@@ -132,7 +132,7 @@ const ThreeDCarousel = ({
     >
       <div
         className="w-full px-4 sm:px-6 lg:px-8 
-      min-w-[350px] md:min-w-[1000px] max-w-7xl  "
+      min-w-[320px] md:min-w-[1000px] max-w-7xl  "
       >
         <div
           className="relative overflow-hidden h-[550px] "
@@ -147,12 +147,12 @@ const ThreeDCarousel = ({
             {items.map((item, index) => (
               <div
                 key={item.id}
-                className={`absolute top-0 w-full max-w-md transform transition-all duration-500 ${getCardAnimationClass(
+                className={`bg-[#151515] rounded-xl absolute top-0 w-full max-w-md transform transition-all duration-500 ${getCardAnimationClass(
                   index
                 )}`}
               >
                 <Card
-                  className={`overflow-hidden bg-background h-[${cardHeight}px] border shadow-sm 
+                  className={`overflow-hidden bg-[#151515] h-[${cardHeight}px] border shadow-sm 
                 hover:shadow-md flex flex-col`}
                 >
                   <div
@@ -163,7 +163,7 @@ const ThreeDCarousel = ({
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="absolute inset-0 bg-black/50" />
+                    
                     <div className="relative z-10 text-center text-white">
                       <h3 className="text-2xl font-bold mb-2">
                         {item.brand.toUpperCase()}
@@ -174,7 +174,7 @@ const ThreeDCarousel = ({
                   </div>
 
                   <CardContent className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-xl font-bold mb-1 text-foreground">
+                    <h3 className="text-xl font-bold mb-1 text-foreground text-white">
                       {item.title}
                     </h3>
                     <p className="text-gray-500 text-sm font-medium mb-2">
@@ -189,7 +189,7 @@ const ThreeDCarousel = ({
                         {item.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-gray-50 text-gray-600 rounded-full text-xs animate-pulse-slow"
+                            className="px-2 py-1 bg-[#101010] text-[#f5f5f5] rounded-md text-xs animate-pulse-slow outline outline-1 outline-blue-500"
                           >
                             {tag}
                           </span>
@@ -198,16 +198,16 @@ const ThreeDCarousel = ({
 
                       <a
                         href={item.link}
-                        className="text-gray-500 flex items-center hover:underline relative group"
+                        className="text-gray-500 flex items-center relative group"
                         onClick={() => {
                           if (item.link.startsWith("/")) {
                             window.scrollTo(0, 0);
                           }
                         }}
                       >
-                        <span className="relative z-10">Learn more</span>
-                        <ArrowRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" />
-                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gray-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-0 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</span> 
+                        <ArrowUpRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500" />
+
                       </a>
                     </div>
                   </CardContent>
@@ -216,28 +216,29 @@ const ThreeDCarousel = ({
             ))}
           </div>
 
-          {!isMobile && (
-            <>
-              <button
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-all hover:scale-110"
-                onClick={() =>
-                  setActive((prev) => (prev - 1 + items.length) % items.length)
-                }
-                aria-label="Previous"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-all hover:scale-110"
-                onClick={() => setActive((prev) => (prev + 1) % items.length)}
-                aria-label="Next"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </>
-          )}
+          <button
+            className="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-all hover:scale-110"
+            onClick={() => setActive((prev) => (prev - 1 + items.length) % items.length)}
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-all hover:scale-110"
+            onClick={() => setActive((prev) => (prev + 1) % items.length)}
+            aria-label="Next"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
 
           <div className="absolute bottom-6 left-0 right-0 flex justify-center items-center space-x-3 z-30">
+            <button
+              className="hidden min-[325px]:flex max-[425px]:flex lg:hidden w-8 h-8 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-all hover:scale-110"
+              onClick={() => setActive((prev) => (prev - 1 + items.length) % items.length)}
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
             {items.map((_, idx) => (
               <button
                 key={idx}
@@ -250,6 +251,13 @@ const ThreeDCarousel = ({
                 aria-label={`Go to item ${idx + 1}`}
               />
             ))}
+            <button
+              className="hidden min-[325px]:flex max-[425px]:flex lg:hidden w-8 h-8 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-all hover:scale-110"
+              onClick={() => setActive((prev) => (prev + 1) % items.length)}
+              aria-label="Next"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>

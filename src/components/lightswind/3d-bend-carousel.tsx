@@ -259,7 +259,7 @@ export const ThreeDBendCarousel = forwardRef<
     const lastTimeRef = useRef<number>(0);
     const velocityRef = useRef<number>(0);
     const rafIdRef = useRef<number | null>(null);
-    const wheelDebounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const wheelDebounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [isPlaying, setIsPlaying] = useState<boolean>(autoPlay);

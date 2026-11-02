@@ -197,14 +197,14 @@ async function generateNotification(
 }
 
 export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
-  maxNotifications = 3,
+  maxNotifications = 1,
   autoInterval = 3500,
   autoGenerate = true,
   notifications = [],
   customMessages,
   animationDuration = 400,
   position = "center",
-  width = 320,
+  width = 200,
   showAvatars = true,
   showTimestamps = true,
   className,

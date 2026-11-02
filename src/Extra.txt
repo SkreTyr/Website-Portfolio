@@ -1,3 +1,1 @@
-<SlidingLogoMarquee className='' reverse /><SlidingLogoMarquee className=''/>
-
-import { SlidingLogoMarquee } from "@/components/lightswind/sliding-logo-marquee"; 
+row-span-2 row-start-11 border border-[#ffffff4d] bg-[#171717] p-2 rounded-md  md:row-span-2 md:col-start-3 md:row-start-4

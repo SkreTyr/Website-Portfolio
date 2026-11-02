@@ -22,10 +22,10 @@ function useDockItemSize(
   const mouseDistance = useTransform(mouseX, (val) => {
     if (typeof val !== "number" || isNaN(val)) return 0;
     const rect = ref.current?.getBoundingClientRect() ?? {
-      x: 0,
-      width: baseItemSize,
+      y: 0,
+      height: baseItemSize,
     };
-    return val - rect.x - baseItemSize / 2;
+    return val - rect.y - baseItemSize / 2;
   });
 
   const targetSize = useTransform(
@@ -96,7 +96,7 @@ function DockItem({
   return (
     <motion.div
       ref={ref}
-      style={{ width: size, height: size }}
+      style={{ width: baseItemSize, height: size }}
       onHoverStart={() => isHovered.set(1)}
       onHoverEnd={() => isHovered.set(0)}
       onFocus={() => isHovered.set(1)}
@@ -212,7 +212,7 @@ export default function Dock({
   spring = { mass: 0.1, stiffness: 150, damping: 12 },
   magnification = 70,
   distance = 200,
-  panelHeight = 64,
+  panelHeight = 400,
   dockHeight = 256,
   baseItemSize = 50,
   gap = "gap-4",
@@ -233,7 +233,7 @@ export default function Dock({
   const isHovered = useMotionValue(0);
 
   const maxHeight = useMemo(
-    () => Math.max(dockHeight, magnification + magnification / 2 + 4),
+    () => Math.max(dockHeight, magnification * 2 + 8),
     [magnification, dockHeight]
   );
 
@@ -248,16 +248,16 @@ export default function Dock({
       className="mx-2 flex max-w-full items-center justify-center"
     >
       <motion.div
-        onMouseMove={({ pageX }) => {
+        onMouseMove={({ pageY }) => {
           isHovered.set(1);
-          mouseX.set(pageX);
+          mouseX.set(pageY);
         }}
         onMouseLeave={() => {
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
         className={cn(
-          "absolute bottom-2 left-1/2 -translate-x-1/2 transform flex items-center justify-center w-fit transition-all duration-300",
+          "absolute bottom-2 left-full top-1/2 -translate-y-1/2 transform flex items-center justify-center w-fit transition-all duration-300",
           multiBorder
             ? "p-[3px] rounded-[24px] sm:rounded-[28px] border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/80 dark:bg-zinc-900/80 shadow-lg backdrop-blur-xl"
             : "",
@@ -269,7 +269,7 @@ export default function Dock({
       >
         <div
           className={cn(
-            "flex items-end w-fit rounded-[20px] sm:rounded-[24px] px-4 pb-2 h-full transition-all duration-300",
+            "flex flex-col items-center w-fit rounded-[20px] sm:rounded-[24px] px-4 py-2 h-full transition-all duration-300",
             gap,
             multiBorder
               ? "border border-zinc-200/90 dark:border-zinc-800/90 bg-white/90 dark:bg-black/90 shadow-inner"

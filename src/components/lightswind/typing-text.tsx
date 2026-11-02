@@ -21,6 +21,7 @@ export interface TypingTextProps {
   letterSpacing?: string;
   align?: "left" | "center" | "right";
   loop?: boolean;
+  lockScroll?: boolean;
 }
 
 export const TypingText = ({
@@ -34,9 +35,23 @@ export const TypingText = ({
   color = "text-white",
   letterSpacing = "tracking-wide",
   align = "left",
-  loop = false,
+  loop: _loop = false,
+  lockScroll = false,
 }: TypingTextProps) => {
   const [textContent, setTextContent] = useState<string>("");
+
+  useEffect(() => {
+    if (!lockScroll) return
+    const total = (delay + duration) * 1000
+    document.body.style.overflow = 'hidden'
+    const t = setTimeout(() => {
+      document.body.style.overflow = ''
+    }, total)
+    return () => {
+      clearTimeout(t)
+      document.body.style.overflow = ''
+    }
+  }, [delay, duration, lockScroll])
 
   useEffect(() => {
     const extractText = (node: ReactNode): string => {
