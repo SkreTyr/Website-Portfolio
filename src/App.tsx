@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Button from './Button'
 import { TypingText } from './components/lightswind/typing-text'
 import profileImg from './assets/Profile3.jpg'
-import ciscoLogo from './assets/Ciscologo.png'
+import ciscoLogo from './assets/CiscoLogo.png'
 import { UserRoundPen } from 'lucide-react'
 import { CornerDownRight, ArrowUpRight } from 'lucide-react';
 import { MapPin } from 'lucide-react';
