@@ -88,7 +88,7 @@ export const ParticleBackground: React.FC = () => {
           overflow: hidden;
           z-index: -2; 
           pointer-events: none;
-          opacity: 0.4;
+          opacity: 0.8;
         }
 
         .animation-wrapper {
@@ -109,9 +109,9 @@ export const ParticleBackground: React.FC = () => {
       <div className="page-solid-bg" />
       <div className="page-particle-container">
         <div className="animation-wrapper">
-          <ParticleLayer count={500} afterCount={200} duration="420s" size={2} afterSize={1} />
-          <ParticleLayer count={200} afterCount={50} duration="380s" size={3} afterSize={4} />
-          <ParticleLayer count={100} afterCount={50} duration="400s" size={1} afterSize={1} />
+          <ParticleLayer count={500} afterCount={200} duration="300s" size={2} afterSize={1} />
+          <ParticleLayer count={100} afterCount={50} duration="200s" size={3} afterSize={4} />
+          <ParticleLayer count={50} afterCount={50} duration="500s" size={1} afterSize={1} />
         </div>
       </div>
     </>

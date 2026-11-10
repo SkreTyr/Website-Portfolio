@@ -6,6 +6,8 @@ import { Phone } from "lucide-react";
 import contactImage from "@/assets/ContactImageWhite.png";
 import AutoReveal from '@/components/AutoReveal'; 
 
+
+
 interface VisualItem {
   key: number;
   url: string;
@@ -20,7 +22,11 @@ const visualData: VisualItem[] = [
   },
 ];
 
-const ImageReveal: React.FC = () => {
+interface ImageRevealProps {
+  image?: string;
+}
+
+const ImageReveal: React.FC<ImageRevealProps> = ({ image = contactImage }) => {
   const [focusedItem, setFocusedItem] = useState<VisualItem | null>(null);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
 
@@ -51,13 +57,14 @@ const ImageReveal: React.FC = () => {
     setFocusedItem(null);
   };
 
+const items = [{ key: 1, url: image, label: "Get In Touch" }];
   return (
     <div
       className="relative w-fit min-h-fit"
       onMouseMove={onMouseTrack}
       onMouseLeave={onHoverDeactivate}
     >
-      {visualData.map((item) => (
+      {items.map((item) => (
         <AutoReveal>
         <div
           key={item.key}
