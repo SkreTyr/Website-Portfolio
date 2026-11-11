@@ -65,9 +65,8 @@ const items = [{ key: 1, url: image, label: "Get In Touch" }];
       onMouseLeave={onHoverDeactivate}
     >
       {items.map((item) => (
-        <AutoReveal>
+        <AutoReveal key={item.key}>
         <div
-          key={item.key}
           className="inline-flex items-center gap-2 rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm/6 font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer"
           onMouseEnter={() => onHoverActivate(item)}
         >

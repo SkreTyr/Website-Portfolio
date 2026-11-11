@@ -19,6 +19,7 @@ export function AutoReveal({
 }: AutoRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const hasEnteredRef = useRef(false)
 
   useEffect(() => {
     const node = ref.current
@@ -26,9 +27,16 @@ export function AutoReveal({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting)
+        const ratio = entry.intersectionRatio
+
+        if (ratio >= threshold) {
+          hasEnteredRef.current = true
+          setIsVisible(true)
+        } else if (ratio === 0 && hasEnteredRef.current) {
+          setIsVisible(false)
+        }
       },
-      { threshold, rootMargin }
+      { threshold: [0, threshold], rootMargin }
     )
 
     observer.observe(node)

@@ -1,6 +1,7 @@
 import ThreeDCarousel from "@/components/lightswind/3d-carousel";
 import veynsImage from "./assets/VeynsWebsite.jpg";
 
+
 export default function ProjectSection() {
   return <div className=''><ThreeDCarousel items={[  {
       id: 1,

@@ -188,7 +188,8 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
                     className: cn(
                       element.props.className,
                       "bg-opacity-15 dark:bg-opacity-15",
-                      "border-opacity-100 dark:border-opacity-100"
+                      "border-opacity-100 dark:border-opacity-100",
+                      "[&_*]:invisible"
                     ),
                     style: {
                       ...element.props.style,

@@ -101,26 +101,26 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
         
-        <div className="w-full p-5 pt-80 pb-80 md:pb-0 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
+        <div className="w-full p-5 pt-80 pb-80 md:pb-20 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             about me
           </h1>
 </AutoReveal>
-<AutoReveal className="w-full flex justify-center">
-<div className="h-screen w-full grid grid-cols-1 grid-rows-[repeat(12,auto)] gap-4 md:h-3/4 md:grid-cols-3 md:grid-rows-5 -z-50">
 
-        <div className="row-span-3 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md">
+<div className="h-screen w-full grid grid-cols-1 grid-rows-[repeat(12,auto)] gap-4 md:h-3/4 md:grid-cols-3 md:grid-rows-5 z-10">
+
+        <AutoReveal className="row-span-3 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md">
           <div className="bg-yellow-200 h-full rounded-md overflow-hidden"><img src={profileImg} alt='Profile Picture' className="w-full h-full object-cover" /></div>
-        </div>
+        </AutoReveal>
 
-    <div className="row-span-4 row-start-4 border border-[#ffffff4d] bg-[#151515]  p-2 rounded-md  md:col-span-2 md:row-span-3">
+    <AutoReveal className="row-span-4 row-start-4 border border-[#ffffff4d] bg-[#151515]  p-2 rounded-md  md:col-span-2 md:row-span-3">
 <div className=" h-full rounded-md">
 <div className=" flex items-center gap-5 font-mono">
 <UserRoundPen color="#ffffff" />
   <h1 className='text-[#f5f5f5]'>A bit of introduction</h1>
 </div>
-<hr className="border border-[#ffffff38] w-full mt-2" />
+<hr className="border-t border-[#ffffff38] w-full mt-2" />
 
 
 <div className="md:grid md:grid-cols-2 md:grid-rows-2 md:gap-4">
@@ -147,19 +147,19 @@ I love building responsive web applications, mastering new coding frameworks, an
 </div>
 </div>
     
-<hr className="border border-[#ffffff38] w-full mt-10" />
+<hr className="border-t border-[#ffffff38] w-full mt-10" />
 
 <div className=' w-full md:mb-20 md:pb-20 mt-4 text-sm md:overflow-hidden md:h-fit'><p className='text-[#d0d0d0] font-mono'>I am a Computer Engineering student at the University of Cebu specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
 
 
       </div> 
 
-      </div>
+      </AutoReveal>
 
-        <div className="row-span-3 row-start-8 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:col-span-2 md:row-span-2 md:row-start-4">
+        <AutoReveal className="row-span-3 row-start-8 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:col-span-2 md:row-span-2 md:row-start-4">
           <div className="h-full rounded-md flex flex-col items-center justify-center gap-5">
             <h1 className='inline-block font-mono text-[#f3f3f3]' >Skills & Stacks</h1>
-            <hr className="border border-[#ffffff38] w-2/4" />
+            <hr className="border-t border-[#ffffff38] w-2/4" />
             <LogoLoop logos={[
               { src: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png", alt: "Stack"},
               { src: "https://img.icons8.com/fluency/48/typescript--v1.png", alt: "Stack"},
@@ -183,15 +183,15 @@ I love building responsive web applications, mastering new coding frameworks, an
               { src: 'https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-cloudflare-provides-content-delivery-network-services-ddos-mitigation-logo-color-tal-revivo.png', alt: 'Logo' }
             ]} speed={60} direction="right" logoHeight={40} gap={80} fadeOut />
           </div>
-        </div>
+        </AutoReveal>
 
-        <div className=" row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
+        <AutoReveal className=" row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
             <div className='flex items-center gap-5 font-mono'>
               <Scroll color="#ffffff" />
               <h1 className='font-mono text-[#f3f3f3]' >Milestone</h1>
             </div>
-            <hr className="border border-[#ffffff38] w-full mt-2" />
+            <hr className="border-t border-[#ffffff38] w-full mt-2" />
             <div className='flex-col text-xs mt-2 font-mono'>
               <h1 className='text-white'>Hines</h1>
               <div className='flex justify-between w-full'>
@@ -218,16 +218,18 @@ I love building responsive web applications, mastering new coding frameworks, an
               <a href="#" className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/>
             </div>
           </div>
-        </div>
-<div id='AboutMeMoreInfo' className=" row-span-2 row-start-16 md:col-start-2 md:row-start-6  justify-center flex"><ButtonImage/></div>
+        </AutoReveal>
+
+<AutoReveal className=" row-span-2 row-start-16 md:col-start-2 md:row-start-6  justify-center flex"><ButtonImage/></AutoReveal>
+
       </div>
-    </AutoReveal>
+
   </div>
 </section>
 
 
 
-       <section className=" h-auto w-full flex justify-center">
+       <section id='Project' className="overflow-hidden h-auto w-full flex justify-center">
                 <div className="w-full p-5 pt-80 md:pt-0 pb-80 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
@@ -237,11 +239,14 @@ I love building responsive web applications, mastering new coding frameworks, an
 <AutoReveal>
                 <ProjectSection />
 </AutoReveal>
+<AutoReveal>
+  <ButtonImage />
+</AutoReveal>
                 </div>
         </section>
 
 
-             <section className=" h-auto w-full flex justify-center pb-80 pt-32">
+             <section className="overflow-hidden h-auto w-full flex justify-center pb-80 pt-32">
                 <div className="w-full flex flex-col items-center justify-center sm:w-full md:w-full lg:w-4/5">
                 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
@@ -250,6 +255,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </AutoReveal>
 <GlowingCards>
 <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
+<AutoReveal>
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -263,12 +269,14 @@ I love building responsive web applications, mastering new coding frameworks, an
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
-    <hr className="border border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+    <hr className="border-t border-[#ffffff38] w-full mt-2 " />
+              <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+  </AutoReveal>
   </GlowingCard>
 
 
 <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
+<AutoReveal>
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -282,12 +290,14 @@ I love building responsive web applications, mastering new coding frameworks, an
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
-    <hr className="border border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+    <hr className="border-t border-[#ffffff38] w-full mt-2 " />
+              <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+  </AutoReveal>
   </GlowingCard>
 
 
- <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
+<GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
+<AutoReveal>
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -301,13 +311,14 @@ I love building responsive web applications, mastering new coding frameworks, an
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
-    <hr className="border border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+    <hr className="border-t border-[#ffffff38] w-full mt-2 " />
+              <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+  </AutoReveal>
   </GlowingCard>
-
+     
 
 </GlowingCards>
-
+  <ButtonImage />
                 </div>
         </section>
 
