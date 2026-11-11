@@ -97,11 +97,11 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
 
-  <section id='About' className=" h-auto w-full flex justify-center pb-40">
+  <section id='About' className=" overflow-hidden h-auto w-full flex justify-center pb-80">
 
 
         
-        <div className=" w-full p-5 pt-80 pb-80 md:pb-20 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
+        <div className="w-full p-5 pt-80 pb-80 md:pb-0 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             about me
@@ -185,7 +185,7 @@ I love building responsive web applications, mastering new coding frameworks, an
           </div>
         </div>
 
-        <div className="row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] backdrop-blur-md p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4">
+        <div className=" row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
             <div className='flex items-center gap-5 font-mono'>
               <Scroll color="#ffffff" />
@@ -213,13 +213,13 @@ I love building responsive web applications, mastering new coding frameworks, an
                 <p className='text-gray-500'>2021-Present</p>
               </div>
             </div>
-              <div className='flex items-center justify-center gap-1 text-sm mt-5 md:mb-4 font-mono text-center group'>
+              <div className=' pb-2 flex items-center justify-center gap-1 text-sm mt-5 md:mb-4 font-mono text-center group'>
               
               <a href="#" className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/>
             </div>
           </div>
         </div>
-<div className="bg-red-500 row-span-2 row-start-16 md:col-start-2 md:row-start-6  justify-center flex "><ButtonImage/></div>
+<div id='AboutMeMoreInfo' className=" row-span-2 row-start-16 md:col-start-2 md:row-start-6  justify-center flex"><ButtonImage/></div>
       </div>
     </AutoReveal>
   </div>
@@ -249,7 +249,7 @@ I love building responsive web applications, mastering new coding frameworks, an
           </h1>
 </AutoReveal>
 <GlowingCards>
-         <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
+<GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -257,7 +257,7 @@ I love building responsive web applications, mastering new coding frameworks, an
       <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
       <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
-    <div className=' w-20 md:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
+    <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
       <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
     </div>
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
@@ -267,7 +267,8 @@ I love building responsive web applications, mastering new coding frameworks, an
               <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
   </GlowingCard>
 
-         <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
+
+<GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -275,7 +276,7 @@ I love building responsive web applications, mastering new coding frameworks, an
       <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
       <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
-    <div className=' w-20 md:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
+    <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
       <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
     </div>
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
@@ -285,7 +286,8 @@ I love building responsive web applications, mastering new coding frameworks, an
               <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
   </GlowingCard>
 
-         <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
+
+ <GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -293,7 +295,7 @@ I love building responsive web applications, mastering new coding frameworks, an
       <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
       <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
-    <div className=' w-20 md:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
+    <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
       <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
     </div>
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
@@ -302,7 +304,7 @@ I love building responsive web applications, mastering new coding frameworks, an
     <hr className="border border-[#ffffff38] w-full mt-2 " />
               <div className="flex justify-center"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
   </GlowingCard>
-     
+
 
 </GlowingCards>
 
