@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { MoveRight } from "lucide-react";
 import contactImageBlack from "@/assets/ContactImage.png";
-import AutoReveal from '@/components/AutoReveal'; 
+import AutoReveal from '@/components/AutoReveal';
 
 
 interface VisualItem {
@@ -16,7 +16,7 @@ interface VisualItem {
 const visualData: VisualItem[] = [
   {
     key: 1,
-    url: contactImageBlack, 
+    url: contactImageBlack,
     label: "Click For More Info",
   },
 ];
@@ -24,6 +24,7 @@ const visualData: VisualItem[] = [
 const ButtonAboutMe: React.FC = () => {
   const [focusedItem, setFocusedItem] = useState<VisualItem | null>(null);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
@@ -40,8 +41,11 @@ const ButtonAboutMe: React.FC = () => {
   }, []);
 
   const onMouseTrack = (e: React.MouseEvent) => {
-    cursorX.set(e.clientX);
-    cursorY.set(e.clientY);
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      cursorX.set(e.clientX - rect.left);
+      cursorY.set(e.clientY - rect.top);
+    }
   };
 
   const onHoverActivate = (item: VisualItem) => {
@@ -54,9 +58,9 @@ const ButtonAboutMe: React.FC = () => {
 
   return (
     <div
-      className="relative w-fit min-h-fit"
+      ref={containerRef}
+      className="flex justify-center relative w-[400px] mx-auto min-h-fit"
       onMouseMove={onMouseTrack}
-      onMouseLeave={onHoverDeactivate}
     >
       {visualData.map((item) => (
         <AutoReveal>
@@ -64,6 +68,7 @@ const ButtonAboutMe: React.FC = () => {
           key={item.key}
           className="inline-flex items-center gap-2 rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm/6 font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer"
           onMouseEnter={() => onHoverActivate(item)}
+          onMouseLeave={onHoverDeactivate}
         >
           <span className="relative">
             {item.label}
@@ -77,12 +82,12 @@ const ButtonAboutMe: React.FC = () => {
         <motion.img
           src={focusedItem.url}
           alt={focusedItem.label}
-          className="fixed z-50 object-cover w-[400px] h-[200px] rounded-lg pointer-events-none shadow-2xl"
+          className="absolute z-50 w-[400px] h-[200px] object-cover  rounded-lg pointer-events-none shadow-2xl"
           style={{
             left: smoothX,
             top: smoothY,
-            x: "20px",
-            y: "20px",
+            x: 20,
+            y: 20,
           }}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
