@@ -3,6 +3,8 @@ import Button from './Button'
 import { TypingText } from './components/lightswind/typing-text'
 import profileImg from './assets/Profile3.jpg'
 import ciscoLogo from './assets/CiscoLogo.png'
+import ibmLogo from './assets/IBMLOGO.png'
+import codedexLogo from './assets/CodedexLogo.png'
 import ButtonImage from '@/ButtonImage';
 import { UserRoundPen } from 'lucide-react'
 import { CornerDownRight, ArrowUpRight } from 'lucide-react';
@@ -270,13 +272,13 @@ I love building responsive web applications, mastering new coding frameworks, an
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
   </GlowingCard>
 </AutoReveal>
 
 
 <AutoReveal className="flex-1 min-w-[13rem] w-2/3">
-<GlowingCard glowColor="#60a5fa" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
+<GlowingCard glowColor="#4ade80" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -285,34 +287,34 @@ I love building responsive web applications, mastering new coding frameworks, an
       <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
-      <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
+      <img src={ibmLogo} alt='Logo' className='w-full h-full object-cover'/>
     </div>
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
   </GlowingCard>
 </AutoReveal>
 
 
 <AutoReveal className="flex-1 min-w-[13rem] w-2/3">
-<GlowingCard glowColor="#60a5fa" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
+<GlowingCard glowColor="#facc15" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
     <div  className=' flex space-x-2 items-center'>
       <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
-      <h1 className='font-mono text-lg'>NetAcad</h1>
+      <h1 className='font-mono text-lg'>Codedex</h1>
     </div>
-    <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
-      <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
+    <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
+      <img src={codedexLogo} alt='Logo' className='w-full h-full object-cover scale-110'/>
     </div>
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
   </GlowingCard>
 </AutoReveal>
      
