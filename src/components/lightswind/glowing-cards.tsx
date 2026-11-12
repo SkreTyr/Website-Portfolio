@@ -200,7 +200,38 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
                     },
                   });
                 }
-                return child;
+
+                // Wrapped card (e.g. AutoReveal > GlowingCard): clone the tree
+                // recursively so the nested card receives the glow surface while
+                // the wrapper structure stays identical (keeps the clone aligned).
+                const wrapWithGlow = (node: React.ReactElement<any>): React.ReactElement<any> => {
+                  const nodeChildren = node.props.children;
+                  const clonedChildren = React.Children.map(nodeChildren, (inner) => {
+                    if (!React.isValidElement(inner)) return inner;
+                    const innerEl = inner as React.ReactElement<any>;
+                    if (innerEl.type === GlowingCard) {
+                      const glow =
+                        (innerEl.props as GlowingCardProps).glowColor || "#3b82f6";
+                      return React.cloneElement(innerEl, {
+                        className: cn(
+                          innerEl.props.className,
+                          "bg-opacity-15 dark:bg-opacity-15",
+                          "border-opacity-100 dark:border-opacity-100",
+                          "[&_*]:invisible"
+                        ),
+                        style: {
+                          ...innerEl.props.style,
+                          backgroundColor: glow + "15",
+                          borderColor: glow,
+                          boxShadow: "0 0 0 1px inset " + glow,
+                        },
+                      });
+                    }
+                    return wrapWithGlow(innerEl);
+                  });
+                  return React.cloneElement(node, { children: clonedChildren });
+                };
+                return wrapWithGlow(child as React.ReactElement<any>);
               })}
             </div>
           </div>

@@ -254,8 +254,8 @@ I love building responsive web applications, mastering new coding frameworks, an
           </h1>
 </AutoReveal>
 <GlowingCards>
-<GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
-<AutoReveal>
+<AutoReveal className="flex-1 min-w-[13rem] w-2/3">
+<GlowingCard glowColor="#60a5fa" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -271,12 +271,12 @@ I love building responsive web applications, mastering new coding frameworks, an
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
               <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
-  </AutoReveal>
   </GlowingCard>
+</AutoReveal>
 
 
-<GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
-<AutoReveal>
+<AutoReveal className="flex-1 min-w-[13rem] w-2/3">
+<GlowingCard glowColor="#60a5fa" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -292,12 +292,12 @@ I love building responsive web applications, mastering new coding frameworks, an
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
               <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
-  </AutoReveal>
   </GlowingCard>
+</AutoReveal>
 
 
-<GlowingCard glowColor="#60a5fa" className="space-y-4 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-2/3">
-<AutoReveal>
+<AutoReveal className="flex-1 min-w-[13rem] w-2/3">
+<GlowingCard glowColor="#60a5fa" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
@@ -313,8 +313,8 @@ I love building responsive web applications, mastering new coding frameworks, an
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
               <div className="flex justify-center mt-3"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-flex items-center gap-1 text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono group'>Learn More<ArrowUpRight className='w-4 h-4 hover:text-blue-500'/></a></div> 
-  </AutoReveal>
   </GlowingCard>
+</AutoReveal>
      
 
 </GlowingCards>
