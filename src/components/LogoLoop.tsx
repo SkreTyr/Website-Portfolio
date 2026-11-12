@@ -1186,7 +1186,7 @@ export const LogoLoop = memo<LogoLoopProps>(
         );
       const zoomClass = cx(
         'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none',
-        scaleOnHover && 'group-hover/item:scale-120'
+        scaleOnHover && 'group-hover/item:scale-[1.2]'
       );
       const labelClass =
         labels === 'below'

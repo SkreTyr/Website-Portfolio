@@ -170,7 +170,7 @@ I love building responsive web applications, mastering new coding frameworks, an
               { src: "https://img.icons8.com/color/96/java-coffee-cup-logo--v1.png", alt: "Stack"},
               { src: "https://img.icons8.com/fluency/96/c-plus-plus-logo.png", alt: "Stack"},
               { src: "https://img.icons8.com/fluency/96/sql.png", alt: "Stack"}
-            ]} speed={60} direction="left" logoHeight={40} gap={80} fadeOut />
+            ]} speed={60} direction="left" logoHeight={40} gap={80} fadeOut scaleOnHover />
 
             <LogoLoop logos={[
               { src: 'https://img.icons8.com/glyph-neue/64/FFFFFF/github.png', alt: 'Logo' },
@@ -181,7 +181,7 @@ I love building responsive web applications, mastering new coding frameworks, an
               { src: 'https://img.icons8.com/color/96/visual-studio-code-2019.png', alt: 'Logo' },
               { src: 'https://img.icons8.com/fluency/96/docker.png', alt: 'Logo' },
               { src: 'https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-cloudflare-provides-content-delivery-network-services-ddos-mitigation-logo-color-tal-revivo.png', alt: 'Logo' }
-            ]} speed={60} direction="right" logoHeight={40} gap={80} fadeOut />
+            ]} speed={60} direction="right" logoHeight={40} gap={80} fadeOut scaleOnHover />
           </div>
         </AutoReveal>
 
