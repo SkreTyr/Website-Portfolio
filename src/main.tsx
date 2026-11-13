@@ -3,12 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
 import Footer from './Footer'
-import Background from '@/Background'
+import SmoothScroll from '@/components/SmoothScroll'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-
-    <App />
-    <Footer />
+    <SmoothScroll>
+      <App />
+      <Footer />
+    </SmoothScroll>
   </StrictMode>,
 )
