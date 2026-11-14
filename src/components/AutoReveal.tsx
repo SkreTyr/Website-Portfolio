@@ -7,6 +7,7 @@ interface AutoRevealProps {
   rootMargin?: string
   direction?: 'up' | 'down' | 'left' | 'right'
   translate?: boolean
+  blur?: boolean
 }
 
 export function AutoReveal({
@@ -16,6 +17,7 @@ export function AutoReveal({
   rootMargin = '0px',
   direction = 'up',
   translate = true,
+  blur = true,
 }: AutoRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -43,24 +45,30 @@ export function AutoReveal({
     return () => observer.disconnect()
   }, [threshold, rootMargin])
 
-  const hiddenTransform =
-    direction === 'left'
+  const hiddenTransform = translate
+    ? direction === 'left'
       ? 'opacity-0 -translate-x-8'
       : direction === 'right'
       ? 'opacity-0 translate-x-8'
       : direction === 'down'
       ? 'opacity-0 -translate-y-8'
       : 'opacity-0 translate-y-8'
+    : 'opacity-0'
 
-  const visibleTransform = translate ? 'opacity-100 translate-x-0 translate-y-0 blur-0' : 'opacity-100 blur-0'
+  const visibleTransform = translate
+    ? 'opacity-100 translate-x-0 translate-y-0'
+    : 'opacity-100'
+
+  const hidden = blur ? `${hiddenTransform} blur-md` : hiddenTransform
+  const visible = blur ? `${visibleTransform} blur-0` : visibleTransform
 
   return (
     <div
       ref={ref}
       className={`transition-all duration-[1500ms] ease-out ${
-        isVisible ? visibleTransform : (translate ? `${hiddenTransform} blur-md` : 'opacity-0 blur-md')
+        isVisible ? visible : hidden
       } ${className}`}
-      style={{ filter: isVisible ? 'blur(0px)' : 'blur(8px)' }}
+      style={blur ? { filter: isVisible ? 'blur(0px)' : 'blur(8px)' } : undefined}
     >
       {children}
     </div>

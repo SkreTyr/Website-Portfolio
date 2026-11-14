@@ -86,9 +86,14 @@ I love building responsive web applications, mastering new coding frameworks, an
           </TypingText>
           </AutoReveal>
 
+<AutoReveal translate={false} blur={false}>
 <div className={`transition-opacity duration-300 ${typingDone ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}>
+
   <Button />
+
 </div>
+</AutoReveal>
+
 
 <div className={`transition-opacity duration-300 ease-out ${atTop && typingDone ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}>
                   <h3 className='text-[#d4d4d4] font-mono opacity-4 text-sm'>Scroll Down</h3>
