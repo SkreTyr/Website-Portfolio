@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import { cn } from "@/lib/utils";
+import { lockScroll as lockSmoothScroll, unlockScroll } from "@/lib/smooth-scroll";
 
 export interface TypingTextProps {
   children: ReactNode;
@@ -52,13 +53,16 @@ export const TypingText = ({
   useEffect(() => {
     if (!lockScroll) return
     const total = (delay + duration) * 1000
+    lockSmoothScroll()
     document.body.style.overflow = 'hidden'
     const t = setTimeout(() => {
       document.body.style.overflow = ''
+      unlockScroll()
     }, total)
     return () => {
       clearTimeout(t)
       document.body.style.overflow = ''
+      unlockScroll()
     }
   }, [delay, duration, lockScroll])
 

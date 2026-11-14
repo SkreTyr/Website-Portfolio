@@ -1,5 +1,6 @@
 import { useEffect, type ReactNode } from 'react'
 import Lenis from 'lenis'
+import { registerLenis } from '@/lib/smooth-scroll'
 
 const SmoothScroll = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
@@ -9,8 +10,12 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
       smoothWheel: true,
       anchors: true,
     })
+    registerLenis(lenis)
 
-    return () => lenis.destroy()
+    return () => {
+      registerLenis(null)
+      lenis.destroy()
+    }
   }, [])
 
   return <>{children}</>
