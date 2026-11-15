@@ -38,7 +38,7 @@ const ProjectDetails = () => {
                 {project.title}
               </h1>
               <div className="border border-[#ffffff4d] bg-[#151515] p-4 rounded-md">
-                <p className="text-[#d0d0d0] font-mono text-sm md:text-base">{project.description}</p>
+                <p className="text-[#d0d0d0] font-mono text-base">{project.description}</p>
                 <hr className="border-t border-[#ffffff38] w-full mt-4 mb-4" />
                 <p className="text-[#d0d0d0] font-mono text-sm">{project.stack}</p>
                 {project.liveUrl && (

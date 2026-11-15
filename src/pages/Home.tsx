@@ -75,7 +75,7 @@ function Home() {
  <AutoReveal className="w-full flex justify-center">
           <TypingText
             as="p"
-            className="text-[#d0d0d0] font-mono text-center text-lg mt-10 lg:w-2/3 2xl:text-1xl"
+            className="text-[#d0d0d0] font-mono text-center text-base md:text-lg mt-10 lg:w-2/3 2xl:text-xl"
             fontSize=""
             fontWeight=""
             color=""
@@ -164,7 +164,7 @@ I love building responsive web applications, mastering new coding frameworks, an
     
 <hr className="border-t border-[#ffffff38] w-full mt-10" />
 
-<div className=' w-full md:mb-20 md:pb-20 mt-4 text-sm md:overflow-hidden md:h-fit'><p className='text-[#d0d0d0] font-mono'>I am a Computer Engineering student at the University of Cebu specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
+<div className=' w-full md:mb-20 md:pb-20 mt-4 text-base md:text-sm md:overflow-hidden md:h-fit'><p className='text-[#d0d0d0] font-mono'>I am a Computer Engineering student at the University of Cebu specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
 
 
       </div> 

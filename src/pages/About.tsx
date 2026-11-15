@@ -59,7 +59,7 @@ const About = () => {
                 <div className="w-40 h-40 shrink-0 rounded-md overflow-hidden border border-[#ffffff4d]">
                   <img src={profileImg} alt="Profile Picture" className="w-full h-full object-cover" />
                 </div>
-                <p className="text-[#d0d0d0] font-mono text-sm md:text-base">
+                <p className="text-[#d0d0d0] font-mono text-base">
                   I am a Computer Engineering student at the University of Cebu specializing in software
                   design, local databases, and network infrastructure. I focus on building clean, reliable
                   systems using a first-principles approach.
