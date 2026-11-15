@@ -1,5 +1,7 @@
 import ThreeDCarousel from "@/components/lightswind/3d-carousel";
 import veynsImage from "./assets/VeynsWebsite.webp";
+import ergonomicsImage from "./assets/SmartErgonomics.webp";
+import automotiveImage from "./assets/AutomotiveComfort.webp";
 
 
 export default function ProjectSection() {
@@ -19,7 +21,7 @@ export default function ProjectSection() {
       brand: "Herman Miller",
       description: "Pressure-sensitive fabrics in office chairs that analyze posture and suggest adjustments for optimal health.",
       tags: ["Office", "Health", "Furniture"],
-      imageUrl: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?q=70&w=1200&auto=format&fit=crop",
+      imageUrl: ergonomicsImage,
       link: "#",
     },
     {
@@ -28,7 +30,7 @@ export default function ProjectSection() {
       brand: "Tesla",
       description: "Intelligent car seats that adapt to passenger position and monitor vital signs for enhanced safety.",
       tags: ["Auto", "Safety", "Smart"],
-      imageUrl: "https://images.unsplash.com/photo-1561580125-028ce3bfcb25?q=70&w=1200&auto=format&fit=crop",
+      imageUrl: automotiveImage,
       link: "#",
     },]} isMobileSwipe /></div>
 }
