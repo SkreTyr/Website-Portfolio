@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 interface ParticleLayerProps {
   count: number;
@@ -63,6 +63,16 @@ const ParticleLayer: React.FC<ParticleLayerProps> = ({
 };
 
 export const ParticleBackground: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
   return (
     <>
       <style>{`
@@ -109,9 +119,16 @@ export const ParticleBackground: React.FC = () => {
       <div className="page-solid-bg" />
       <div className="page-particle-container">
         <div className="animation-wrapper">
-          <ParticleLayer count={500} afterCount={200} duration="300s" size={2} afterSize={1} />
-          <ParticleLayer count={100} afterCount={50} duration="200s" size={3} afterSize={4} />
-          <ParticleLayer count={50} afterCount={50} duration="500s" size={1} afterSize={1} />
+          {isMobile ? (
+            // phones: one light layer only (full 3 layers = ~1300 shadows to paint per frame)
+            <ParticleLayer count={100} afterCount={50} duration="300s" size={2} afterSize={2} />
+          ) : (
+            <>
+              <ParticleLayer count={500} afterCount={200} duration="300s" size={2} afterSize={1} />
+              <ParticleLayer count={100} afterCount={50} duration="200s" size={3} afterSize={4} />
+              <ParticleLayer count={50} afterCount={50} duration="500s" size={1} afterSize={1} />
+            </>
+          )}
         </div>
       </div>
     </>

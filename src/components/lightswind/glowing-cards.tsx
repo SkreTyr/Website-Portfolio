@@ -88,12 +88,17 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
   const overlayRef = useRef<HTMLDivElement>(null);
   const [, setMousePosition] = useState({ x: 0, y: 0 });
   const [showOverlay, setShowOverlay] = useState(false);
+  const [canHover, setCanHover] = useState(true);
+
+  useEffect(() => {
+    setCanHover(window.matchMedia('(pointer: fine)').matches)
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
     const overlay = overlayRef.current;
 
-    if (!container || !overlay || !enableGlow) return;
+    if (!container || !overlay || !enableGlow || !canHover) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
@@ -121,7 +126,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [enableGlow, glowOpacity]);
+  }, [enableGlow, glowOpacity, canHover]);
 
   const containerStyle = {
     '--gap': gap,
@@ -157,7 +162,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
           {children}
         </div>
 
-        {enableGlow && (
+        {enableGlow && canHover && (
           <div
             ref={overlayRef}
             className={cn(

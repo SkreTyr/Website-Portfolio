@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
-import contactImageBlack from "@/assets/ContactImage.png";
+import contactImageBlack from "@/assets/ContactImage.webp";
 import AutoReveal from '@/components/AutoReveal';
 
 

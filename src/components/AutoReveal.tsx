@@ -21,7 +21,16 @@ export function AutoReveal({
 }: AutoRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const hasEnteredRef = useRef(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   useEffect(() => {
     const node = ref.current
@@ -45,30 +54,29 @@ export function AutoReveal({
     return () => observer.disconnect()
   }, [threshold, rootMargin])
 
-  const hiddenTransform = translate
-    ? direction === 'left'
+  const useBlur = blur && !isMobile
+
+  const hiddenTransform =
+    direction === 'left'
       ? 'opacity-0 -translate-x-8'
       : direction === 'right'
       ? 'opacity-0 translate-x-8'
       : direction === 'down'
       ? 'opacity-0 -translate-y-8'
       : 'opacity-0 translate-y-8'
-    : 'opacity-0'
 
-  const visibleTransform = translate
-    ? 'opacity-100 translate-x-0 translate-y-0'
-    : 'opacity-100'
+  const visibleTransform = translate ? 'opacity-100 translate-x-0 translate-y-0' : 'opacity-100'
 
-  const hidden = blur ? `${hiddenTransform} blur-md` : hiddenTransform
-  const visible = blur ? `${visibleTransform} blur-0` : visibleTransform
+  const hidden = useBlur ? `${hiddenTransform} blur-md` : hiddenTransform
+  const visible = useBlur ? `${visibleTransform} blur-0` : visibleTransform
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-[1500ms] ease-out ${
+      className={`${useBlur ? 'transition-all' : 'transition-[opacity,transform]'} duration-[1500ms] ease-out ${
         isVisible ? visible : hidden
       } ${className}`}
-      style={blur ? { filter: isVisible ? 'blur(0px)' : 'blur(8px)' } : undefined}
+      style={useBlur ? { filter: isVisible ? 'blur(0px)' : 'blur(8px)' } : undefined}
     >
       {children}
     </div>

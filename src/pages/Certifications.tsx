@@ -3,9 +3,9 @@ import { ArrowLeft, BadgeCheck, ArrowUpRight } from 'lucide-react'
 import Background from '@/Background'
 import AutoReveal from '@/components/AutoReveal'
 import { GlowingCards, GlowingCard } from '@/components/lightswind/glowing-cards'
-import ciscoLogo from '@/assets/CiscoLogo.png'
-import ibmLogo from '@/assets/IBMLOGO.png'
-import codedexLogo from '@/assets/CodedexLogo.png'
+import ciscoLogo from '@/assets/CiscoLogo.webp'
+import ibmLogo from '@/assets/IBMLOGO.webp'
+import codedexLogo from '@/assets/CodedexLogo.webp'
 
 interface Certification {
   key: number
@@ -82,7 +82,7 @@ const Certifications = () => {
                       <h1 className="font-mono text-lg">{cert.issuer}</h1>
                     </div>
                     <div className="w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d] p-1 rounded-md overflow-hidden">
-                      <img src={cert.image} alt="Logo" className="w-full h-full object-cover scale-110" />
+                      <img src={cert.image} alt="Logo" loading="lazy" decoding="async" className="w-full h-full object-cover scale-110" />
                     </div>
                     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">{cert.title}</div>
                   </div>

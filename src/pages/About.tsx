@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowLeft, UserRoundPen, CornerDownRight, MapPin, MailDot, GraduationCap } from 'lucide-react'
 import Background from '@/Background'
 import AutoReveal from '@/components/AutoReveal'
-import profileImg from '@/assets/Profile3.jpg'
+import profileImg from '@/assets/Profile3.webp'
 
 const About = () => {
   return (

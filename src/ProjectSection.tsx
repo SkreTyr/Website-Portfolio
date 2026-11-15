@@ -1,5 +1,5 @@
 import ThreeDCarousel from "@/components/lightswind/3d-carousel";
-import veynsImage from "./assets/VeynsWebsite.jpg";
+import veynsImage from "./assets/VeynsWebsite.webp";
 
 
 export default function ProjectSection() {

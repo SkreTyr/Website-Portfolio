@@ -259,7 +259,7 @@ export default function Navbar({
         className={cn(
           "absolute bottom-2 left-full top-1/2 -translate-y-1/2 transform flex items-center justify-center w-fit transition-all duration-300",
           multiBorder
-            ? "p-[3px] rounded-[24px] sm:rounded-[28px] border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/80 dark:bg-zinc-900/80 shadow-lg backdrop-blur-xl"
+            ? "p-[3px] rounded-[24px] sm:rounded-[28px] border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/80 dark:bg-zinc-900/80 shadow-lg backdrop-blur-md lg:backdrop-blur-xl"
             : "",
           className
         )}
@@ -274,7 +274,7 @@ export default function Navbar({
             multiBorder
               ? "border border-zinc-200/90 dark:border-zinc-800/90 bg-white/90 dark:bg-black/90 shadow-inner"
               : blurBackground
-              ? "bg-white/10 dark:bg-black/20 backdrop-blur-xl border-2 border-white/20 dark:border-white/10 shadow-md"
+              ? "bg-white/10 dark:bg-black/20 backdrop-blur-md lg:backdrop-blur-xl border-2 border-white/20 dark:border-white/10 shadow-md"
               : "bg-background border-2 border-border shadow-md"
           )}
         >

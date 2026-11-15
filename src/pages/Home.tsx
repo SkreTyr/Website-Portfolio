@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import Button from '@/Button'
 import { TypingText } from '@/components/lightswind/typing-text'
 import { hasIntroPlayed, markIntroPlayed } from '@/lib/intro'
-import profileImg from '@/assets/Profile3.jpg'
-import ciscoLogo from '@/assets/CiscoLogo.png'
-import ibmLogo from '@/assets/IBMLOGO.png'
-import codedexLogo from '@/assets/CodedexLogo.png'
+import profileImg from '@/assets/Profile3.webp'
+import ciscoLogo from '@/assets/CiscoLogo.webp'
+import ibmLogo from '@/assets/IBMLOGO.webp'
+import codedexLogo from '@/assets/CodedexLogo.webp'
 import ButtonImage from '@/ButtonImage';
 import { UserRoundPen } from 'lucide-react'
 import { CornerDownRight, ArrowUpRight } from 'lucide-react';
@@ -126,7 +126,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 <div className="bg-blue-400 h-auto w-full grid grid-cols-1 grid-rows-[repeat(12,auto)] gap-4 md:h-3/4 md:grid-cols-3 md:grid-rows-5 z-10">
 
         <AutoReveal className="row-span-3 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md">
-          <div className="bg-yellow-200 h-full rounded-md overflow-hidden"><img src={profileImg} alt='Profile Picture' className="w-full h-full object-cover" /></div>
+          <div className="bg-yellow-200 h-full rounded-md overflow-hidden"><img src={profileImg} alt='Profile Picture' loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
         </AutoReveal>
 
     <AutoReveal className="row-span-4 row-start-4 border border-[#ffffff4d] bg-[#151515]  p-2 rounded-md  md:col-span-2 md:row-span-3">
@@ -279,7 +279,7 @@ I love building responsive web applications, mastering new coding frameworks, an
       <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
-      <img src={ciscoLogo} alt='Logo' className='w-full h-full object-cover'/>
+      <img src={ciscoLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover'/>
     </div>
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
@@ -300,7 +300,7 @@ I love building responsive web applications, mastering new coding frameworks, an
       <h1 className='font-mono text-lg'>NetAcad</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
-      <img src={ibmLogo} alt='Logo' className='w-full h-full object-cover'/>
+      <img src={ibmLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover'/>
     </div>
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
@@ -321,7 +321,7 @@ I love building responsive web applications, mastering new coding frameworks, an
       <h1 className='font-mono text-lg'>Codedex</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-      <img src={codedexLogo} alt='Logo' className='w-full h-full object-cover scale-110'/>
+      <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
     </div>
     <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
