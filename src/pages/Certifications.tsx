@@ -69,7 +69,7 @@ const Certifications = () => {
             </h1>
           </AutoReveal>
 
-          <GlowingCards>
+          <GlowingCards className="md:px-10 lg:px-0">
             {certifications.map((cert) => (
               <AutoReveal key={cert.key} className="flex-1 min-w-[13rem] w-2/3">
                 <GlowingCard

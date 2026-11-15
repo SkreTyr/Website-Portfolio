@@ -52,7 +52,7 @@ interface NavbarItemProps {
   itemBorderColor?: string;
   borderRadius?: string;
   hideLabels?: boolean;
-  labelPosition?: "top" | "bottom";
+  labelPosition?: "top" | "bottom" | "left" | "right";
   labelBackground?: string;
   labelTextColor?: string;
 }
@@ -91,6 +91,10 @@ function NavbarItem({
   const labelOffsetStyle =
     labelPosition === "bottom"
       ? { top: "calc(100% + 8px)", bottom: "auto" }
+      : labelPosition === "right"
+      ? { left: "calc(100% + 8px)", right: "auto", top: "50%", transform: "translateY(-50%)" }
+      : labelPosition === "left"
+      ? { right: "calc(100% + 8px)", left: "auto", top: "50%", transform: "translateY(-50%)" }
       : { bottom: "calc(100% + 8px)", top: "auto" };
 
   return (
@@ -191,7 +195,7 @@ interface NavbarProps {
   /** Whether to hide all hover labels. @default false */
   hideLabels?: boolean;
   /** Position of the hover label relative to the icon. @default "top" */
-  labelPosition?: "top" | "bottom";
+  labelPosition?: "top" | "bottom" | "left" | "right";
   /** Background for the hover label tooltip. Tailwind class. @default "bg-[#060606]" */
   labelBackground?: string;
   /** Text color for the hover label tooltip. Tailwind class. @default "text-white" */
@@ -259,7 +263,7 @@ export default function Navbar({
         className={cn(
           "absolute bottom-2 left-full top-1/2 -translate-y-1/2 transform flex items-center justify-center w-fit transition-all duration-300",
           multiBorder
-            ? "p-[3px] rounded-[24px] sm:rounded-[28px] border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/80 dark:bg-zinc-900/80 shadow-lg backdrop-blur-md lg:backdrop-blur-xl"
+            ? "rounded-md border border-zinc-200/80 dark:border-zinc-800/80 bg-[#151515] shadow-lg backdrop-blur-md lg:backdrop-blur-xl"
             : "",
           className
         )}
@@ -269,10 +273,10 @@ export default function Navbar({
       >
         <div
           className={cn(
-            "flex flex-col items-center w-fit rounded-[20px] sm:rounded-[24px] px-4 py-2 h-full transition-all duration-300",
+            "flex flex-col items-center justify-center w-fit rounded-md px-4 py-2 h-full transition-all duration-300",
             gap,
             multiBorder
-              ? "border border-zinc-200/90 dark:border-zinc-800/90 bg-white/90 dark:bg-black/90 shadow-inner"
+              ? "bg-[#151515] shadow-inner"
               : blurBackground
               ? "bg-white/10 dark:bg-black/20 backdrop-blur-md lg:backdrop-blur-xl border-2 border-white/20 dark:border-white/10 shadow-md"
               : "bg-background border-2 border-border shadow-md"

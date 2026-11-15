@@ -35,6 +35,8 @@ export interface GlowingCardsProps {
   borderRadius?: string;
   /** Enable responsive layout */
   responsive?: boolean;
+  /** Allow the cards to wrap to new rows (default true). Set false to keep all cards on one row. */
+  wrap?: boolean;
   /** Custom CSS variables for theming */
   customTheme?: {
     cardBg?: string;
@@ -82,6 +84,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
   backgroundColor,
   borderRadius = "1rem",
   responsive = true,
+  wrap = true,
   customTheme,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -153,10 +156,11 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
         )}
         style={{ padding: "var(--padding)" }} // String literal
       >
-        <div
+<div
           className={cn(
             "flex items-center justify-center flex-wrap gap-[var(--gap)]",
-            responsive && "flex-col sm:flex-row "
+            responsive && "flex-col sm:flex-row",
+            !wrap && "sm:flex-nowrap"
           )}
         >
           {children}
@@ -181,7 +185,8 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
             <div
               className={cn(
                 "flex items-center justify-center flex-wrap gap-[var(--gap)] max-w-[var(--max-width)] center mx-auto",
-                responsive && "flex-col sm:flex-row"
+                responsive && "flex-col sm:flex-row",
+                !wrap && "sm:flex-nowrap"
               )}
               style={{ padding: "var(--padding)" }} // String literal
             >

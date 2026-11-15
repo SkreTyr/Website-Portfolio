@@ -7,7 +7,8 @@ import ciscoLogo from '@/assets/CiscoLogo.webp'
 import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
 import ButtonImage from '@/ButtonImage';
-import { UserRoundPen } from 'lucide-react'
+import { UserRoundPen, Home as HomeIcon, FolderOpen } from 'lucide-react'
+import Navbar from '@/Navbar'
 import { CornerDownRight, ArrowUpRight } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 import { MailDot } from 'lucide-react';
@@ -27,17 +28,56 @@ function Home() {
   const [atTop, setAtTop] = useState(true)
   const introPlayed = useRef(hasIntroPlayed()).current
   const [typingDone, setTypingDone] = useState(introPlayed)
+  const [showDock, setShowDock] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setAtTop(window.scrollY === 0)
+    const onScroll = () => {
+      setAtTop(window.scrollY === 0)
+      // sidebar dock appears once the hero (100vh) is scrolled past
+      setShowDock(window.scrollY > window.innerHeight * 0.9)
+    }
+    onScroll()
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const dockItems = [
+    {
+      icon: <HomeIcon size={20} />,
+      label: 'Home',
+      onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+    },
+    {
+      icon: <UserRoundPen size={20} />,
+      label: 'About',
+      onClick: () => document.querySelector('#About')?.scrollIntoView({ behavior: 'smooth' }),
+    },
+    {
+      icon: <FolderOpen size={20} />,
+      label: 'Projects',
+      onClick: () => document.querySelector('#Project')?.scrollIntoView({ behavior: 'smooth' }),
+    },
+    {
+      icon: <BadgeCheck size={20} />,
+      label: 'Certifications',
+      onClick: () => document.querySelector('#Certifications')?.scrollIntoView({ behavior: 'smooth' }),
+    },
+  ]
+
   return (
     
     <div>
-<Background />
+      <Background />
+
+      {/* sidebar dock: appears once the hero (100vh) is scrolled past, slides in from the left */}
+      {showDock && (
+        <div className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40">
+          <AutoReveal direction="left">
+            <Navbar items={dockItems} panelHeight={264} NavbarHeight={340} labelPosition="right" />
+          </AutoReveal>
+        </div>
+      )}
+
       <section className=" h-screen w-full flex justify-center">
         
         <div className="pt-20 w-full p-5 flex flex-col items-center justify-center  sm:w-3/4 md:w-3/4 xl:p-20" >
@@ -75,7 +115,7 @@ function Home() {
  <AutoReveal className="w-full flex justify-center">
           <TypingText
             as="p"
-            className="text-[#d0d0d0] font-mono text-center text-base md:text-lg mt-10 lg:w-2/3 2xl:text-xl"
+            className="text-gray-400 font-mono text-center text-base md:text-lg mt-10 lg:w-2/3 2xl:text-xl"
             fontSize=""
             fontWeight=""
             color=""
@@ -104,19 +144,19 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
 <div className={`transition-opacity duration-300 ease-out ${atTop && typingDone ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}>
-                  <h3 className='text-[#d4d4d4] font-mono opacity-4 text-sm'>Scroll Down</h3>
-                  <ChevronDown className='text-[#d1d1d1] w-4 h-4 animate-bounce md:mt-2 block mx-auto' />
+                  <h3 className='text-gray-400 font-mono opacity-4 text-sm'>Scroll Down</h3>
+                  <ChevronDown className='text-gray-400 w-4 h-4 animate-bounce md:mt-2 block mx-auto' />
                 </div>
         </div>
       </section>
 
 
 
-  <section id='About' className=" mt-40 overflow-hidden h-auto w-full flex justify-center pb-20">
+  <section id='About' className=" mt-40 overflow-hidden h-auto w-full flex justify-center pb-44">
 
 
         
-        <div className="w-full min-[370px]:w-11/12 p-5  md:pb-20 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
+        <div className="w-full min-[370px]:w-11/12 p-5  md:pb-20 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto ">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             about
@@ -244,8 +284,8 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
 
-       <section id='Project' className="overflow-hidden h-auto w-full flex justify-center [content-visibility:auto] [contain-intrinsic-size:auto_600px]">
-                <div className=" w-full p-5 md:pt-0 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto overflow-hidden">
+       <section id='Project' className="overflow-hidden h-auto w-full flex justify-center [content-visibility:auto] [contain-intrinsic-size:auto_600px] ">
+                <div className=" w-full p-5 md:pt-0 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto overflow-hidden pb-44">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             Projects
@@ -261,14 +301,14 @@ I love building responsive web applications, mastering new coding frameworks, an
         </section>
 
 
-             <section id='Certifications' className="overflow-hidden h-auto w-full flex justify-center pb-80 pt-20">
-                <div className="w-full flex flex-col items-center justify-center sm:w-full md:w-full lg:w-4/5">
+             <section id='Certifications' className="overflow-hidden h-auto w-full flex justify-center pb-80 pt-40">
+                <div className=" w-full flex flex-col items-center justify-center sm:w-full md:w-full lg:w-4/5">
                 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             Certifications
           </h1>
 </AutoReveal>
-<GlowingCards>
+<GlowingCards padding='' className="md:px-10 lg:px-0">
 <AutoReveal className="flex-1 min-w-[13rem] w-4/5">
 <GlowingCard glowColor="#60a5fa" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
@@ -311,7 +351,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </AutoReveal>
 
 
-<AutoReveal className="flex-1 min-w-[13rem] w-4/5">
+<AutoReveal className="flex-1 min-w-[13rem] w-4/5 sm:max-w-[calc((100%-2.5rem)/2)]">
 <GlowingCard glowColor="#facc15" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
