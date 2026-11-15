@@ -9,6 +9,7 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
       lerp: 0.1,
       smoothWheel: true,
       anchors: true,
+      stopInertiaOnNavigate: true,
     })
     registerLenis(lenis)
 

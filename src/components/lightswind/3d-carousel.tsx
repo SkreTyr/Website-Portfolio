@@ -7,6 +7,7 @@ import {
   useState,
   TouchEvent,
 } from "react";
+import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "./card";
 
@@ -18,6 +19,7 @@ export interface ThreeDCarouselItem {
   tags: string[];
   imageUrl: string;
   link: string;
+  to?: string;
 }
 
 interface ThreeDCarouselProps {
@@ -183,21 +185,25 @@ const ThreeDCarousel = ({
                         ))}
                       </div>
 
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-500 flex items-center relative group"
-                        onClick={() => {
-                          if (item.link.startsWith("/")) {
-                            window.scrollTo(0, 0);
-                          }
-                        }}
-                      >
-              <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-0 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</span> 
-                        <ArrowUpRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500" />
-
-                      </a>
+                      {item.to ? (
+                        <Link
+                          to={item.to}
+                          className="text-gray-500 flex items-center relative group"
+                        >
+                          <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-0 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</span>
+                          <ArrowUpRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500" />
+                        </Link>
+                      ) : (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-500 flex items-center relative group"
+                        >
+                          <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-0 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</span>
+                          <ArrowUpRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500" />
+                        </a>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

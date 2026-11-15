@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Phone } from "lucide-react";
 import contactImage from "@/assets/ContactImageWhite.png";
-import AutoReveal from '@/components/AutoReveal'; 
+import AutoReveal from '@/components/AutoReveal';
 
 
 
@@ -14,19 +15,17 @@ interface VisualItem {
   label: string;
 }
 
-const visualData: VisualItem[] = [
-  {
-    key: 1,
-    url: contactImage, 
-    label: "Get In Touch",
-  },
-];
-
 interface ImageRevealProps {
   image?: string;
+  label?: string;
+  href?: string;
 }
 
-const ImageReveal: React.FC<ImageRevealProps> = ({ image = contactImage }) => {
+const ImageReveal: React.FC<ImageRevealProps> = ({
+  image = contactImage,
+  label = "Get In Touch",
+  href,
+}) => {
   const [focusedItem, setFocusedItem] = useState<VisualItem | null>(null);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
 
@@ -57,26 +56,57 @@ const ImageReveal: React.FC<ImageRevealProps> = ({ image = contactImage }) => {
     setFocusedItem(null);
   };
 
-const items = [{ key: 1, url: image, label: "Get In Touch" }];
+  const items = [{ key: 1, url: image, label }];
+  const isExternal = !!href?.startsWith("http");
   return (
     <div
       className="relative w-fit min-h-fit"
       onMouseMove={onMouseTrack}
       onMouseLeave={onHoverDeactivate}
     >
-      {items.map((item) => (
-        <AutoReveal key={item.key}>
-        <div
-          className="inline-flex items-center gap-2 rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm/6 font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer"
-          onMouseEnter={() => onHoverActivate(item)}
-        >
-          <Phone />
-          <span className="relative">
-            {item.label}
-          </span>
-        </div>
-        </AutoReveal>
-      ))}
+      {items.map((item) => {
+        const inner = (
+          <>
+            <Phone />
+            <span className="relative">{item.label}</span>
+          </>
+        );
+        const contentClass =
+          "inline-flex items-center gap-2 rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm/6 font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer";
+
+        return (
+          <AutoReveal key={item.key}>
+            {href ? (
+              isExternal ? (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={contentClass}
+                  onMouseEnter={() => onHoverActivate(item)}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <Link
+                  to={href}
+                  className={contentClass}
+                  onMouseEnter={() => onHoverActivate(item)}
+                >
+                  {inner}
+                </Link>
+              )
+            ) : (
+              <div
+                className={contentClass}
+                onMouseEnter={() => onHoverActivate(item)}
+              >
+                {inner}
+              </div>
+            )}
+          </AutoReveal>
+        );
+      })}
 
       {isLargeScreen && focusedItem && (
         <motion.img

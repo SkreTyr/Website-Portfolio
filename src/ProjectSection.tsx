@@ -11,6 +11,7 @@ export default function ProjectSection() {
       tags: ["Quality Assurance", "Front-End"],
       imageUrl: veynsImage,
       link: "https://veyns-ubec.vercel.app/",
+      to: "/projects/veyns",
     },
     {
       id: 2,

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 import contactImageBlack from "@/assets/ContactImage.png";
 import AutoReveal from '@/components/AutoReveal';
@@ -13,18 +14,28 @@ interface VisualItem {
   label: string;
 }
 
-const visualData: VisualItem[] = [
-  {
-    key: 1,
-    url: contactImageBlack,
-    label: "More Info",
-  },
-];
+interface ButtonAboutMeProps {
+  label?: string;
+  href?: string;
+  image?: string;
+}
 
-const ButtonAboutMe: React.FC = () => {
+const ButtonAboutMe: React.FC<ButtonAboutMeProps> = ({
+  label = "More Info",
+  href,
+  image = contactImageBlack,
+}) => {
   const [focusedItem, setFocusedItem] = useState<VisualItem | null>(null);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const visualData: VisualItem[] = [
+    {
+      key: 1,
+      url: image,
+      label,
+    },
+  ];
 
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
@@ -56,6 +67,9 @@ const ButtonAboutMe: React.FC = () => {
     setFocusedItem(null);
   };
 
+  const contentClass =
+    "inline-flex items-center gap-2 rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm/6 font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer";
+
   return (
     <div
       ref={containerRef}
@@ -64,16 +78,30 @@ const ButtonAboutMe: React.FC = () => {
     >
       {visualData.map((item) => (
         <AutoReveal key={item.key}>
-        <div
-          className="inline-flex items-center gap-2 rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm/6 font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer"
-          onMouseEnter={() => onHoverActivate(item)}
-          onMouseLeave={onHoverDeactivate}
-        >
-          <span className="relative">
-            {item.label}
-          </span>
-          <MoveRight size={16} />
-        </div>
+        {href ? (
+          <Link
+            to={href}
+            className={contentClass}
+            onMouseEnter={() => onHoverActivate(item)}
+            onMouseLeave={onHoverDeactivate}
+          >
+            <span className="relative">
+              {label}
+            </span>
+            <MoveRight size={16} />
+          </Link>
+        ) : (
+          <div
+            className={contentClass}
+            onMouseEnter={() => onHoverActivate(item)}
+            onMouseLeave={onHoverDeactivate}
+          >
+            <span className="relative">
+              {label}
+            </span>
+            <MoveRight size={16} />
+          </div>
+        )}
         </AutoReveal>
       ))}
 

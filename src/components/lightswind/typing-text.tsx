@@ -23,6 +23,7 @@ export interface TypingTextProps {
   align?: "left" | "center" | "right";
   loop?: boolean;
   lockScroll?: boolean;
+  instant?: boolean;
   onComplete?: () => void;
 }
 
@@ -39,16 +40,21 @@ export const TypingText = ({
   align = "left",
   loop: _loop = false,
   lockScroll = false,
+  instant = false,
   onComplete,
 }: TypingTextProps) => {
   const [textContent, setTextContent] = useState<string>("");
 
   useEffect(() => {
     if (!onComplete) return
+    if (instant) {
+      onComplete()
+      return
+    }
     const total = (delay + duration) * 1000
     const t = setTimeout(() => onComplete(), total)
     return () => clearTimeout(t)
-  }, [delay, duration, onComplete])
+  }, [delay, duration, onComplete, instant])
 
   useEffect(() => {
     if (!lockScroll) return
@@ -106,22 +112,32 @@ export const TypingText = ({
     }),
   };
 
+  const componentClass = cn(
+    "inline-flex",
+    className,
+    fontSize,
+    fontWeight,
+    color,
+    letterSpacing,
+    align === "center"
+      ? "justify-center text-center"
+      : align === "right"
+      ? "justify-end text-right"
+      : "justify-start text-left"
+  );
+
+  if (instant) {
+    return React.createElement(
+      Component as any,
+      { className: componentClass },
+      textContent
+    );
+  }
+
   return React.createElement(
     Component as any,
     {
-      className: cn(
-        "inline-flex",
-        className,
-        fontSize,
-        fontWeight,
-        color,
-        letterSpacing,
-        align === "center"
-          ? "justify-center text-center"
-          : align === "right"
-          ? "justify-end text-right"
-          : "justify-start text-left"
-      ),
+      className: componentClass,
     },
     <motion.span
       className="inline-block"
