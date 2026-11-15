@@ -154,7 +154,7 @@ const ThreeDCarousel = ({
               >
                 <Card
                   className={`overflow-hidden bg-[#151515] h-[${cardHeight}px] border shadow-sm 
-                hover:shadow-md flex flex-col`}
+                hover:shadow-md flex flex-col backdrop-blur-none`}
                 >
                   <div
                     className="relative bg-black p-6 flex items-center justify-center h-48 overflow-hidden"
