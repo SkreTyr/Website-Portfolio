@@ -116,7 +116,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
         
-        <div className=" w-full p-5  md:pb-20 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
+        <div className="w-full min-[420px]:w-4/5 p-5  md:pb-20 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             about
