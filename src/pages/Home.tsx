@@ -112,7 +112,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
 
-  <section id='About' className=" mt-40 overflow-hidden h-auto w-full flex justify-center pb-80">
+  <section id='About' className=" mt-40 overflow-hidden h-auto w-full flex justify-center pb-20">
 
 
         
@@ -171,7 +171,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
       </AutoReveal>
 
-        <AutoReveal className="row-span-3 row-start-8 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:col-span-2 md:row-span-2 md:row-start-4">
+        <AutoReveal rootMargin="0px 0px -15% 0px" className="row-span-3 row-start-8 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:col-span-2 md:row-span-2 md:row-start-4">
           <div className="h-full rounded-md flex flex-col items-center justify-center gap-5">
             <h1 className='inline-block font-mono text-[#f3f3f3]' >Skills & Stacks</h1>
             <hr className="border-t border-[#ffffff38] w-2/4" />
@@ -200,7 +200,7 @@ I love building responsive web applications, mastering new coding frameworks, an
           </div>
         </AutoReveal>
 
-        <AutoReveal className=" row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
+        <AutoReveal rootMargin="0px 0px -15% 0px" className=" row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
             <div className='flex items-center gap-5 font-mono'>
               <Scroll color="#ffffff" />
@@ -245,7 +245,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
        <section id='Project' className="overflow-hidden h-auto w-full flex justify-center [content-visibility:auto] [contain-intrinsic-size:auto_600px]">
-                <div className=" w-full p-5 md:pt-0 pb-80 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
+                <div className=" w-full p-5 md:pt-0 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto overflow-hidden">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             Projects
@@ -261,7 +261,7 @@ I love building responsive web applications, mastering new coding frameworks, an
         </section>
 
 
-             <section id='Certifications' className="overflow-hidden h-auto w-full flex justify-center pb-80 pt-32">
+             <section id='Certifications' className="overflow-hidden h-auto w-full flex justify-center pb-80 pt-20">
                 <div className="w-full flex flex-col items-center justify-center sm:w-full md:w-full lg:w-4/5">
                 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
@@ -269,7 +269,7 @@ I love building responsive web applications, mastering new coding frameworks, an
           </h1>
 </AutoReveal>
 <GlowingCards>
-<AutoReveal className="flex-1 min-w-[13rem] w-2/3">
+<AutoReveal className="flex-1 min-w-[13rem] w-4/5">
 <GlowingCard glowColor="#60a5fa" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
@@ -290,7 +290,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </AutoReveal>
 
 
-<AutoReveal className="flex-1 min-w-[13rem] w-2/3">
+<AutoReveal className="flex-1 min-w-[13rem] w-4/5">
 <GlowingCard glowColor="#4ade80" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
@@ -311,7 +311,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </AutoReveal>
 
 
-<AutoReveal className="flex-1 min-w-[13rem] w-2/3">
+<AutoReveal className="flex-1 min-w-[13rem] w-4/5">
 <GlowingCard glowColor="#facc15" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
       
     
