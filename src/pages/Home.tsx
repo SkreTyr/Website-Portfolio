@@ -112,18 +112,18 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
 
-  <section id='About' className="bg-red-500 mt-40 overflow-hidden h-auto w-full flex justify-center pb-80">
+  <section id='About' className=" mt-40 overflow-hidden h-auto w-full flex justify-center pb-80">
 
 
         
-        <div className="bg-red-500 w-full p-5  md:pb-20 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
+        <div className=" w-full p-5  md:pb-20 flex flex-col items-center justify-center sm:w-full md:overflow-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             about
           </h1>
 </AutoReveal>
 
-<div className="bg-blue-400 h-auto w-full grid grid-cols-1 grid-rows-[repeat(12,auto)] gap-4 md:h-3/4 md:grid-cols-3 md:grid-rows-5 z-10">
+<div className=" h-auto w-full grid grid-cols-1 grid-rows-[repeat(12,auto)] gap-4 md:h-3/4 md:grid-cols-3 md:grid-rows-5 z-10">
 
         <AutoReveal className="row-span-3 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md">
           <div className="bg-yellow-200 h-full rounded-md overflow-hidden"><img src={profileImg} alt='Profile Picture' loading="lazy" decoding="async" className="w-full h-full object-cover" /></div>
