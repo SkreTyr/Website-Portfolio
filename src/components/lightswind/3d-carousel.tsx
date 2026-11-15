@@ -41,7 +41,7 @@ const ThreeDCarousel = ({
       brand: "VEYNS",
       description: "Order your favorite meals directly from our kitchen for lower prices, exclusive deals, and fast local delivery.",
       tags: ["Sports", "Health", "IoT"],
-      imageUrl: "https://images.unsplash.com/photo-1515243061678-14fc18b93935?q=80&w=2940&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1515243061678-14fc18b93935?q=70&w=1200&auto=format&fit=crop",
       link: "#",
     },
     {
@@ -50,7 +50,7 @@ const ThreeDCarousel = ({
       brand: "Herman Miller",
       description: "Pressure-sensitive fabrics in office chairs that analyze posture and suggest adjustments for optimal health.",
       tags: ["Office", "Health", "Furniture"],
-      imageUrl: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?q=80&w=2938&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?q=70&w=1200&auto=format&fit=crop",
       link: "#",
     },
     {
@@ -59,7 +59,7 @@ const ThreeDCarousel = ({
       brand: "Tesla",
       description: "Intelligent car seats that adapt to passenger position and monitor vital signs for enhanced safety.",
       tags: ["Auto", "Safety", "Smart"],
-      imageUrl: "https://images.unsplash.com/photo-1561580125-028ce3bfcb25?q=80&w=2940&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1561580125-028ce3bfcb25?q=70&w=1200&auto=format&fit=crop",
       link: "#",
     },
   ],
@@ -71,18 +71,21 @@ const ThreeDCarousel = ({
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const touchStartRef = useRef<number | null>(null);
+  const touchEndRef = useRef<number | null>(null);
+  const [canHover] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(pointer: fine)').matches : true
+  );
   const minSwipeDistance = 50;
 
   useEffect(() => {
-    if (autoRotate && isInView && !isHovering) {
+    if (autoRotate && canHover && isInView && !isHovering) {
       const interval = setInterval(() => {
         setActive((prev) => (prev + 1) % items.length);
       }, rotateInterval);
       return () => clearInterval(interval);
     }
-  }, [isInView, isHovering, autoRotate, rotateInterval, items.length]);
+  }, [isInView, isHovering, autoRotate, rotateInterval, items.length, canHover]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -93,17 +96,19 @@ const ThreeDCarousel = ({
   }, []);
 
   const onTouchStart = (e: TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-    setTouchEnd(null);
+    touchStartRef.current = e.targetTouches[0].clientX;
+    touchEndRef.current = null;
   };
 
   const onTouchMove = (e: TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    // ref, not state: touchmove fires ~60x/s during a scroll — a setState per
+    // move would re-render the whole carousel and jank the scroll
+    touchEndRef.current = e.targetTouches[0].clientX;
   };
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
+    if (!touchStartRef.current || !touchEndRef.current) return;
+    const distance = touchStartRef.current - touchEndRef.current;
     if (distance > minSwipeDistance) {
       setActive((prev) => (prev + 1) % items.length);
     } else if (distance < -minSwipeDistance) {
@@ -143,7 +148,7 @@ const ThreeDCarousel = ({
             {items.map((item, index) => (
               <div
                 key={item.id}
-                className={`bg-[#151515] rounded-xl absolute top-0 w-full max-w-md transform transition-all duration-500 ${getCardAnimationClass(
+                className={`bg-[#151515] rounded-xl absolute top-0 w-full max-w-md transform-gpu transition-[transform,opacity] duration-500 ${getCardAnimationClass(
                   index
                 )}`}
               >
