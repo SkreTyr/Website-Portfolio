@@ -141,24 +141,24 @@ I love building responsive web applications, mastering new coding frameworks, an
 <div className="md:grid md:grid-cols-2 md:grid-rows-2 md:gap-4">
     <div className='flex items-center gap-5 font-mono mt-4'>
   <CornerDownRight color='grey'/>
-  <h2 className='text-[#d0d0d0] text-sm md:text-base '>Shann Michael D. Agang</h2>
+  <h2 className='text-[#f3f3f3] text-sm md:text-base '>Shann Michael D. Agang</h2>
 </div>
 
 <div className='flex items-center gap-5 font-mono mt-4'>
   <MapPin color='grey'/>
-   <h2 className='text-[#d0d0d0] text-sm md:text-base'>Luz, Cebu City, Philippines</h2>
+   <h2 className='text-[#f3f3f3] text-sm md:text-base'>Luz, Cebu City, Philippines</h2>
   </div>
 
   <div className='flex items-center gap-5 font-mono mt-4'>
   <MailDot color='grey'/>
-  <h2 className='text-[#d0d0d0] text-sm md:text-base'>Shannmichaelagang<br></br>@gmail.com</h2>
+  <h2 className='text-[#f3f3f3] text-sm md:text-base'>Shannmichaelagang<br></br>@gmail.com</h2>
    <AnimatedCopyButton textToCopy='Shannmichaelagang@gmail.com' size='sm'/>
 </div>
 
 
 <div className='flex items-center gap-5 font-mono mt-4'>
   <GraduationCap color='grey'/>
-  <h2 className='text-[#d0d0d0] text-sm md:text-base'>Computer Engineering</h2>
+  <h2 className='text-[#f3f3f3] text-sm md:text-base'>Computer Engineering</h2>
 </div>
 </div>
     
@@ -245,7 +245,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
        <section id='Project' className="overflow-hidden h-auto w-full flex justify-center [content-visibility:auto] [contain-intrinsic-size:auto_600px]">
-                <div className=" w-full p-5 pt-80 md:pt-0 pb-80 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
+                <div className=" w-full p-5 md:pt-0 pb-80 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
             Projects
