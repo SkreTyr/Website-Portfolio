@@ -7,12 +7,13 @@ import automotiveImage from "./assets/AutomotiveComfort.webp";
 export default function ProjectSection() {
   return <div className=''><ThreeDCarousel items={[  {
       id: 1,
-      title: "Project One",
-      brand: "Temporary",
-      description: "A temporary placeholder card used for testing the project section performance.",
-      tags: ["Test", "Placeholder"],
+      title: "VEYNS",
+      brand: "Food | Health | Direct Dispatch",
+      description: "A dedicated online ordering system connecting local kitchens directly to customers for fast delivery, real-time tracking, and commission-free ordering.",
+      tags: ["Quality Assurance", "Front-End"],
       imageUrl: veynsImage,
-      link: "#",
+      link: "https://veyns-ubec.vercel.app/",
+      to: "/projects/veyns",
     },
     {
       id: 2,

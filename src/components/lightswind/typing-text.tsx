@@ -127,10 +127,18 @@ export const TypingText = ({
   );
 
   if (instant) {
+    // render '\n' (from <br> in the children) as real line breaks — a raw
+    // string would collapse the newline into a space in HTML
+    const lines = textContent.split("\n");
     return React.createElement(
       Component as any,
       { className: componentClass },
-      textContent
+      lines.map((line, i) => (
+        <React.Fragment key={i}>
+          {line}
+          {i < lines.length - 1 && <br />}
+        </React.Fragment>
+      ))
     );
   }
 

@@ -130,7 +130,7 @@ I love building responsive web applications, mastering new coding frameworks, an
         </AutoReveal>
 
     <AutoReveal className="row-span-4 row-start-4 border border-[#ffffff4d] bg-[#151515]  p-2 rounded-md  md:col-span-2 md:row-span-3">
-<div className=" h-full rounded-md">
+<div className="h-full rounded-md">
 <div className=" flex items-center gap-5 font-mono">
 <UserRoundPen color="#ffffff" />
   <h1 className='text-[#f5f5f5]'>A bit of introduction</h1>
@@ -141,30 +141,30 @@ I love building responsive web applications, mastering new coding frameworks, an
 <div className="md:grid md:grid-cols-2 md:grid-rows-2 md:gap-4">
     <div className='flex items-center gap-5 font-mono mt-4'>
   <CornerDownRight color='grey'/>
-  <h2 className='text-[#f3f3f3]'>Shann Michael D. Agang</h2>
+  <h2 className='text-[#d0d0d0] text-sm md:text-base '>Shann Michael D. Agang</h2>
 </div>
 
 <div className='flex items-center gap-5 font-mono mt-4'>
   <MapPin color='grey'/>
-   <h2 className='text-[#f3f3f3]'>Luz, Cebu City, Philippines</h2>
+   <h2 className='text-[#d0d0d0] text-sm md:text-base'>Luz, Cebu City, Philippines</h2>
   </div>
 
   <div className='flex items-center gap-5 font-mono mt-4'>
   <MailDot color='grey'/>
-  <h2 className='text-[#f3f3f3]'>Shannmichaelagang<br></br>@gmail.com</h2>
+  <h2 className='text-[#d0d0d0] text-sm md:text-base'>Shannmichaelagang<br></br>@gmail.com</h2>
    <AnimatedCopyButton textToCopy='Shannmichaelagang@gmail.com' size='sm'/>
 </div>
 
 
 <div className='flex items-center gap-5 font-mono mt-4'>
   <GraduationCap color='grey'/>
-  <h2 className='text-[#f3f3f3]'>Computer Engineering</h2>
+  <h2 className='text-[#d0d0d0] text-sm md:text-base'>Computer Engineering</h2>
 </div>
 </div>
     
 <hr className="border-t border-[#ffffff38] w-full mt-10" />
 
-<div className=' w-full md:mb-20 md:pb-20 mt-4 text-base md:text-sm md:overflow-hidden md:h-fit'><p className='text-[#d0d0d0] font-mono'>I am a Computer Engineering student at the University of Cebu specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
+<div className=' w-full md:mb-20 md:pb-20 mt-4 text-sm md:text-base md:overflow-hidden md:h-fit'><p className='text-[#b0b0b0] font-mono'>I am a Computer Engineering student at the University of Cebu specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
 
 
       </div> 

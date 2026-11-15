@@ -6,6 +6,7 @@ interface ParticleLayerProps {
   duration: string;
   size: number;
   afterSize: number;
+  twinkle?: boolean;
 }
 
 const SPACING = 2560;
@@ -26,6 +27,7 @@ const ParticleLayer: React.FC<ParticleLayerProps> = ({
   count,
   duration,
   size,
+  twinkle = false,
 }) => {
   // SEAMLESS FIX: Generate ONE master shadow blueprint per layer. 
   // By reusing `shadows` on both the element and its `::after` duplicate, 
@@ -38,7 +40,7 @@ const ParticleLayer: React.FC<ParticleLayerProps> = ({
         .particle-layer-${count} {
           position: absolute;
           background: transparent;
-          animation: animParticle ${duration} linear infinite;
+          animation: animParticle ${duration} linear infinite${twinkle ? ', twinkle 6s ease-in-out infinite alternate' : ''};
           box-shadow: ${shadows};
           border-radius: 50%;
           height: ${size}px;
@@ -56,6 +58,10 @@ const ParticleLayer: React.FC<ParticleLayerProps> = ({
           height: ${size}px;
           width: ${size}px;
         }
+        @keyframes twinkle {
+          from { opacity: 0.35; }
+          to { opacity: 1; }
+        }
       `}</style>
       <div className={`particle-layer-${count}`} />
     </>
@@ -63,7 +69,9 @@ const ParticleLayer: React.FC<ParticleLayerProps> = ({
 };
 
 export const ParticleBackground: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+  );
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
@@ -120,8 +128,12 @@ export const ParticleBackground: React.FC = () => {
       <div className="page-particle-container">
         <div className="animation-wrapper">
           {isMobile ? (
-            // phones: one light layer only (full 3 layers = ~1300 shadows to paint per frame)
-            <ParticleLayer count={100} afterCount={50} duration="300s" size={2} afterSize={2} />
+            // phones: two light layers only (full 3 layers = ~1300 shadows to paint per frame).
+            // The second layer is a sparse twinkling star field (opacity pulse is GPU-composited).
+            <>
+              <ParticleLayer count={100} afterCount={50} duration="300s" size={2} afterSize={2} />
+              <ParticleLayer count={70} afterCount={0} duration="400s" size={3} afterSize={3} twinkle />
+            </>
           ) : (
             <>
               <ParticleLayer count={500} afterCount={200} duration="300s" size={2} afterSize={1} />

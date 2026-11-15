@@ -3,7 +3,15 @@ import { ArrowLeft } from 'lucide-react'
 import Background from '@/Background'
 import AutoReveal from '@/components/AutoReveal'
 
-const projects: Record<string, { title: string; description: string; stack: string; liveUrl?: string }> = {}
+const projects: Record<string, { title: string; description: string; stack: string; liveUrl?: string }> = {
+  veyns: {
+    title: 'Veyns',
+    description:
+      'A kiosk management system built for retail environments. It handles product catalog management, transactions, and reporting with a clean, responsive interface.',
+    stack: 'React · TypeScript · Tailwind CSS',
+    liveUrl: 'https://veyns-ubec.vercel.app/',
+  },
+}
 
 const ProjectDetails = () => {
   const { id } = useParams<{ id: string }>()
