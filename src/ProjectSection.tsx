@@ -32,5 +32,6 @@ export default function ProjectSection() {
       tags: ["Auto", "Safety", "Smart"],
       imageUrl: automotiveImage,
       link: "#",
+      disabled: true,
     },]} isMobileSwipe /></div>
 }

@@ -8,7 +8,7 @@ import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
 import ButtonImage from '@/ButtonImage';
 import { UserRoundPen, Home as HomeIcon, FolderOpen } from 'lucide-react'
-import Navbar from '@/Navbar'
+import Dock from '@/components/lightswind/dock'
 import { CornerDownRight, ArrowUpRight } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 import { MailDot } from 'lucide-react';
@@ -73,7 +73,7 @@ function Home() {
       {showDock && (
         <div className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40">
           <AutoReveal direction="left">
-            <Navbar items={dockItems} panelHeight={264} NavbarHeight={340} labelPosition="right" />
+            <Dock items={dockItems} labelPosition="right" />
           </AutoReveal>
         </div>
       )}

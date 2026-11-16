@@ -1,5 +1,4 @@
-
-import ButtonAboutMe from './ButtonAboutMe';
+import ImageReveal from './ImageReveal';
 
 interface ButtonImageProps {
   className?: string;
@@ -12,7 +11,7 @@ export default function ButtonImage({ className, label, href, image }: ButtonIma
     return (
         <div className={`mt-5 mb-5 sm:mb-10 ${className || ''}`}>
 
-            <ButtonAboutMe label={label} href={href} image={image} />
+            <ImageReveal label={label} href={href} image={image} />
         </div>
     )
 }

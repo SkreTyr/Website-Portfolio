@@ -9,6 +9,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
 /* ---- Custom Scrollbar: thin, black track, dark grey thumb ---- */
@@ -38,6 +39,7 @@ body {
 html {
   scrollbar-width: thin;
   scrollbar-color: #3a3a3a #101010;
+  overflow-x: hidden;
 }
 
 /* ---- Lenis recommended styles ---- */

@@ -89,7 +89,7 @@ export const ParticleBackground: React.FC = () => {
           position: fixed;
           top: 0;
           left: 0;
-          width: 100vw;
+          width: 100%;
           height: 100vh;
           background: #101010;
           z-index: -2; /* Set to -2 so it sits cleanly beneath the particle container */
@@ -101,7 +101,7 @@ export const ParticleBackground: React.FC = () => {
           position: fixed;
           top: 0;
           left: 0;
-          width: 100vw;
+          width: 100%;
           height: 100vh;
           overflow: hidden;
           z-index: -2; 

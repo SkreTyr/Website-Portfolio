@@ -14,13 +14,13 @@ interface VisualItem {
   label: string;
 }
 
-interface ButtonAboutMeProps {
+interface ImageRevealProps {
   label?: string;
   href?: string;
   image?: string;
 }
 
-const ButtonAboutMe: React.FC<ButtonAboutMeProps> = ({
+const ImageReveal: React.FC<ImageRevealProps> = ({
   label = "More Info",
   href,
   image = contactImageBlack,
@@ -125,4 +125,4 @@ const ButtonAboutMe: React.FC<ButtonAboutMeProps> = ({
   );
 };
 
-export default ButtonAboutMe;
+export default ImageReveal;

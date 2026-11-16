@@ -53,7 +53,7 @@ const Certifications = () => {
       <Background />
       <section className="h-auto w-full flex justify-center pt-32 pb-20">
         <div className="w-full p-5 flex flex-col items-center justify-center lg:w-4/5">
-          <AutoReveal direction="left" className="w-full">
+          <AutoReveal direction="left" className="w-full md:pl-10 lg:pl-0">
             <Link
               to="/#Certifications"
               className="inline-flex items-center gap-2 font-mono text-sm text-gray-400 hover:text-white transition-colors mb-8"

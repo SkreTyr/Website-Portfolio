@@ -27,8 +27,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen w-full">
       <Background />
-      <section className="h-auto w-full flex justify-center pt-32 pb-20">
-        <div className="w-full p-5 flex flex-col items-center justify-center lg:w-3/4 2xl:w-2/4">
+      <section className="bg-red-500 h-auto w-full flex justify-center pt-32 pb-20">
+        <div className="bg-blue-500 w-full p-5 flex flex-col items-center justify-center lg:w-3/4 2xl:w-2/4">
           <AutoReveal direction="left" className="w-full">
             <Link
               to="/"

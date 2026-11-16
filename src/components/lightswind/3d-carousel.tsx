@@ -20,6 +20,7 @@ export interface ThreeDCarouselItem {
   imageUrl: string;
   link: string;
   to?: string;
+  disabled?: boolean;
 }
 
 interface ThreeDCarouselProps {
@@ -190,7 +191,12 @@ const ThreeDCarousel = ({
                         ))}
                       </div>
 
-                      {item.to ? (
+                      {item.disabled ? (
+                        <div className="text-gray-500 flex items-center relative cursor-not-allowed">
+                          <span className='text-gray-200 relative inline-block'>Learn More</span>
+                          <ArrowUpRight className="ml-2 w-4 h-4 relative z-10" />
+                        </div>
+                      ) : item.to ? (
                         <Link
                           to={item.to}
                           className="text-gray-500 flex items-center relative group"

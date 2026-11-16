@@ -1,3 +1,4 @@
+// components/Dock.tsx
 "use client";
 
 import {
@@ -8,18 +9,18 @@ import {
   AnimatePresence,
   MotionValue,
 } from "framer-motion";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-function useNavbarItemSize(
-  mouseX: MotionValue<number>,
+function useDockItemSize(
+  mouseY: MotionValue<number>,
   baseItemSize: number,
   magnification: number,
   distance: number,
   ref: React.RefObject<HTMLDivElement | null>,
   spring: { mass: number; stiffness: number; damping: number }
 ) {
-  const mouseDistance = useTransform(mouseX, (val) => {
+  const mouseDistance = useTransform(mouseY, (val) => {
     if (typeof val !== "number" || isNaN(val)) return 0;
     const rect = ref.current?.getBoundingClientRect() ?? {
       y: 0,
@@ -37,11 +38,11 @@ function useNavbarItemSize(
   return useSpring(targetSize, spring);
 }
 
-interface NavbarItemProps {
+interface DockItemProps {
   icon: React.ReactNode;
   label: string;
   onClick: () => void;
-  mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
   baseItemSize: number;
   magnification: number;
   distance: number;
@@ -57,11 +58,11 @@ interface NavbarItemProps {
   labelTextColor?: string;
 }
 
-function NavbarItem({
+function DockItem({
   icon,
   label,
   onClick,
-  mouseX,
+  mouseY,
   baseItemSize,
   magnification,
   distance,
@@ -72,13 +73,13 @@ function NavbarItem({
   itemBorderColor,
   borderRadius,
   hideLabels = false,
-  labelPosition = "top",
+  labelPosition = "right",
   labelBackground,
   labelTextColor,
-}: NavbarItemProps) {
+}: DockItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isHovered = useMotionValue(0);
-  const size = useNavbarItemSize(mouseX, baseItemSize, magnification, distance, ref, spring);
+  const size = useDockItemSize(mouseY, baseItemSize, magnification, distance, ref, spring);
   const [showLabel, setShowLabel] = useState(false);
 
   useEffect(() => {
@@ -97,10 +98,12 @@ function NavbarItem({
       ? { right: "calc(100% + 8px)", left: "auto", top: "50%", transform: "translateY(-50%)" }
       : { bottom: "calc(100% + 8px)", top: "auto" };
 
+  const tooltipAnimY = labelPosition === "bottom" ? -4 : 4;
+
   return (
     <motion.div
       ref={ref}
-      style={{ width: baseItemSize, height: size }}
+      style={{ width: size, height: size }}
       onHoverStart={() => isHovered.set(1)}
       onHoverEnd={() => isHovered.set(0)}
       onFocus={() => isHovered.set(1)}
@@ -135,9 +138,9 @@ function NavbarItem({
         <AnimatePresence>
           {showLabel && (
             <motion.div
-              initial={{ opacity: 0, y: labelPosition === "bottom" ? -4 : 4 }}
+              initial={{ opacity: 0, y: tooltipAnimY }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: labelPosition === "bottom" ? -4 : 4 }}
+              exit={{ opacity: 0, y: tooltipAnimY }}
               transition={{ duration: 0.18 }}
               className={cn(
                 "absolute left-1/2 w-fit whitespace-pre rounded-md border px-2 py-0.5 text-xs pointer-events-none z-50",
@@ -156,17 +159,17 @@ function NavbarItem({
   );
 }
 
-interface NavbarItemData {
+interface DockItemData {
   icon: React.ReactNode;
   label: string;
   onClick: () => void;
   badgeCount?: number;
 }
 
-interface NavbarProps {
-  /** Items to render inside the Navbar. Each needs an icon, label, and optional onClick + badgeCount. */
-  items: NavbarItemData[];
-  /** Extra CSS classes for the Navbar panel container. */
+interface DockProps {
+  /** Items to render inside the dock. Each needs an icon, label, and optional onClick + badgeCount. */
+  items: DockItemData[];
+  /** Extra CSS classes for the dock panel container. */
   className?: string;
   /** Framer Motion spring physics for all animations. */
   spring?: { mass: number; stiffness: number; damping: number };
@@ -174,15 +177,9 @@ interface NavbarProps {
   magnification?: number;
   /** Distance in px over which magnification spreads to neighbours. @default 200 */
   distance?: number;
-  /** Navbar panel height in px when idle. @default 64 */
-  panelHeight?: number;
-  /** Navbar panel max height in px when expanded. @default 256 */
-  NavbarHeight?: number;
   /** Base (idle) size of each item in px. @default 50 */
   baseItemSize?: number;
-  /** Navbar position on screen. Only "bottom" is currently animated. @default "bottom" */
-  position?: "bottom" | "top";
-  /** Gap between Navbar items. Tailwind gap class e.g. "gap-2", "gap-6". @default "gap-4" */
+  /** Gap between dock items. Tailwind gap class e.g. "gap-2", "gap-6". @default "gap-4" */
   gap?: string;
   /** Background color for individual item icons. Tailwind class or CSS value. */
   itemBackground?: string;
@@ -194,15 +191,15 @@ interface NavbarProps {
   badgeColor?: string;
   /** Whether to hide all hover labels. @default false */
   hideLabels?: boolean;
-  /** Position of the hover label relative to the icon. @default "top" */
+  /** Position of the hover label relative to the icon. @default "right" */
   labelPosition?: "top" | "bottom" | "left" | "right";
   /** Background for the hover label tooltip. Tailwind class. @default "bg-[#060606]" */
   labelBackground?: string;
   /** Text color for the hover label tooltip. Tailwind class. @default "text-white" */
   labelTextColor?: string;
-  /** If true, renders a frosted glass blur panel behind the Navbar. @default false */
+  /** If true, renders a frosted glass blur panel behind the dock. @default false */
   blurBackground?: boolean;
-  /** If true, wraps the Navbar with the blocks multi-layer border concept frame. @default true */
+  /** If true, wraps the dock with the blocks multi-layer border concept frame. @default true */
   multiBorder?: boolean;
   /** Show a visual separator line. @default false */
   showSeparator?: boolean;
@@ -210,14 +207,12 @@ interface NavbarProps {
   separatorIndex?: number;
 }
 
-export default function Navbar({
+export default function Dock({
   items,
   className = "",
   spring = { mass: 0.1, stiffness: 150, damping: 12 },
   magnification = 70,
   distance = 200,
-  panelHeight = 400,
-  NavbarHeight = 256,
   baseItemSize = 50,
   gap = "gap-4",
   itemBackground,
@@ -225,94 +220,66 @@ export default function Navbar({
   borderRadius,
   badgeColor = "bg-red-500",
   hideLabels = false,
-  labelPosition = "top",
+  labelPosition = "right",
   labelBackground,
   labelTextColor,
   blurBackground = false,
   multiBorder = true,
   showSeparator = false,
   separatorIndex,
-}: NavbarProps) {
-  const mouseX = useMotionValue(Infinity);
-  const isHovered = useMotionValue(0);
-
-  const maxHeight = useMemo(
-    () => Math.max(NavbarHeight, magnification * 2 + 8),
-    [magnification, NavbarHeight]
-  );
-
-  const animatedHeight = useSpring(
-    useTransform(isHovered, [0, 1], [panelHeight, maxHeight]),
-    spring
-  );
+}: DockProps) {
+  const mouseY = useMotionValue(Infinity);
 
   return (
     <motion.div
-      style={{ height: animatedHeight }}
-      className="mx-2 flex max-w-full items-center justify-center"
+      onMouseMove={({ clientY }) => {
+        mouseY.set(clientY);
+      }}
+      onMouseLeave={() => {
+        mouseY.set(Infinity);
+      }}
+      className={cn(
+        "flex flex-col items-center rounded-full px-2 py-5 shadow-lg transition-all duration-300",
+        multiBorder
+          ? "border border-zinc-200/80 dark:border-zinc-800/80 bg-[#151515] backdrop-blur-md lg:backdrop-blur-xl"
+          : blurBackground
+          ? "bg-white/10 dark:bg-black/20 backdrop-blur-md lg:backdrop-blur-xl border-2 border-white/20 dark:border-white/10 shadow-md"
+          : "bg-background border-2 border-border shadow-md",
+        gap,
+        className
+      )}
+      style={{ width: magnification + 16 }}
+      role="toolbar"
+      aria-label="Application dock"
     >
-      <motion.div
-        onMouseMove={({ pageY }) => {
-          isHovered.set(1);
-          mouseX.set(pageY);
-        }}
-        onMouseLeave={() => {
-          isHovered.set(0);
-          mouseX.set(Infinity);
-        }}
-        className={cn(
-          "absolute bottom-2 left-full top-1/2 -translate-y-1/2 transform flex items-center justify-center w-fit transition-all duration-300",
-          multiBorder
-            ? "rounded-md border border-zinc-200/80 dark:border-zinc-800/80 bg-[#151515] shadow-lg backdrop-blur-md lg:backdrop-blur-xl"
-            : "",
-          className
-        )}
-        style={{ height: panelHeight }}
-        role="toolbar"
-        aria-label="Application Navbar"
-      >
-        <div
-          className={cn(
-            "flex flex-col items-center justify-center w-fit rounded-md px-4 py-2 h-full transition-all duration-300",
-            gap,
-            multiBorder
-              ? "bg-[#151515] shadow-inner"
-              : blurBackground
-              ? "bg-white/10 dark:bg-black/20 backdrop-blur-md lg:backdrop-blur-xl border-2 border-white/20 dark:border-white/10 shadow-md"
-              : "bg-background border-2 border-border shadow-md"
+      {items.map((item, index) => (
+        <React.Fragment key={index}>
+          <DockItem
+            icon={item.icon}
+            label={item.label}
+            onClick={item.onClick}
+            mouseY={mouseY}
+            baseItemSize={baseItemSize}
+            magnification={magnification}
+            distance={distance}
+            spring={spring}
+            badgeCount={item.badgeCount}
+            badgeColor={badgeColor}
+            itemBackground={itemBackground}
+            itemBorderColor={itemBorderColor}
+            borderRadius={borderRadius}
+            hideLabels={hideLabels}
+            labelPosition={labelPosition}
+            labelBackground={labelBackground}
+            labelTextColor={labelTextColor}
+          />
+          {showSeparator && separatorIndex === index && (
+            <div className="self-center h-8 w-px bg-zinc-300 dark:bg-zinc-600 mx-1 shrink-0" />
           )}
-        >
-          {items.map((item, index) => (
-            <React.Fragment key={index}>
-              <NavbarItem
-                icon={item.icon}
-                label={item.label}
-                onClick={item.onClick}
-                mouseX={mouseX}
-                baseItemSize={baseItemSize}
-                magnification={magnification}
-                distance={distance}
-                spring={spring}
-                badgeCount={item.badgeCount}
-                badgeColor={badgeColor}
-                itemBackground={itemBackground}
-                itemBorderColor={itemBorderColor}
-                borderRadius={borderRadius}
-                hideLabels={hideLabels}
-                labelPosition={labelPosition}
-                labelBackground={labelBackground}
-                labelTextColor={labelTextColor}
-              />
-              {showSeparator && separatorIndex === index && (
-                <div className="self-center h-8 w-px bg-zinc-300 dark:bg-zinc-600 mx-1 shrink-0" />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      </motion.div>
+        </React.Fragment>
+      ))}
     </motion.div>
   );
 }
 
-export { Navbar };
-
+export { Dock };
