@@ -52,7 +52,7 @@ const Certifications = () => {
     <div className=" min-h-screen w-full">
       <Background />
       <section className=" h-auto w-full flex justify-center pt-32 pb-20">
-        <div className=" w-full p-5 flex flex-col items-center justify-center lg:w-3/5">
+        <div className=" w-full p-5 flex flex-col items-center justify-center md:w-full lg:w-4/5 xl:w-3/5">
           <AutoReveal direction="left" className=" w-full md:pl-10 lg:pl-0">
             <Link
               to="/#Certifications"
