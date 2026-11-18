@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Button from '@/Button'
 import { TypingText } from '@/components/lightswind/typing-text'
 import { hasIntroPlayed, markIntroPlayed } from '@/lib/intro'
@@ -69,14 +70,22 @@ function Home() {
     <div>
       <Background />
 
-      {/* sidebar dock: appears once the hero (100vh) is scrolled past, slides in from the left */}
-      {showDock && (
-        <div className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40">
-          <AutoReveal direction="left">
-            <Dock items={dockItems} labelPosition="right" />
-          </AutoReveal>
-        </div>
-      )}
+      {/* sidebar dock: appears once the hero (100vh) is scrolled past, slides in from the left.
+          Exits (outro) back out to the left when the user scrolls back to the hero. */}
+      <AnimatePresence>
+        {showDock && (
+          <div className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40">
+            <motion.div
+              initial={{ opacity: 0, x: -32 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -32 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+            >
+              <Dock items={dockItems} labelPosition="right" />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <section className=" h-screen w-full flex justify-center">
         
@@ -115,7 +124,7 @@ function Home() {
  <AutoReveal className="w-full flex justify-center">
           <TypingText
             as="p"
-            className="text-gray-400 font-mono text-center text-base md:text-lg mt-10 lg:w-2/3 2xl:text-xl"
+            className="text-gray-400 font-mono text-center text-sm md:text-base mt-10 lg:w-2/3 2xl:text-xl"
             fontSize=""
             fontWeight=""
             color=""
