@@ -110,10 +110,10 @@ function DockItem({
       onBlur={() => isHovered.set(0)}
       onClick={onClick}
       className={cn(
-        "relative inline-flex items-center justify-center shadow-md cursor-pointer",
-        borderRadius ?? "rounded-full",
-        itemBackground ?? "bg-background",
-        itemBorderColor ? `border-2 ${itemBorderColor}` : ""
+        "relative inline-flex items-center justify-center cursor-pointer text-white",
+        borderRadius ?? "rounded-md",
+        itemBackground ?? "bg-transparent",
+        itemBorderColor ? `border ${itemBorderColor}` : "border border-[#ffffff4d]"
       )}
       tabIndex={0}
       role="button"
@@ -211,10 +211,10 @@ export default function Dock({
   items,
   className = "",
   spring = { mass: 0.1, stiffness: 150, damping: 12 },
-  magnification = 70,
+  magnification = 56,
   distance = 200,
-  baseItemSize = 50,
-  gap = "gap-4",
+  baseItemSize = 40,
+  gap = "gap-3",
   itemBackground,
   itemBorderColor,
   borderRadius,
@@ -230,6 +230,27 @@ export default function Dock({
 }: DockProps) {
   const mouseY = useMotionValue(Infinity);
 
+  // Responsive sizing: thin on small laptops (<1280px), medium on large (>=1280px)
+  const [isLargeLaptop, setIsLargeLaptop] = useState(
+    typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 1280px)").matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1280px)");
+    const update = () => setIsLargeLaptop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const effectiveBaseItemSize = isLargeLaptop
+    ? baseItemSize
+    : Math.round(baseItemSize * 0.85);
+  const effectiveMagnification = isLargeLaptop
+    ? magnification
+    : Math.round(magnification * 0.85);
+
   return (
     <motion.div
       onMouseMove={({ clientY }) => {
@@ -239,16 +260,16 @@ export default function Dock({
         mouseY.set(Infinity);
       }}
       className={cn(
-        "flex flex-col items-center rounded-full px-2 py-5 shadow-lg transition-all duration-300",
+        "flex flex-col items-center rounded-md px-2 py-3 shadow-lg transition-all duration-300",
         multiBorder
-          ? "border border-zinc-200/80 dark:border-zinc-800/80 bg-[#151515] backdrop-blur-md lg:backdrop-blur-xl"
+          ? "border border-zinc-200/80 dark:border-zinc-600/80 bg-[#151515] backdrop-blur-md lg:backdrop-blur-xl"
           : blurBackground
           ? "bg-white/10 dark:bg-black/20 backdrop-blur-md lg:backdrop-blur-xl border-2 border-white/20 dark:border-white/10 shadow-md"
           : "bg-background border-2 border-border shadow-md",
         gap,
         className
       )}
-      style={{ width: magnification + 16 }}
+      style={{ width: effectiveMagnification + 16 }}
       role="toolbar"
       aria-label="Application dock"
     >
@@ -259,8 +280,8 @@ export default function Dock({
             label={item.label}
             onClick={item.onClick}
             mouseY={mouseY}
-            baseItemSize={baseItemSize}
-            magnification={magnification}
+            baseItemSize={effectiveBaseItemSize}
+            magnification={effectiveMagnification}
             distance={distance}
             spring={spring}
             badgeCount={item.badgeCount}
