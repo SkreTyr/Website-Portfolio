@@ -14,7 +14,6 @@ export function AutoReveal({
   children,
   className = '',
   threshold = 0.15,
-  rootMargin = '0px',
   direction = 'up',
   translate = true,
   blur = true,
@@ -22,7 +21,6 @@ export function AutoReveal({
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const hasEnteredRef = useRef(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)')
@@ -36,23 +34,50 @@ export function AutoReveal({
     const node = ref.current
     if (!node) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const ratio = entry.intersectionRatio
+    // Deterministic scroll-driven visibility check.
+    // IntersectionObserver is unreliable with Lenis smooth scrolling (callbacks
+    // get throttled/missed) and with `overflow-hidden` / `content-visibility`
+    // ancestors. getBoundingClientRect is read every frame instead.
+    const vh = () => window.innerHeight || document.documentElement.clientHeight
+    let visible = false
 
-        if (ratio >= threshold) {
-          hasEnteredRef.current = true
-          setIsVisible(true)
-        } else if (ratio === 0 && hasEnteredRef.current) {
-          setIsVisible(false)
-        }
-      },
-      { threshold: [0, threshold], rootMargin }
-    )
+    const check = () => {
+      const rect = node.getBoundingClientRect()
+      const viewportH = vh()
+      const inView = rect.top < viewportH * (1 - threshold) && rect.bottom > 0
+      const fullyOut = rect.bottom <= 0 || rect.top >= viewportH
 
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [threshold, rootMargin])
+      let next = visible
+      if (inView) next = true
+      else if (fullyOut) next = false
+
+      if (next !== visible) {
+        visible = next
+        setIsVisible(next)
+      }
+    }
+
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        check()
+        ticking = false
+      })
+    }
+
+    // initial check (handles above-the-fold elements)
+    check()
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [threshold])
 
   const useBlur = blur && !isMobile
 
