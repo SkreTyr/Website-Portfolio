@@ -98,7 +98,7 @@ export function AutoReveal({
   return (
     <div
       ref={ref}
-      className={`${useBlur ? 'transition-all' : 'transition-[opacity,transform]'} duration-[700ms] ease-out ${
+      className={`${useBlur ? 'transition-all' : 'transition-[opacity,transform]'} duration-[1000ms] ease-out ${
         isVisible ? visible : hidden
       } ${className}`}
       style={useBlur ? { filter: isVisible ? 'blur(0px)' : 'blur(8px)' } : undefined}
