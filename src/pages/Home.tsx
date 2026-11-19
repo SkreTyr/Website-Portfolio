@@ -23,7 +23,6 @@ import { AnimatedCopyButton } from "@/components/lightswind/animated-copy-button
 import ProjectSection from '@/ProjectSection';
 import { GlowingCards, GlowingCard } from "@/components/lightswind/glowing-cards"
 import { BadgeCheck } from 'lucide-react';
-import Background from '@/Background'
 
 
 function Home() {
@@ -69,7 +68,6 @@ function Home() {
   return (
     
     <div>
-      <Background />
 
       {/* sidebar dock: appears once the hero (100vh) is scrolled past, slides in from the left.
           Exits (outro) back out to the left when the user scrolls back to the hero. */}
