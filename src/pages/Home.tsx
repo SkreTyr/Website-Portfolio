@@ -7,6 +7,7 @@ import profileImg from '@/assets/Profile3.webp'
 import ciscoLogo from '@/assets/CiscoLogo.webp'
 import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
+import certificationsReveal from '@/assets/CertificationsReveal.webp'
 import ButtonImage from '@/ButtonImage';
 import { UserRoundPen, Home as HomeIcon, FolderOpen } from 'lucide-react'
 import Dock from '@/components/lightswind/dock'
@@ -382,7 +383,7 @@ I love building responsive web applications, mastering new coding frameworks, an
      
 
 </GlowingCards>
-  <ButtonImage label="More Certifications" href="/certifications" />
+  <ButtonImage label="More Certifications" href="/certifications" image={certificationsReveal} />
                 </div>
         </section>
 
