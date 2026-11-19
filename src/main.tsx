@@ -6,12 +6,14 @@ import App from './App'
 import Footer from './Footer'
 import SmoothScroll from '@/components/SmoothScroll'
 import ScrollToTop from '@/components/ScrollToTop'
+import Background from '@/Background'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <SmoothScroll>
         <ScrollToTop />
+        <Background />
         <App />
         <Footer />
       </SmoothScroll>

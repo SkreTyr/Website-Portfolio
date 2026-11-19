@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import Background from '@/Background'
 import AutoReveal from '@/components/AutoReveal'
 import ProjectSection from '@/ProjectSection'
 
 const Projects = () => {
   return (
     <div className="min-h-screen w-full">
-      <Background />
       <section className="h-auto w-full flex justify-center pt-32 pb-20">
         <div className="w-full p-5 flex flex-col items-center justify-center lg:w-3/4 2xl:w-2/4">
           <AutoReveal direction="left" className="w-full">

@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft, UserRoundPen, CornerDownRight, MapPin, MailDot, GraduationCap } from 'lucide-react'
-import Background from '@/Background'
 import AutoReveal from '@/components/AutoReveal'
 import profileImg from '@/assets/Profile3.webp'
 
 const About = () => {
   return (
     <div className="min-h-screen w-full">
-      <Background />
       <section className="h-auto w-full flex justify-center pt-32 pb-20">
         <div className="w-full p-5 flex flex-col items-center justify-center lg:w-3/4 2xl:w-2/4">
           <AutoReveal direction="left" className="w-full">
