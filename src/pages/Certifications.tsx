@@ -70,6 +70,7 @@ const Certifications = () => {
             <p className="text-gray-400 font-mono text-sm md:text-base text-left mb-8 max-w-2xl">
               A collection of professional certifications and credentials earned across networking, security, and software development.
             </p>
+            <hr className="border-t border-[#ffffff38] w-full max-w-2xl mb-8" />
           </AutoReveal>
 
 <GlowingCards padding='' gap="1.5rem" className=" md:px-10 lg:px-0">
