@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
@@ -52,11 +53,9 @@ const ImageReveal: React.FC<ImageRevealProps> = ({
   }, []);
 
   const onMouseTrack = (e: React.MouseEvent) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      cursorX.set(e.clientX - rect.left);
-      cursorY.set(e.clientY - rect.top);
-    }
+    // Use viewport coordinates: the preview is rendered in a portal (position: fixed)
+    cursorX.set(e.clientX);
+    cursorY.set(e.clientY);
   };
 
   const onHoverActivate = (item: VisualItem) => {
@@ -105,11 +104,11 @@ const ImageReveal: React.FC<ImageRevealProps> = ({
         </AutoReveal>
       ))}
 
-      {isLargeScreen && focusedItem && (
+      {isLargeScreen && focusedItem && createPortal(
         <motion.img
           src={focusedItem.url}
           alt={focusedItem.label}
-          className="absolute z-50 w-[400px] h-[200px] object-cover  rounded-lg pointer-events-none shadow-2xl"
+          className="fixed z-[9999] w-[400px] h-[200px] object-cover rounded-lg pointer-events-none shadow-2xl"
           style={{
             left: smoothX,
             top: smoothY,
@@ -119,7 +118,8 @@ const ImageReveal: React.FC<ImageRevealProps> = ({
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        />
+        />,
+        document.body
       )}
     </div>
   );
