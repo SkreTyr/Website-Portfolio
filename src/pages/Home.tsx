@@ -9,7 +9,7 @@ import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
 import certificationsReveal from '@/assets/CertificationsReveal.webp'
 import ButtonImage from '@/ButtonImage';
-import { UserRoundPen, Home as HomeIcon, FolderOpen } from 'lucide-react'
+import { UserRoundPen, Home as HomeIcon, FolderOpen, Headset, Mail } from 'lucide-react'
 import Dock from '@/components/lightswind/dock'
 import { CornerDownRight, ArrowUpRight } from 'lucide-react';
 import { MapPin } from 'lucide-react';
@@ -23,6 +23,8 @@ import { AnimatedCopyButton } from "@/components/lightswind/animated-copy-button
 import ProjectSection from '@/ProjectSection';
 import { GlowingCards, GlowingCard } from "@/components/lightswind/glowing-cards"
 import { BadgeCheck } from 'lucide-react';
+import { GitHubCalendar } from 'react-github-calendar';
+import LastFm from '@/components/LastFm';
 
 
 function Home() {
@@ -30,6 +32,38 @@ function Home() {
   const introPlayed = useRef(hasIntroPlayed()).current
   const [typingDone, setTypingDone] = useState(introPlayed)
   const [showDock, setShowDock] = useState(false)
+  const calendarRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = calendarRef.current
+    if (!el) return
+    const scrollToPresent = () => {
+      const scroller = (el.firstElementChild?.firstElementChild as HTMLElement) || el
+      scroller.scrollLeft = scroller.scrollWidth
+    }
+    // keep the view pinned to the most recent (present) contributions
+    const observer = new MutationObserver(scrollToPresent)
+    observer.observe(el, { childList: true, subtree: true })
+    scrollToPresent()
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const section = document.getElementById('Github Contribution')
+    const el = calendarRef.current
+    if (!section || !el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const scroller = (el.firstElementChild?.firstElementChild as HTMLElement) || el
+          scroller.scrollLeft = scroller.scrollWidth
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
@@ -62,6 +96,16 @@ function Home() {
       icon: <BadgeCheck size={20} />,
       label: 'Certifications',
       onClick: () => document.querySelector('#Certifications')?.scrollIntoView({ behavior: 'smooth' }),
+    },
+    {
+      icon: <Headset size={20} />,
+      label: 'Github Contribution',
+      onClick: () => document.getElementById('Github Contribution')?.scrollIntoView({ behavior: 'smooth' }),
+    },
+    {
+      icon: <Mail size={20} />,
+      label: 'Lets Connect',
+      onClick: () => document.getElementById('Lets Connect')?.scrollIntoView({ behavior: 'smooth' }),
     },
   ]
 
@@ -385,7 +429,65 @@ I love building responsive web applications, mastering new coding frameworks, an
                 </div>
         </section>
 
+      <section id='Github Contribution' className=" overflow-hidden h-auto w-full flex justify-center pb-44 pt-40 ">
+        <div className=" w-full p-5 flex flex-col items-center justify-center gap-12 lg:w-4/5">
+          <AutoReveal direction="left" className="w-full md:pl-10 lg:pl-0">
+            <h1 className="text-[#f5f5f5] font-bebas text-center mb-8 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
+              Current Vibe
+            </h1>
+          </AutoReveal>
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-6 w-full">
+          <AutoReveal className="w-full lg:w-1/2">
+            <LastFm />
+          </AutoReveal>
+          <AutoReveal className="w-full lg:w-2/5">
+            <div className=" flex flex-col items-center gap-3 w-full">
+              <div ref={calendarRef} className="github-calendar rounded-md border border-[#ffffff4d] bg-[#151515] p-4">
+                <GitHubCalendar
+                  username="SkreTyr"
+                  colorScheme="dark"
+                  theme={{
+                    dark: ['#151515', '#0c4a6e', '#0369a1', '#0ea5e9', '#38bdf8'],
+                  }}
+                  blockRadius={3}
+                  blockMargin={3}
+                  transformData={(data) => {
+                    const now = new Date()
+                    const start = new Date(now.getFullYear(), now.getMonth() - 6, 1)
+                    const startStr = `${start.getFullYear()}-${String(start.getMonth() + 1).padStart(2, '0')}-01`
+                    const filtered = data.filter((d) => new Date(d.date) >= start)
+                    if (!filtered.some((d) => d.date === startStr)) {
+                      filtered.unshift({ date: startStr, count: 0, level: 0 })
+                    }
+                    return filtered
+                  }}
+                />
+              </div>
+              <a
+                href="https://github.com/SkreTyr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className='group self-start inline-flex items-center gap-1 text-gray-300 hover:text-blue-600 relative text-sm after:content-[""] after:absolute after:left-0 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'
+              >
+                View on Github
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </div>
+          </AutoReveal>
+          </div>
+        </div>
+      </section>
 
+      <section id='Lets Connect' className="overflow-hidden h-auto w-full flex justify-center pb-44 pt-40">
+        <div className="w-full p-5 flex flex-col items-center justify-center lg:w-4/5">
+          <AutoReveal direction="left" className="w-full md:pl-10 lg:pl-0">
+            <h1 className="text-[#f5f5f5] font-bebas text-center mb-8 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
+              Connect
+            </h1>
+          </AutoReveal>
+
+        </div>
+      </section>
 
     </div>
   );

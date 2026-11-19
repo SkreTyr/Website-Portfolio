@@ -3,6 +3,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* GitHub contribution graph: bordered + rounded boxes, blue palette, white mono text */
+.github-calendar {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  color: #ffffff4d;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.github-calendar::-webkit-scrollbar {
+  display: none;
+}
+.github-calendar svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.github-calendar svg rect {
+  stroke: #ffffff4d;
+  stroke-width: 1;
+  transition: stroke 0.15s ease, opacity 0.15s ease;
+}
+.github-calendar svg rect:hover {
+  stroke: #38bdf8;
+  stroke-width: 2;
+  opacity: 0.85;
+}
+.github-calendar svg text {
+  fill: #ffffff4d;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 
 body {
   margin: 0;
