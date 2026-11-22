@@ -65,7 +65,7 @@ function Home() {
     },
     {
       icon: <Mail size={20} />,
-      label: 'Lets Connect',
+      label: 'Connect',
       onClick: () => document.getElementById('Lets Connect')?.scrollIntoView({ behavior: 'smooth' }),
     },
   ]
