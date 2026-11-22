@@ -23,7 +23,7 @@ const ProjectDetails = () => {
           <AutoReveal direction="left" className="w-full">
             <Link
               to="/#Project"
-              className="inline-flex items-center gap-2 font-mono text-sm text-gray-400 hover:text-white transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -36,15 +36,15 @@ const ProjectDetails = () => {
                 {project.title}
               </h1>
               <div className="border border-[#ffffff4d] bg-[#151515] p-4 rounded-md">
-                <p className="text-[#d0d0d0] font-mono text-base">{project.description}</p>
+                <p className="text-[#d0d0d0] text-base">{project.description}</p>
                 <hr className="border-t border-[#ffffff38] w-full mt-4 mb-4" />
-                <p className="text-[#d0d0d0] font-mono text-sm">{project.stack}</p>
+                <p className="text-[#d0d0d0] text-sm">{project.stack}</p>
                 {project.liveUrl && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-block mt-4 text-blue-400 hover:text-blue-300 font-mono text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-all after:duration-300 hover:after:w-full"
+                    className="inline-block mt-4 text-blue-400 hover:text-blue-300 text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-all after:duration-300 hover:after:w-full"
                   >
                     Visit Live Site
                   </a>
