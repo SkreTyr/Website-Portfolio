@@ -95,17 +95,13 @@ export const TypingText = ({
     setTextContent(extractText(children));
   }, [children]);
 
-  const characters = textContent.split("").map((char) =>
-    char === " " ? "\u00A0" : char
-  );
-
   const characterVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: (i: number) => ({
       opacity: 1,
       scale: 1,
       transition: {
-        delay: delay + i * (duration / characters.length),
+        delay: delay + i * (duration / Math.max(textContent.length, 1)),
         duration: 0.3,
         ease: "easeInOut",
       },
@@ -154,22 +150,44 @@ export const TypingText = ({
       aria-label={textContent}
       role="text"
     >
-      {characters.map((char, index) =>
-        char === "\n" ? (
-          <br key={`br-${index}`} />
-        ) : (
-          <motion.span
-            key={`${char}-${index}`}
-            className="inline-block"
-            variants={characterVariants}
-            custom={index}
-            initial="hidden"
-            animate="visible"
-          >
-            {char}
-          </motion.span>
-        )
-      )}
+      {(() => {
+        let globalIndex = 0;
+        const nodes: ReactNode[] = [];
+        const lines = textContent.split("\n");
+        lines.forEach((line, lineIdx) => {
+          if (lineIdx > 0) nodes.push(<br key={`br-${lineIdx}`} />);
+          const words = line.split(" ");
+          words.forEach((word, wordIdx) => {
+            if (wordIdx > 0) {
+              nodes.push(<span key={`sp-${lineIdx}-${wordIdx}`}>&nbsp;</span>);
+            }
+            const wordChars = word.split("").map((char) => {
+              const i = globalIndex++;
+              return (
+                <motion.span
+                  key={`${char}-${i}`}
+                  className="inline-block"
+                  variants={characterVariants}
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {char}
+                </motion.span>
+              );
+            });
+            nodes.push(
+              <span
+                key={`w-${lineIdx}-${wordIdx}`}
+                className="inline-block whitespace-nowrap"
+              >
+                {wordChars}
+              </span>
+            );
+          });
+        });
+        return nodes;
+      })()}
     </motion.span>
   );
 };
