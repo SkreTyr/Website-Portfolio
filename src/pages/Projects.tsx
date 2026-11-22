@@ -11,7 +11,7 @@ const Projects = () => {
           <AutoReveal direction="left" className="w-full">
             <Link
               to="/#Project"
-              className="inline-flex items-center gap-2 font-mono text-sm text-gray-400 hover:text-white transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
