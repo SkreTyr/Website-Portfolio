@@ -6,7 +6,7 @@ import AutoReveal from '@/components/AutoReveal'
 const CONTACT_EMAIL = 'shannmichaelagang@gmail.com'
 
 const inputClass =
-  'w-full bg-[#101010] border border-[#ffffff4d] rounded-md p-2 text-sm font-mono text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-400'
+  'w-full bg-[#101010] border border-[#ffffff4d] rounded-md p-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-400'
 
 const Contact = () => {
   const [sent, setSent] = useState(false)
@@ -30,7 +30,7 @@ const Contact = () => {
           <AutoReveal direction="left" className="w-full">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 font-mono text-sm text-gray-400 hover:text-white transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -51,12 +51,12 @@ const Contact = () => {
               <textarea name="message" required placeholder="Message" rows={5} className={inputClass} />
               <button
                 type="submit"
-                className="self-start inline-flex items-center rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer font-mono"
+                className="self-start inline-flex items-center rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer"
               >
                 Send Message
               </button>
               {sent && (
-                <p className="font-mono text-sm text-blue-300">
+                <p className=" text-sm text-blue-300">
                   Your email client should open with the message pre-filled.
                 </p>
               )}
