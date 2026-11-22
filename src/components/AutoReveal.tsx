@@ -70,10 +70,25 @@ export function AutoReveal({
     // initial check (handles above-the-fold elements)
     check()
 
+    // Re-check across the first ~1s. This covers cases where the element is
+    // revealed by scroll restoration on route change or laid out late by
+    // `content-visibility: auto` — situations where no scroll event fires.
+    let rafId = 0
+    let frames = 0
+    const recheck = () => {
+      check()
+      frames += 1
+      if (!visible && frames < 90) {
+        rafId = requestAnimationFrame(recheck)
+      }
+    }
+    rafId = requestAnimationFrame(recheck)
+
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
 
     return () => {
+      cancelAnimationFrame(rafId)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
