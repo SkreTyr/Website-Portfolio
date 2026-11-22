@@ -9,7 +9,7 @@ import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
 import certificationsReveal from '@/assets/CertificationsReveal.webp'
 import ButtonImage from '@/ButtonImage';
-import { UserRoundPen, Home as HomeIcon, FolderOpen, Headset, Mail } from 'lucide-react'
+import { UserRoundPen, Home as HomeIcon, FolderOpen, Mail } from 'lucide-react'
 import Dock from '@/components/lightswind/dock'
 import { CornerDownRight, ArrowUpRight } from 'lucide-react';
 import { MapPin } from 'lucide-react';
@@ -23,8 +23,6 @@ import { AnimatedCopyButton } from "@/components/lightswind/animated-copy-button
 import ProjectSection from '@/ProjectSection';
 import { GlowingCards, GlowingCard } from "@/components/lightswind/glowing-cards"
 import { BadgeCheck } from 'lucide-react';
-import { GitHubCalendar } from 'react-github-calendar';
-import LastFm from '@/components/LastFm';
 
 
 function Home() {
@@ -32,38 +30,6 @@ function Home() {
   const introPlayed = useRef(hasIntroPlayed()).current
   const [typingDone, setTypingDone] = useState(introPlayed)
   const [showDock, setShowDock] = useState(false)
-  const calendarRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = calendarRef.current
-    if (!el) return
-    const scrollToPresent = () => {
-      const scroller = (el.firstElementChild?.firstElementChild as HTMLElement) || el
-      scroller.scrollLeft = scroller.scrollWidth
-    }
-    // keep the view pinned to the most recent (present) contributions
-    const observer = new MutationObserver(scrollToPresent)
-    observer.observe(el, { childList: true, subtree: true })
-    scrollToPresent()
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const section = document.getElementById('Github Contribution')
-    const el = calendarRef.current
-    if (!section || !el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          const scroller = (el.firstElementChild?.firstElementChild as HTMLElement) || el
-          scroller.scrollLeft = scroller.scrollWidth
-        }
-      },
-      { threshold: 0.1 }
-    )
-    observer.observe(section)
-    return () => observer.disconnect()
-  }, [])
 
   useEffect(() => {
     const onScroll = () => {
@@ -96,11 +62,6 @@ function Home() {
       icon: <BadgeCheck size={20} />,
       label: 'Certifications',
       onClick: () => document.querySelector('#Certifications')?.scrollIntoView({ behavior: 'smooth' }),
-    },
-    {
-      icon: <Headset size={20} />,
-      label: 'Github Contribution',
-      onClick: () => document.getElementById('Github Contribution')?.scrollIntoView({ behavior: 'smooth' }),
     },
     {
       icon: <Mail size={20} />,
@@ -152,7 +113,7 @@ function Home() {
  <AutoReveal>
           <TypingText
             as="h3"
-            className="text-[#f3f3f3] font-mono mt-5 mb-3 xl 2xl:text-1xl"
+            className="text-[#f3f3f3]  mt-5 mb-3 xl 2xl:text-1xl"
             fontSize=""
             fontWeight=""
             color=""
@@ -167,13 +128,13 @@ function Home() {
  <AutoReveal className="w-full flex justify-center">
           <TypingText
             as="p"
-            className="text-gray-400 font-mono text-center text-sm md:text-base mt-10 lg:w-2/3 2xl:text-xl"
+            className="text-[#d0d0d0]  font-extralight text-center text-sm md:text-base mt-10 lg:w-2/3 2xl:text-xl"
             fontSize=""
-            fontWeight=""
+            fontWeight="font-extralight"
             color=""
             letterSpacing=""
             align="center"
-            duration={3}
+            duration={2}
             lockScroll={!introPlayed}
             instant={introPlayed}
             onComplete={() => {
@@ -196,7 +157,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
 <div className={`transition-opacity duration-300 ease-out ${atTop && typingDone ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}>
-                  <h3 className='text-gray-400 font-mono opacity-4 text-sm'>Scroll Down</h3>
+                  <h3 className='text-gray-400 opacity-4 text-sm'>Scroll Down</h3>
                   <ChevronDown className='text-gray-400 w-4 h-4 animate-bounce md:mt-2 block mx-auto' />
                 </div>
         </div>
@@ -223,32 +184,32 @@ I love building responsive web applications, mastering new coding frameworks, an
 
     <AutoReveal className="row-span-4 row-start-4 border border-[#ffffff4d] bg-[#151515]  p-2 rounded-md  md:col-span-2 md:row-span-3">
 <div className="h-full rounded-md">
-<div className=" flex items-center gap-5 font-mono">
+<div className=" flex items-center gap-5">
 <UserRoundPen color="#ffffff" />
-  <h1 className='text-[#f5f5f5]'>A bit of introduction</h1>
+  <h1 className='text-[#f3f3f3]'>A bit of introduction</h1>
 </div>
 <hr className="border-t border-[#ffffff38] w-full mt-2" />
 
 
 <div className="md:grid md:grid-cols-2 md:grid-rows-2 md:gap-4">
-    <div className='flex items-center gap-5 font-mono mt-4'>
+    <div className='flex items-center gap-5  mt-4'>
   <CornerDownRight color='grey'/>
   <h2 className='text-[#f3f3f3] text-sm md:text-base '>Shann Michael D. Agang</h2>
 </div>
 
-<div className='flex items-center gap-5 font-mono mt-4'>
+<div className='flex items-center gap-5  mt-4'>
   <MapPin color='grey'/>
    <h2 className='text-[#f3f3f3] text-sm md:text-base'>Luz, Cebu City, Philippines</h2>
   </div>
 
-  <div className='flex items-center gap-5 font-mono mt-4'>
+  <div className='flex items-center gap-5  mt-4'>
   <MailDot color='grey'/>
   <h2 className='text-[#f3f3f3] text-sm md:text-base'>Shannmichaelagang<br></br>@gmail.com</h2>
    <AnimatedCopyButton textToCopy='Shannmichaelagang@gmail.com' size='sm'/>
 </div>
 
 
-<div className='flex items-center gap-5 font-mono mt-4'>
+<div className='flex items-center gap-5  mt-4'>
   <GraduationCap color='grey'/>
   <h2 className='text-[#f3f3f3] text-sm md:text-base'>Computer Engineering</h2>
 </div>
@@ -256,7 +217,7 @@ I love building responsive web applications, mastering new coding frameworks, an
     
 <hr className="border-t border-[#ffffff38] w-full mt-10" />
 
-<div className=' w-full md:mb-20 md:pb-20 mt-4 text-sm md:text-base md:overflow-hidden md:h-fit'><p className='text-[#b0b0b0] font-mono'>I am a Computer Engineering student at the University of Cebu specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
+<div className=' w-full md:mb-20 md:pb-20 mt-4 text-sm md:text-base md:overflow-hidden md:h-fit'><p className='text-[#d0d0d0] '>I am a Computer Engineering student at the University of Cebu specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
 
 
       </div> 
@@ -265,7 +226,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
         <AutoReveal rootMargin="0px 0px -15% 0px" className="row-span-3 row-start-8 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:col-span-2 md:row-span-2 md:row-start-4">
           <div className="h-full rounded-md flex flex-col items-center justify-center gap-5">
-            <h1 className='inline-block font-mono text-[#f3f3f3]' >Skills & Stacks</h1>
+            <h1 className='inline-block text-[#f3f3f3]' >Skills & Stacks</h1>
             <hr className="border-t border-[#ffffff38] w-2/4" />
             <LogoLoop logos={[
               { src: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png", alt: "Stack"},
@@ -294,33 +255,34 @@ I love building responsive web applications, mastering new coding frameworks, an
 
         <AutoReveal rootMargin="0px 0px -15% 0px" className=" row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
-            <div className='flex items-center gap-5 font-mono'>
+            <div className='flex items-center gap-5'>
               <Scroll color="#ffffff" />
-              <h1 className='font-mono text-[#f3f3f3]' >Milestone</h1>
+              <h1 className=' text-[#f3f3f3]' >Milestone</h1>
             </div>
             <hr className="border-t border-[#ffffff38] w-full mt-2" />
-            <div className='flex-col text-xs mt-2 font-mono'>
+            <div className='flex-col text-xs mt-2'>
               <h1 className='text-white'>Hines</h1>
               <div className='flex justify-between w-full'>
                 <p className='text-gray-500'>Sr. Software Engineer</p>
                 <p className='text-gray-500'>2021-Present</p>
               </div>
             </div>
-            <div className='flex-col text-xs mt-4 font-mono'>
+            <div className='flex-col text-xs mt-4'>
               <h1 className='text-white'>Hines</h1>
               <div className='flex justify-between w-full'>
                 <p className='text-gray-500'>Sr. Software Engineer</p>
                 <p className='text-gray-500'>2021-Present</p>
               </div>
             </div>
-            <div className='flex-col text-xs mt-4 font-mono'>
+            <div className='flex-col text-xs mt-4'>
               <h1 className='text-white'>Hines</h1>
               <div className='flex justify-between w-full'>
                 <p className='text-gray-500'>Sr. Software Engineer</p>
                 <p className='text-gray-500'>2021-Present</p>
               </div>
             </div>
-              <div className=' pb-2 flex items-center justify-center gap-1 text-sm mt-5 md:mb-4 font-mono text-center group'>
+            
+              <div className=' pb-2 flex items-center justify-center gap-1 text-sm mt-8 text-center group'>
               
               <a href="#" className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/>
             </div>
@@ -367,17 +329,17 @@ I love building responsive web applications, mastering new coding frameworks, an
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
     <div  className=' flex space-x-2 items-center'>
-      <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
-      <h1 className='font-mono text-lg'>NetAcad</h1>
+      <BadgeCheck className="w-6 h-5 text-blue-500" />
+      <h1 className=' text-lg'>NetAcad</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
       <img src={ciscoLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover'/>
     </div>
-    <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
+    <div className="col-span-2 text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
+              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
   </GlowingCard>
 </AutoReveal>
 
@@ -388,17 +350,17 @@ I love building responsive web applications, mastering new coding frameworks, an
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
     <div  className=' flex space-x-2 items-center'>
-      <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
-      <h1 className='font-mono text-lg'>NetAcad</h1>
+      <BadgeCheck className="w-6 h-5 text-blue-500" />
+      <h1 className=' text-lg'>NetAcad</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
       <img src={ibmLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover'/>
     </div>
-    <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
+    <div className="col-span-2 text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
+              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
   </GlowingCard>
 </AutoReveal>
 
@@ -409,17 +371,17 @@ I love building responsive web applications, mastering new coding frameworks, an
     
 <div className="grid grid-cols-2 grid-rows-2 gap-4">
     <div  className=' flex space-x-2 items-center'>
-      <BadgeCheck className="w-6 h-5 text-blue-500 font-mono" />
-      <h1 className='font-mono text-lg'>Codedex</h1>
+      <BadgeCheck className="w-6 h-5 text-blue-500" />
+      <h1 className=' text-lg'>Codedex</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
       <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
     </div>
-    <div className="col-span-2 font-mono text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
+    <div className="col-span-2 text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
+              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
   </GlowingCard>
 </AutoReveal>
      
@@ -429,63 +391,47 @@ I love building responsive web applications, mastering new coding frameworks, an
                 </div>
         </section>
 
-      <section id='Github Contribution' className=" overflow-hidden h-auto w-full flex justify-center pb-44 pt-40 ">
-        <div className=" w-full p-5 flex flex-col items-center justify-center gap-12 lg:w-4/5">
+      <section id='Lets Connect' className=" overflow-hidden h-auto w-full flex justify-center pb-44">
+        <div className=" w-full p-5 flex flex-col items-center justify-center lg:w-4/5">
           <AutoReveal direction="left" className="w-full md:pl-10 lg:pl-0">
-            <h1 className="text-[#f5f5f5] font-bebas text-center mb-8 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
-              Current Vibe
-            </h1>
-          </AutoReveal>
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-6 w-full">
-          <AutoReveal className="w-full lg:w-1/2">
-            <LastFm />
-          </AutoReveal>
-          <AutoReveal className="w-full lg:w-2/5">
-            <div className=" flex flex-col items-center gap-3 w-full">
-              <div ref={calendarRef} className="github-calendar rounded-md border border-[#ffffff4d] bg-[#151515] p-4">
-                <GitHubCalendar
-                  username="SkreTyr"
-                  colorScheme="dark"
-                  theme={{
-                    dark: ['#151515', '#0c4a6e', '#0369a1', '#0ea5e9', '#38bdf8'],
-                  }}
-                  blockRadius={3}
-                  blockMargin={3}
-                  transformData={(data) => {
-                    const now = new Date()
-                    const start = new Date(now.getFullYear(), now.getMonth() - 6, 1)
-                    const startStr = `${start.getFullYear()}-${String(start.getMonth() + 1).padStart(2, '0')}-01`
-                    const filtered = data.filter((d) => new Date(d.date) >= start)
-                    if (!filtered.some((d) => d.date === startStr)) {
-                      filtered.unshift({ date: startStr, count: 0, level: 0 })
-                    }
-                    return filtered
-                  }}
-                />
-              </div>
-              <a
-                href="https://github.com/SkreTyr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className='group self-start inline-flex items-center gap-1 text-gray-300 hover:text-blue-600 relative text-sm after:content-[""] after:absolute after:left-0 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full font-mono'
-              >
-                View on Github
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </div>
-          </AutoReveal>
-          </div>
-        </div>
-      </section>
-
-      <section id='Lets Connect' className="overflow-hidden h-auto w-full flex justify-center pb-44 pt-40">
-        <div className="w-full p-5 flex flex-col items-center justify-center lg:w-4/5">
-          <AutoReveal direction="left" className="w-full md:pl-10 lg:pl-0">
-            <h1 className="text-[#f5f5f5] font-bebas text-center mb-8 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
+            <h1 className=" text-[#f5f5f5] font-bebas text-center mb-8 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
               Connect
             </h1>
           </AutoReveal>
-
+          <div className='w-1/2 h-auto flex items-center justify-center gap-8 md:gap-12'>
+            <AutoReveal>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
+              <span className="absolute h-16 w-16 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-gradient-to-tr from-amber-400 via-pink-600 to-purple-700 opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
+              <span className="relative w-12 h-12 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#e4405f] group-hover:opacity-0 transition-opacity duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios/50/FFFFFF/instagram-new.png)", maskImage: "url(https://img.icons8.com/ios/50/FFFFFF/instagram-new.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
+              <img width="48" height="48" src="https://img.icons8.com/fluency/96/instagram-new.png" alt="instagram" className="absolute w-12 h-12 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
+            </a>
+            </AutoReveal>
+            <AutoReveal>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
+              <span className="absolute h-16 w-16 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-[#1877f2] opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
+              <span className="relative w-12 h-12 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#1877f2] group-hover:opacity-0 transition-opacity duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios/50/FFFFFF/facebook-new.png)", maskImage: "url(https://img.icons8.com/ios/50/FFFFFF/facebook-new.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
+              <span className="absolute w-12 h-12 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/facebook-new.png)", maskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/facebook-new.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
+            </a>
+            </AutoReveal>
+            <AutoReveal>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
+              <span className="absolute h-16 w-16 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-[#0a66c2] opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
+              <span className="relative w-12 h-12 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#0a66c2] group-hover:bg-white transition-colors duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/linkedin.png)", maskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/linkedin.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
+            </a>
+            </AutoReveal>
+            <AutoReveal>
+            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
+              <span className="absolute h-16 w-16 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-[#5865f2] opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
+              <span className="relative w-12 h-12 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#5865f2] group-hover:bg-white transition-colors duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/discord.png)", maskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/discord.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
+            </a>
+            </AutoReveal>
+            <AutoReveal>
+            <a href="https://github.com/SkreTyr" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
+              <span className="absolute h-16 w-16 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-[#d3d3d3] opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
+              <span className="relative w-12 h-12 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#f5f5f5] group-hover:bg-[#181717] transition-colors duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/github.png)", maskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/github.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
+            </a>
+            </AutoReveal>
+          </div>
         </div>
       </section>
 
