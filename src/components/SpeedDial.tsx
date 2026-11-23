@@ -59,7 +59,7 @@ export default function SpeedDial() {
           transition={{ duration: 0.3, ease: 'easeOut' }}
           className="fixed bottom-6 right-6 z-50 lg:hidden"
         >
-          <ExpandableSpeedDial direction="up" actions={actions} />
+          <ExpandableSpeedDial direction="up" actions={actions} showLabels />
         </motion.div>
       )}
     </AnimatePresence>

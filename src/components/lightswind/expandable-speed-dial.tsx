@@ -20,6 +20,8 @@ interface ExpandableSpeedDialProps {
   className?: string;
   /** Size of the main button */
   size?: "sm" | "md" | "lg";
+  /** Show a persistent label beside each action icon (instead of hover tooltip) */
+  showLabels?: boolean;
 }
 
 export function ExpandableSpeedDial({
@@ -27,6 +29,7 @@ export function ExpandableSpeedDial({
   direction = "up",
   className,
   size = "md",
+  showLabels = false,
 }: ExpandableSpeedDialProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,17 +48,18 @@ export function ExpandableSpeedDial({
   };
 
   const getDirectionClasses = () => {
+    const align = showLabels ? "right-0" : "left-1/2 -translate-x-1/2";
     switch (direction) {
       case "up":
-        return "bottom-full mb-3 flex-col-reverse left-1/2 -translate-x-1/2";
+        return `bottom-full mb-3 flex-col-reverse ${align}`;
       case "down":
-        return "top-full mt-3 flex-col left-1/2 -translate-x-1/2";
+        return `top-full mt-3 flex-col ${align}`;
       case "left":
         return "right-full mr-3 flex-row-reverse top-1/2 -translate-y-1/2";
       case "right":
         return "left-full ml-3 flex-row top-1/2 -translate-y-1/2";
       default:
-        return "bottom-full mb-3 flex-col-reverse left-1/2 -translate-x-1/2";
+        return `bottom-full mb-3 flex-col-reverse ${align}`;
     }
   };
 
@@ -106,39 +110,53 @@ export function ExpandableSpeedDial({
         {isOpen && (
           <div className={cn("absolute flex gap-3", getDirectionClasses())}>
             {actions.map((action, index) => (
-              <motion.button
+              <motion.div
                 key={action.label}
                 variants={getMotionVariants(index)}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                onClick={() => {
-                  action.onClick();
-                  setIsOpen(false);
-                }}
-                className={cn(
-                  "relative flex items-center justify-center rounded-full bg-[#151515] text-[#f3f3f3] shadow-md border border-white/20 hover:bg-[#1f1f1f] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f3f3f3]",
-                  actionSizes[size]
-                )}
-                title={action.label}
-                aria-label={action.label}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                className={cn("flex items-center gap-2", showLabels && "flex-row-reverse")}
               >
-                {action.icon}
-                
-                {/* Tooltip for horizontal/vertical depending on direction */}
-                {(direction === "up" || direction === "down") && (
-                  <span className="absolute right-full mr-3 whitespace-nowrap rounded-md bg-[#f3f3f3] px-2 py-1 text-xs text-[#151515] opacity-0 transition-opacity group-hover:opacity-100 hidden sm:block">
+                <motion.button
+                  onClick={() => {
+                    action.onClick();
+                    setIsOpen(false);
+                  }}
+                  className={cn(
+                    "relative flex items-center justify-center rounded-full bg-[#151515] text-[#f3f3f3] shadow-md border border-white/20 hover:bg-[#1f1f1f] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f3f3f3]",
+                    actionSizes[size]
+                  )}
+                  title={action.label}
+                  aria-label={action.label}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {action.icon}
+
+                  {!showLabels && (
+                    <>
+                      {/* Tooltip for horizontal/vertical depending on direction */}
+                      {(direction === "up" || direction === "down") && (
+                        <span className="absolute right-full mr-3 whitespace-nowrap rounded-md bg-[#f3f3f3] px-2 py-1 text-xs text-[#151515] opacity-0 transition-opacity group-hover:opacity-100 hidden sm:block">
+                          {action.label}
+                        </span>
+                      )}
+                      {(direction === "left" || direction === "right") && (
+                        <span className="absolute bottom-full mb-3 whitespace-nowrap rounded-md bg-[#f3f3f3] px-2 py-1 text-xs text-[#151515] opacity-0 transition-opacity group-hover:opacity-100 hidden sm:block">
+                          {action.label}
+                        </span>
+                      )}
+                    </>
+                  )}
+                </motion.button>
+
+                {showLabels && (
+                  <span className="whitespace-nowrap rounded-md bg-[#151515] text-[#f3f3f3] border border-white/20 px-2 py-1 text-xs shadow-md">
                     {action.label}
                   </span>
                 )}
-                {(direction === "left" || direction === "right") && (
-                  <span className="absolute bottom-full mb-3 whitespace-nowrap rounded-md bg-[#f3f3f3] px-2 py-1 text-xs text-[#151515] opacity-0 transition-opacity group-hover:opacity-100 hidden sm:block">
-                    {action.label}
-                  </span>
-                )}
-              </motion.button>
+              </motion.div>
             ))}
           </div>
         )}

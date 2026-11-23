@@ -375,6 +375,14 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
           {notes.map((note) => (
             <motion.div
               key={note.id}
+              drag="x"
+              dragSnapToOrigin
+              dragElastic={0.6}
+              onDragEnd={(_, info) => {
+                if (Math.abs(info.offset.x) > 80 || Math.abs(info.velocity.x) > 500) {
+                  dismissNotification(note.id);
+                }
+              }}
               initial={{ opacity: 0, y: 20, scale: 0.94 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.94 }}
@@ -383,6 +391,7 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="w-full flex justify-center will-change-transform"
+              style={{ touchAction: "pan-y" }}
             >
               <Notification
                 notification={note}
