@@ -6,6 +6,7 @@ import Certifications from '@/pages/Certifications'
 import About from '@/pages/About'
 import Projects from '@/pages/Projects'
 import { AnimatedNotification } from '@/components/lightswind/animated-notification'
+import SpeedDial from '@/components/SpeedDial'
 import profileImg from '@/assets/Profile3.webp'
 
 function App() {
@@ -21,8 +22,10 @@ function App() {
       </Routes>
       <AnimatedNotification
         position="top-right"
+        autoInterval={5000}
         fixedUser={{ name: 'Shann Michael', initials: 'SA', avatarUrl: profileImg, color: '#f3f3f3' }}
       />
+      <SpeedDial />
     </>
   )
 }
