@@ -185,7 +185,7 @@ I love building responsive web applications, mastering new coding frameworks, an
     <AutoReveal className="row-span-4 row-start-4 border border-[#ffffff4d] bg-[#151515]  p-2 rounded-md  md:col-span-2 md:row-span-3">
 <div className="h-full rounded-md">
 <div className=" flex items-center gap-5">
-<UserRoundPen color="#ffffff" />
+<UserRoundPen color="#ffffff" size="1em" />
   <h1 className='text-[#f3f3f3]'>A bit of introduction</h1>
 </div>
 <hr className="border-t border-[#ffffff38] w-full mt-2" />
@@ -193,24 +193,24 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 <div className="md:grid md:grid-cols-2 md:grid-rows-2 md:gap-4">
     <div className='flex items-center gap-5  mt-4'>
-  <CornerDownRight color='grey'/>
+  <CornerDownRight color='grey' size="1em" className="text-sm md:text-base"/>
   <h2 className='text-[#f3f3f3] text-sm md:text-base '>Shann Michael D. Agang</h2>
 </div>
 
 <div className='flex items-center gap-5  mt-4'>
-  <MapPin color='grey'/>
+  <MapPin color='grey' size="1em" className="text-sm md:text-base"/>
    <h2 className='text-[#f3f3f3] text-sm md:text-base'>Luz, Cebu City, Philippines</h2>
   </div>
 
   <div className='flex items-center gap-5  mt-4'>
-  <MailDot color='grey'/>
+  <MailDot color='grey' size="1em" className="text-sm md:text-base"/>
   <h2 className='text-[#f3f3f3] text-sm md:text-base'>Shannmichaelagang<br></br>@gmail.com</h2>
    <AnimatedCopyButton textToCopy='Shannmichaelagang@gmail.com' size='sm'/>
 </div>
 
 
 <div className='flex items-center gap-5  mt-4'>
-  <GraduationCap color='grey'/>
+  <GraduationCap color='grey' size="1em" className="text-sm md:text-base"/>
   <h2 className='text-[#f3f3f3] text-sm md:text-base'>Computer Engineering</h2>
 </div>
 </div>
