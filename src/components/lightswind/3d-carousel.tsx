@@ -7,7 +7,7 @@ import {
   useState,
   TouchEvent,
 } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "./card";
 
@@ -72,12 +72,23 @@ const ThreeDCarousel = ({
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
   const touchStartRef = useRef<number | null>(null);
   const touchEndRef = useRef<number | null>(null);
+  const didSwipeRef = useRef(false);
   const [canHover] = useState(() =>
     typeof window !== 'undefined' ? window.matchMedia('(pointer: fine)').matches : true
   );
   const minSwipeDistance = 50;
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     if (autoRotate && canHover && isInView && !isHovering) {
@@ -97,6 +108,7 @@ const ThreeDCarousel = ({
   }, []);
 
   const onTouchStart = (e: TouchEvent) => {
+    didSwipeRef.current = false;
     touchStartRef.current = e.targetTouches[0].clientX;
     touchEndRef.current = null;
   };
@@ -111,9 +123,20 @@ const ThreeDCarousel = ({
     if (!touchStartRef.current || !touchEndRef.current) return;
     const distance = touchStartRef.current - touchEndRef.current;
     if (distance > minSwipeDistance) {
+      didSwipeRef.current = true;
       setActive((prev) => (prev + 1) % items.length);
     } else if (distance < -minSwipeDistance) {
+      didSwipeRef.current = true;
       setActive((prev) => (prev - 1 + items.length) % items.length);
+    }
+  };
+
+  const openItem = (item: ThreeDCarouselItem) => {
+    if (item.disabled) return;
+    if (item.to) {
+      navigate(item.to);
+    } else if (item.link && item.link !== "#") {
+      window.open(item.link, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -149,9 +172,24 @@ const ThreeDCarousel = ({
             {items.map((item, index) => (
               <div
                 key={item.id}
-                className={`bg-[#151515] rounded-xl absolute top-0 w-full max-w-md transform-gpu transition-[transform,opacity] duration-500 ${getCardAnimationClass(
-                  index
-                )}`}
+                role={isMobile ? "button" : undefined}
+                tabIndex={isMobile ? 0 : -1}
+                onClick={() => {
+                  if (!isMobile || didSwipeRef.current) return;
+                  if (index === active) openItem(item);
+                  else setActive(index);
+                }}
+                onKeyDown={(e) => {
+                  if (!isMobile) return;
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    if (index === active) openItem(item);
+                    else setActive(index);
+                  }
+                }}
+                className={`bg-[#151515] rounded-xl absolute top-0 w-full max-w-md transform-gpu transition-[transform,opacity] duration-500 ${
+                  isMobile ? "cursor-pointer" : ""
+                } ${getCardAnimationClass(index)}`}
               >
                 <Card
                   className={`overflow-hidden bg-[#151515] h-[${cardHeight}px] border shadow-sm 
@@ -199,9 +237,10 @@ const ThreeDCarousel = ({
                       ) : item.to ? (
                         <Link
                           to={item.to}
+                          onClick={(e) => e.stopPropagation()}
                           className="text-gray-500 flex items-center relative group"
                         >
-                          <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-0 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</span>
+                          <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</span>
                           <ArrowUpRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500" />
                         </Link>
                       ) : (
@@ -209,9 +248,10 @@ const ThreeDCarousel = ({
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="text-gray-500 flex items-center relative group"
                         >
-                          <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-0 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</span>
+                          <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full'>Learn More</span>
                           <ArrowUpRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500" />
                         </a>
                       )}
