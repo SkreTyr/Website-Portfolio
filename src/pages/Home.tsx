@@ -31,6 +31,14 @@ function Home() {
   const [typingDone, setTypingDone] = useState(introPlayed)
   const [showDock, setShowDock] = useState(false)
 
+  // Scroll to a hash target (e.g. /#connect) once the page has mounted
+  useEffect(() => {
+    const id = window.location.hash.slice(1)
+    if (!id) return
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView()
+  }, [])
+
   useEffect(() => {
     const onScroll = () => {
       setAtTop(window.scrollY === 0)

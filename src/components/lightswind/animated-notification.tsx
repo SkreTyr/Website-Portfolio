@@ -20,14 +20,18 @@ export interface NotificationItem {
   priority?: "low" | "medium" | "high";
   type?: "info" | "success" | "warning" | "error";
   fadingOut?: boolean;
+  href?: string;
 }
+
+/** A custom message can be a plain string, or an object with optional link */
+export type CustomMessage = string | { text: string; href?: string };
 
 export interface AnimatedNotificationProps {
   maxNotifications?: number;
   autoInterval?: number;
   autoGenerate?: boolean;
   notifications?: NotificationItem[];
-  customMessages?: string[];
+  customMessages?: CustomMessage[];
   animationDuration?: number;
   position?: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center";
   width?: number;
@@ -125,7 +129,17 @@ const Notification: React.FC<{
         getVariantStyles(),
         getPriorityStyles()
       )}
-      onClick={onClick}
+      onClick={() => {
+        if (notification.href) {
+          if (notification.href.startsWith("http")) {
+            window.open(notification.href, "_blank", "noopener,noreferrer");
+          } else {
+            window.location.href = notification.href;
+          }
+        } else {
+          onClick?.();
+        }
+      }}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
       <Avatar user={notification.user} showAvatar={showAvatars} />
@@ -176,21 +190,25 @@ async function fetchRandomUser(apiEndpoint?: string): Promise<NotificationUser> 
   }
 }
 
-function getRandomMessage(customMessages?: string[]) {
-  const messages = customMessages || defaultMessages;
+function getRandomMessage(customMessages?: CustomMessage[]): CustomMessage {
+  const messages: CustomMessage[] = customMessages || defaultMessages;
   return messages[Math.floor(Math.random() * messages.length)];
 }
 
 async function generateNotification(
-  customMessages?: string[],
+  customMessages?: CustomMessage[],
   userApiEndpoint?: string,
   fixedUser?: NotificationUser
 ): Promise<NotificationItem> {
   const user = fixedUser || (await fetchRandomUser(userApiEndpoint));
+  const picked = getRandomMessage(customMessages);
+  const text = typeof picked === "string" ? picked : picked.text;
+  const href = typeof picked === "string" ? undefined : picked.href;
   return {
     id: generateId(),
     user,
-    message: getRandomMessage(customMessages),
+    message: text,
+    href,
     timestamp: new Date().toLocaleTimeString(),
     priority: (["low", "medium", "high"] as const)[Math.floor(Math.random() * 3)],
   };
