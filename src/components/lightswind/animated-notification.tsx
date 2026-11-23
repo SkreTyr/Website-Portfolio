@@ -94,7 +94,8 @@ const Notification: React.FC<{
   onDismiss?: () => void;
   onClick?: () => void;
   allowDismiss: boolean;
-}> = ({ notification, showAvatars, showTimestamps, variant, onDismiss, onClick, allowDismiss }) => {
+  consumeDragClick?: () => boolean;
+}> = ({ notification, showAvatars, showTimestamps, variant, onDismiss, onClick, allowDismiss, consumeDragClick }) => {
   const getVariantStyles = () => {
     switch (variant) {
       case "minimal":
@@ -130,6 +131,8 @@ const Notification: React.FC<{
         getPriorityStyles()
       )}
       onClick={() => {
+        // Ignore the click that fires right after a swipe/drag gesture
+        if (consumeDragClick?.()) return;
         if (notification.href) {
           if (notification.href.startsWith("http")) {
             window.open(notification.href, "_blank", "noopener,noreferrer");
@@ -240,6 +243,7 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
   const isGenerating = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const dragMoved = useRef(false);
 
   // Clear a specific note's auto-dismiss timer
   const clearNoteTimeout = useCallback((id: string) => {
@@ -396,10 +400,17 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
               drag="x"
               dragSnapToOrigin
               dragElastic={0.6}
+              onDragStart={() => {
+                dragMoved.current = true;
+              }}
               onDragEnd={(_, info) => {
                 if (Math.abs(info.offset.x) > 80 || Math.abs(info.velocity.x) > 500) {
                   dismissNotification(note.id);
                 }
+                // Reset after the click that immediately follows the drag fires
+                window.setTimeout(() => {
+                  dragMoved.current = false;
+                }, 0);
               }}
               initial={{ opacity: 0, y: 20, scale: 0.94 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -417,6 +428,7 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
                 showTimestamps={showTimestamps}
                 variant={variant}
                 allowDismiss={allowDismiss}
+                consumeDragClick={() => dragMoved.current}
                 onClick={() => onNotificationClick?.(note)}
                 onDismiss={() => dismissNotification(note.id)}
               />

@@ -264,7 +264,7 @@ I love building responsive web applications, mastering new coding frameworks, an
         <AutoReveal rootMargin="0px 0px -15% 0px" className=" row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
             <div className='flex items-center gap-5'>
-              <Scroll color="#ffffff" />
+              <Scroll color="#ffffff" size="1em" />
               <h1 className=' text-[#f3f3f3]' >Milestone</h1>
             </div>
             <hr className="border-t border-[#ffffff38] w-full mt-2" />
