@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
-import ProjectSection from '@/ProjectSection'
+import ProjectStacking from '@/ProjectStacking'
 
 const Projects = () => {
   return (
@@ -25,7 +25,7 @@ const Projects = () => {
           </AutoReveal>
 
           <AutoReveal className="w-full">
-            <ProjectSection />
+            <ProjectStacking />
           </AutoReveal>
         </div>
       </section>

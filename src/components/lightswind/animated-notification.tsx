@@ -193,18 +193,16 @@ async function fetchRandomUser(apiEndpoint?: string): Promise<NotificationUser> 
   }
 }
 
-function getRandomMessage(customMessages?: CustomMessage[]): CustomMessage {
-  const messages: CustomMessage[] = customMessages || defaultMessages;
-  return messages[Math.floor(Math.random() * messages.length)];
-}
-
 async function generateNotification(
   customMessages?: CustomMessage[],
   userApiEndpoint?: string,
-  fixedUser?: NotificationUser
+  fixedUser?: NotificationUser,
+  pickedIndex = 0
 ): Promise<NotificationItem> {
   const user = fixedUser || (await fetchRandomUser(userApiEndpoint));
-  const picked = getRandomMessage(customMessages);
+  const messages: CustomMessage[] =
+    customMessages && customMessages.length > 0 ? customMessages : defaultMessages;
+  const picked = messages[pickedIndex % messages.length];
   const text = typeof picked === "string" ? picked : picked.text;
   const href = typeof picked === "string" ? undefined : picked.href;
   return {
@@ -244,6 +242,7 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const dragMoved = useRef(false);
+  const messageIndexRef = useRef(0);
 
   // Clear a specific note's auto-dismiss timer
   const clearNoteTimeout = useCallback((id: string) => {
@@ -274,7 +273,16 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
     if (!autoGenerate || isGenerating.current) return;
     isGenerating.current = true;
     try {
-      const newNote = await generateNotification(customMessages, userApiEndpoint, fixedUser);
+      // Rotate through messages in order (no immediate repeats)
+      const pool = customMessages && customMessages.length > 0 ? customMessages : defaultMessages;
+      const pickedIndex = messageIndexRef.current % pool.length;
+      messageIndexRef.current = (pickedIndex + 1) % pool.length;
+      const newNote = await generateNotification(
+        customMessages,
+        userApiEndpoint,
+        fixedUser,
+        pickedIndex
+      );
 
       setNotes((prev) => {
         let updated = [...prev];
