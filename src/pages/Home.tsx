@@ -298,7 +298,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
 
 
-       <section id='Project' className="pt-80 sm:pt-0 overflow-hidden h-auto w-full flex justify-center [content-visibility:auto] [contain-intrinsic-size:auto_600px] ">
+       <section id='Project' className="pt-40 sm:pt-0 overflow-hidden h-auto w-full flex justify-center [content-visibility:auto] [contain-intrinsic-size:auto_600px] ">
                 <div className=" w-full p-5 md:pt-0 flex flex-col items-center justify-center sm:w-full md:overflow-x-hidden md:w-full lg:w-3/4 xl:w-3/4 2xl:w-2/4 lg:overflow-x-hidden h-auto overflow-hidden pb-44">
 <AutoReveal direction="left">
           <h1 className="text-[#f5f5f5] font-bebas text-center mb-5 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
