@@ -66,7 +66,7 @@ function Home() {
     {
       icon: <Mail size={20} />,
       label: 'Connect',
-      onClick: () => document.getElementById('Lets Connect')?.scrollIntoView({ behavior: 'smooth' }),
+      onClick: () => document.getElementById('connect')?.scrollIntoView({ behavior: 'smooth' }),
     },
   ]
 
@@ -391,7 +391,7 @@ I love building responsive web applications, mastering new coding frameworks, an
                 </div>
         </section>
 
-      <section id='Lets Connect' className=" overflow-hidden h-auto w-full flex justify-center pb-44">
+      <section id='connect' className=" overflow-hidden h-auto w-full flex justify-center pb-44">
         <div className=" w-full p-5 flex flex-col items-center justify-center lg:w-4/5">
           <AutoReveal direction="left" className="w-full md:pl-10 lg:pl-0">
             <h1 className=" text-[#f5f5f5] font-bebas text-center mb-8 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
