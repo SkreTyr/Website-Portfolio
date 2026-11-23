@@ -94,13 +94,13 @@ const Notification: React.FC<{
   const getVariantStyles = () => {
     switch (variant) {
       case "minimal":
-        return "bg-[#151515] border border-border/50 backdrop-blur-xl";
+        return "bg-[#151515] border border-border/50";
       case "glass":
-        return "bg-[#151515] backdrop-blur-2xl border border-white/20 dark:border-gray-800/20 shadow-2xl";
+        return "bg-[#151515] border border-white/20 dark:border-gray-800/20 shadow-2xl";
       case "bordered":
-        return "bg-[#151515] border-2 border-primary/30 backdrop-blur-lg shadow-xl";
+        return "bg-[#151515] border-2 border-primary/30 shadow-xl";
       default:
-        return "bg-[#151515] backdrop-blur-2xl border border-white/20 shadow-2xl";
+        return "bg-[#151515] border border-white/20 shadow-2xl";
     }
   };
 
@@ -220,6 +220,8 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
   const intervalRef = useRef<number | null>(null);
   const dismissTimeouts = useRef<Map<string, number>>(new Map());
   const isGenerating = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Clear a specific note's auto-dismiss timer
   const clearNoteTimeout = useCallback((id: string) => {
@@ -288,9 +290,21 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
     dismissNotification,
   ]);
 
-  // Start interval generator
+  // Pause auto-generation while the toast area is off-screen
   useEffect(() => {
-    if (autoGenerate) {
+    const node = containerRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.01 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  // Start interval generator (only while the toast area is on-screen)
+  useEffect(() => {
+    if (autoGenerate && isVisible) {
       intervalRef.current = window.setInterval(() => {
         void addGeneratedNote();
       }, autoInterval);
@@ -310,7 +324,7 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
         intervalRef.current = null;
       }
     }
-  }, [autoGenerate, autoInterval, addGeneratedNote]);
+  }, [autoGenerate, autoInterval, addGeneratedNote, isVisible]);
 
   // Sync external notifications prop
   useEffect(() => {
@@ -355,20 +369,18 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
   const animDurationSec = animationDuration / 1000;
 
   return (
-    <div className={cn(getPositionStyles(), className)}>
+    <div ref={containerRef} className={cn(getPositionStyles(), className)}>
       <div className="flex flex-col gap-3 items-center max-w-[calc(100vw-3rem)]" style={{ width }}>
-        <AnimatePresence mode="popLayout" initial={false}>
+        <AnimatePresence initial={false}>
           {notes.map((note) => (
             <motion.div
               key={note.id}
-              layout
-              initial={{ opacity: 0, y: 20, scale: 0.94, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, scale: 0.94, filter: "blur(4px)" }}
+              initial={{ opacity: 0, y: 20, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.94 }}
               transition={{
                 duration: animDurationSec,
                 ease: [0.22, 1, 0.36, 1],
-                layout: { duration: 0.32, ease: [0.22, 1, 0.36, 1] },
               }}
               className="w-full flex justify-center will-change-transform"
             >
