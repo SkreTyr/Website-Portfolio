@@ -19,7 +19,7 @@ interface StackingCardsProps {
 }
 
 const learnMoreClass =
-  "group text-gray-300 hover:text-blue-600 relative inline-flex items-center text-sm after:content-[\"\"] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-all after:duration-300 hover:after:w-full";
+  "group text-gray-300 hover:text-blue-600 relative inline-flex items-center text-sm after:content-[\"\"] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full";
 
 export function StackingCards({ items }: StackingCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
