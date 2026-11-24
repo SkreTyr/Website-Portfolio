@@ -260,7 +260,7 @@ export default function Dock({
         mouseY.set(Infinity);
       }}
       className={cn(
-        "flex flex-col items-center rounded-md px-2 py-3 shadow-lg transition-all duration-300",
+        "flex flex-col items-center rounded-md px-2 py-3 shadow-lg transition-[transform,background-color,color] duration-300",
         multiBorder
           ? "border border-zinc-200/80 dark:border-zinc-600/80 bg-[#151515] backdrop-blur-md lg:backdrop-blur-xl"
           : blurBackground
