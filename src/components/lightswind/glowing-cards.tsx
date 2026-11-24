@@ -58,7 +58,7 @@ export const GlowingCard: React.FC<GlowingCardProps> = ({
       className={cn(
         "relative flex-1 min-w-[13rem] w-11 p-2 rounded-2xl text-black dark:text-white",
         "bg-background border ",
-        "transition-all duration-400 ease-out",
+        "transition-[opacity,box-shadow] duration-400 ease-out",
         className
       )}
       style={{
@@ -171,7 +171,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
             ref={overlayRef}
             className={cn(
               "absolute inset-0 pointer-events-none select-none",
-              "opacity-0 transition-all duration-[&lsqb;var(--animation-duration)&rsqb;] ease-out"
+              "opacity-0 transition-[opacity] duration-[&lsqb;var(--animation-duration)&rsqb;] ease-out"
             )}
             style={{
               // String concatenation for WebkitMask and mask
