@@ -72,7 +72,7 @@ const Avatar: React.FC<{ user: NotificationUser; showAvatar: boolean }> = ({ use
   if (!showAvatar) return null;
   return (
     <div
-      className="flex-shrink-0 w-10 h-10 max-[360px]:w-8 max-[360px]:h-8 rounded-full overflow-hidden bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center transition-all duration-300 hover:scale-110"
+      className="flex-shrink-0 w-10 h-10 max-[360px]:w-8 max-[360px]:h-8 rounded-full overflow-hidden bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center transition-transform duration-300 hover:scale-110"
       style={{ backgroundColor: user.color }}
     >
       {user.avatarUrl ? (
@@ -162,7 +162,7 @@ const Notification: React.FC<{
             e.stopPropagation();
             onDismiss?.();
           }}
-          className="flex-shrink-0 w-5 h-5 text-muted-foreground/50 hover:text-muted-foreground transition-all duration-200 hover:scale-110 opacity-0 group-hover:opacity-100"
+          className="flex-shrink-0 w-5 h-5 text-muted-foreground/50 hover:text-muted-foreground transition-[transform,opacity] duration-200 hover:scale-110 opacity-0 group-hover:opacity-100"
           aria-label="dismiss notification"
         >
           <X className="w-4 h-4" />
