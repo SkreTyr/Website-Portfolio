@@ -16,19 +16,9 @@ export function AutoReveal({
   threshold = 0.15,
   direction = 'up',
   translate = true,
-  blur = true,
 }: AutoRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)')
-    const update = () => setIsMobile(mq.matches)
-    update()
-    mq.addEventListener('change', update)
-    return () => mq.removeEventListener('change', update)
-  }, [])
 
   useEffect(() => {
     const node = ref.current
@@ -94,8 +84,6 @@ export function AutoReveal({
     }
   }, [threshold])
 
-  const useBlur = blur && !isMobile
-
   const hiddenTransform =
     direction === 'left'
       ? 'opacity-0 -translate-x-8'
@@ -107,16 +95,15 @@ export function AutoReveal({
 
   const visibleTransform = translate ? 'opacity-100 translate-x-0 translate-y-0' : 'opacity-100'
 
-  const hidden = useBlur ? `${hiddenTransform} blur-md` : hiddenTransform
-  const visible = useBlur ? `${visibleTransform} blur-0` : visibleTransform
+  const hidden = hiddenTransform
+  const visible = visibleTransform
 
   return (
     <div
       ref={ref}
-      className={`${useBlur ? 'transition-all' : 'transition-[opacity,transform]'} duration-[1000ms] ease-out ${
+      className={`transition-[opacity,transform] duration-[1000ms] ease-out ${
         isVisible ? visible : hidden
       } ${className}`}
-      style={useBlur ? { filter: isVisible ? 'blur(0px)' : 'blur(8px)' } : undefined}
     >
       {children}
     </div>
