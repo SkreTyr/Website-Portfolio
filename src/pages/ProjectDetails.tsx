@@ -44,7 +44,7 @@ const ProjectDetails = () => {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-block mt-4 text-blue-400 hover:text-blue-300 text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-all after:duration-300 hover:after:w-full"
+                    className="inline-block mt-4 text-blue-400 hover:text-blue-300 text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-[width] after:duration-300 hover:after:w-full"
                   >
                     Visit Live Site
                   </a>
