@@ -8,7 +8,10 @@ import profileImg from '@/assets/Profile3.webp'
 import ciscoLogo from '@/assets/CiscoLogo.webp'
 import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
+import codedexLightLogo from '@/assets/CodedexLightMode.webp'
+import ThemeImage from '@/components/ThemeImage'
 import certificationsReveal from '@/assets/CertificationsReveal.webp'
+import certificationsLightReveal from '@/assets/CertificationsLightReveal.webp'
 import ButtonImage from '@/ButtonImage';
 import { UserRoundPen, Home as HomeIcon, FolderOpen, Mail } from 'lucide-react'
 import Dock from '@/components/lightswind/dock'
@@ -391,7 +394,7 @@ I love building responsive web applications, mastering new coding frameworks, an
       <h1 className=' text-lg'>Codedex</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-      <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+      <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
     </div>
     <div className="col-span-2 text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
@@ -403,7 +406,7 @@ I love building responsive web applications, mastering new coding frameworks, an
      
 
 </GlowingCards>
-  <ButtonImage label="More Certifications" href="/certifications" image={certificationsReveal} />
+  <ButtonImage label="More Certifications" href="/certifications" image={certificationsReveal} lightImage={certificationsLightReveal} />
                 </div>
         </section>
 
