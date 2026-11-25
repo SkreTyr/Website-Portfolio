@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 import contactImageBlack from "@/assets/ContactImage.webp";
 import AutoReveal from '@/components/AutoReveal';
+import { useIsLightMode } from '@/lib/useTheme';
 
 
 interface VisualItem {
@@ -19,21 +20,28 @@ interface ImageRevealProps {
   label?: string;
   href?: string;
   image?: string;
+  lightImage?: string;
 }
 
 const ImageReveal: React.FC<ImageRevealProps> = ({
   label = "More Info",
   href,
   image = contactImageBlack,
+  lightImage,
 }) => {
   const [focusedItem, setFocusedItem] = useState<VisualItem | null>(null);
   const [isLargeScreen, setIsLargeScreen] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isLightMode = useIsLightMode();
+
+  // Light Mode uses a dedicated image when provided; otherwise fall back to the
+  // default (dark-mode) image.
+  const resolvedImage = isLightMode && lightImage ? lightImage : image;
 
   const visualData: VisualItem[] = [
     {
       key: 1,
-      url: image,
+      url: resolvedImage,
       label,
     },
   ];
@@ -106,7 +114,7 @@ const ImageReveal: React.FC<ImageRevealProps> = ({
 
       {isLargeScreen && focusedItem && createPortal(
         <motion.img
-          src={focusedItem.url}
+          src={resolvedImage}
           alt={focusedItem.label}
           className="fixed z-[9999] w-[400px] h-[200px] object-cover rounded-lg pointer-events-none shadow-2xl"
           style={{
