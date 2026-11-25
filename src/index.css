@@ -83,10 +83,9 @@ html.lenis body {
 /* ---- Theme invert (ToggleTheme) ----
    The site uses hardcoded colors, so "opposite color" is achieved by inverting
    the content surface when `.dark` is set on <html>. Raster media is
-   counter-inverted so photos/logos keep their real colors. */
-.theme-surface {
-  transition: filter 0.3s ease;
-}
+   counter-inverted so photos/logos keep their real colors.
+   NOTE: No `transition: filter` here — animating a filter over the entire page
+   subtree is a major scroll/toggle lag source, so the swap is instant. */
 html.dark .theme-surface {
   filter: invert(1);
 }
@@ -122,7 +121,7 @@ html.dark .theme-surface .bg-\[\#151515\] {
   background-color: #2f2f2f !important;
 }
 html.dark .theme-surface .border-\[\#ffffff4d\] {
-  border-color: transparent !important;
+  border-color: #999999 !important;
 }
 
 /* ---- Dock (portaled to <body>, outside .theme-surface, so not inverted) ----
@@ -131,7 +130,7 @@ html.dark .theme-surface .border-\[\#ffffff4d\] {
    original #151515 / #ffffff4d look. */
 html.dark .dock-surface {
   background-color: #d0d0d0 !important;
-  border-color: transparent !important;
+  border-color: #666666 !important;
 }
 html.dark .dock-surface .text-white {
   color: #151515 !important;
@@ -151,7 +150,7 @@ html.dark .dock-surface .text-gray-500 {
 }
 html.dark .dock-surface [role="tooltip"] {
   background-color: #d0d0d0 !important;
-  border-color: transparent !important;
+  border-color: #666666 !important;
   color: #000000 !important;
 }
 
@@ -168,7 +167,7 @@ html.dark .theme-surface #ThreeDCarousel .text-gray-600 {
 /* ---- Light mode: buttons get a soft dark-grey border (matches containers) ----
    .border-white/30 inverts to a faint grey; #999999 inverts to #666666. */
 html.dark .theme-surface .border-white\/30 {
-  border-color: transparent !important;
+  border-color: #999999 !important;
 }
 
 /* ---- Light mode: Blue is always Blue ----
@@ -199,6 +198,7 @@ html.dark .theme-surface .focus\:border-blue-400:focus { border-color: #9f5a05 !
    Match the container body (#d0d0d0) with black title and dark-grey body text. */
 html.dark .animated-notification .bg-\[\#151515\] {
   background-color: #d0d0d0 !important;
+  border-color: transparent !important;
 }
 html.dark .animated-notification h3 {
   color: #000000 !important;

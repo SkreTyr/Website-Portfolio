@@ -262,9 +262,9 @@ export default function Dock({
       className={cn(
         "flex flex-col items-center rounded-md px-2 py-3 shadow-lg transition-[transform,background-color,color] duration-300",
         multiBorder
-          ? "border border-zinc-200/80 dark:border-zinc-600/80 bg-[#151515] backdrop-blur-md lg:backdrop-blur-xl"
+          ? "border border-zinc-200/80 dark:border-zinc-600/80 bg-[#151515]"
           : blurBackground
-          ? "bg-white/10 dark:bg-black/20 backdrop-blur-md lg:backdrop-blur-xl border-2 border-white/20 dark:border-white/10 shadow-md"
+          ? "bg-white/10 dark:bg-black/20 backdrop-blur-sm border-2 border-white/20 dark:border-white/10 shadow-md"
           : "bg-background border-2 border-border shadow-md",
         gap,
         className
