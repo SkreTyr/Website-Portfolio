@@ -79,3 +79,149 @@ html.lenis body {
 .scroll-reveal-piece {
   display: inline-block;
 }
+
+/* ---- Theme invert (ToggleTheme) ----
+   The site uses hardcoded colors, so "opposite color" is achieved by inverting
+   the content surface when `.dark` is set on <html>. Raster media is
+   counter-inverted so photos/logos keep their real colors. */
+.theme-surface {
+  transition: filter 0.3s ease;
+}
+html.dark .theme-surface {
+  filter: invert(1);
+}
+html.dark .theme-surface img,
+html.dark .theme-surface video,
+html.dark .theme-surface canvas {
+  filter: invert(1);
+}
+
+/* Keep specific elements (e.g. Connect social icons) in their original colors
+   even in the inverted white theme. */
+html.dark .theme-surface .keep-color {
+  filter: invert(1);
+}
+
+/* The fixed background lives outside .theme-surface (so it isn't clipped by the
+   filter). Invert it too so the whole page — hero and the rest — matches in the
+   white theme, and match the body color behind it. */
+html.dark .page-solid-bg,
+html.dark .page-particle-container {
+  filter: invert(1);
+}
+html.dark body {
+  background: #efefef;
+}
+
+/* ---- Light mode (html.dark = inverted white theme) containers ----
+   Containers use bg-[#151515] + border-[#ffffff4d]. Under the surface filter
+   these invert to a darker-white body with a border. Values here are the
+   pre-invert colors. The border is set to #999999 so it inverts to a soft dark
+   grey (#666666) — lighter than pure black, but still clearly defined. */
+html.dark .theme-surface .bg-\[\#151515\] {
+  background-color: #2f2f2f !important;
+}
+html.dark .theme-surface .border-\[\#ffffff4d\] {
+  border-color: transparent !important;
+}
+
+/* ---- Dock (portaled to <body>, outside .theme-surface, so not inverted) ----
+   Set light-mode colors directly: darker-white body, soft dark-grey border
+   (matches the lightened container borders), dark icons. Dark mode keeps the
+   original #151515 / #ffffff4d look. */
+html.dark .dock-surface {
+  background-color: #d0d0d0 !important;
+  border-color: transparent !important;
+}
+html.dark .dock-surface .text-white {
+  color: #151515 !important;
+}
+html.dark .dock-surface .text-gray-400,
+html.dark .dock-surface .text-gray-500 {
+  color: #3a3a3a !important;
+}
+
+/* ---- Dock icon hover labels (tooltip) ----
+   Match the dock container: background = container bg, border = container
+   border, text stays white. */
+.dock-surface [role="tooltip"] {
+  background-color: #151515 !important;
+  border-color: #52525b !important;
+  color: #ffffff !important;
+}
+html.dark .dock-surface [role="tooltip"] {
+  background-color: #d0d0d0 !important;
+  border-color: transparent !important;
+  color: #000000 !important;
+}
+
+/* ---- Light mode: 3D carousel text darkening ----
+   Brand (.text-gray-500) and description (.text-gray-600) invert to a pale color
+   under the surface filter. These pre-invert values render as darker greys. */
+html.dark .theme-surface #ThreeDCarousel .text-gray-500 {
+  color: #a6a6a6 !important;
+}
+html.dark .theme-surface #ThreeDCarousel .text-gray-600 {
+  color: #b8b8b8 !important;
+}
+
+/* ---- Light mode: buttons get a soft dark-grey border (matches containers) ----
+   .border-white/30 inverts to a faint grey; #999999 inverts to #666666. */
+html.dark .theme-surface .border-white\/30 {
+  border-color: transparent !important;
+}
+
+/* ---- Light mode: Blue is always Blue ----
+   The surface invert shifts blue hues to amber. Instead of counter-inverting
+   whole elements (which would also freeze their greys), set each blue utility's
+   color to the PRE-INVERT of the real blue so it renders as true blue after the
+   surface filter. Only the specific property is touched, so hover/focus states
+   and surrounding greys are unaffected. */
+html.dark .theme-surface .text-blue-600 { color: #da9c14 !important; }
+html.dark .theme-surface .text-blue-500 { color: #c47d09 !important; }
+html.dark .theme-surface .text-blue-400 { color: #9f5a05 !important; }
+html.dark .theme-surface .text-blue-300 { color: #6c3a02 !important; }
+
+html.dark .theme-surface .hover\:text-blue-600:hover { color: #da9c14 !important; }
+html.dark .theme-surface .hover\:text-blue-500:hover { color: #c47d09 !important; }
+html.dark .theme-surface .hover\:text-blue-400:hover { color: #9f5a05 !important; }
+html.dark .theme-surface .hover\:text-blue-300:hover { color: #6c3a02 !important; }
+
+html.dark .theme-surface .after\:bg-blue-300::after { background-color: #6c3a02 !important; }
+/* Learn More underlines are black in light mode (#ffffff pre-invert renders #000). */
+html.dark .theme-surface .after\:bg-blue-200::after { background-color: #ffffff !important; }
+
+html.dark .theme-surface .outline-blue-500 { outline-color: #c47d09 !important; }
+
+html.dark .theme-surface .focus\:border-blue-400:focus { border-color: #9f5a05 !important; }
+
+/* ---- Light mode: AnimatedNotification (portaled outside .theme-surface) ----
+   Match the container body (#d0d0d0) with black title and dark-grey body text. */
+html.dark .animated-notification .bg-\[\#151515\] {
+  background-color: #d0d0d0 !important;
+}
+html.dark .animated-notification h3 {
+  color: #000000 !important;
+}
+html.dark .animated-notification p {
+  color: #3a3a3a !important;
+}
+html.dark .animated-notification .text-muted-foreground\/70,
+html.dark .animated-notification .text-muted-foreground\/50 {
+  color: #3a3a3a !important;
+}
+/* Keep the left priority accent colored in light mode. The glass variant's
+   dark:border-gray-800/20 (higher specificity) otherwise overrides it to black. */
+html.dark .animated-notification .border-l-red-500 { border-left-color: #ef4444 !important; }
+html.dark .animated-notification .border-l-yellow-500 { border-left-color: #eab308 !important; }
+html.dark .animated-notification .border-l-blue-500 { border-left-color: #3b82f6 !important; }
+html.dark .animated-notification .border-l-primary\/50 { border-left-color: #6b7280 !important; }
+
+/* ---- Light mode: SpeedDial (portaled outside .theme-surface) ----
+   Main "+" button matches the toggle-theme body (#151515) with a white icon. */
+html.dark .speed-dial-root .bg-\[\#f3f3f3\] {
+  background-color: #151515 !important;
+}
+html.dark .speed-dial-root .text-\[\#151515\] {
+  color: #ffffff !important;
+}

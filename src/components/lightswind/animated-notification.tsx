@@ -399,7 +399,7 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
   const animDurationSec = animationDuration / 1000;
 
   return (
-    <div ref={containerRef} className={cn(getPositionStyles(), className)}>
+    <div ref={containerRef} className={cn("animated-notification", getPositionStyles(), className)}>
       <div className="flex flex-col gap-3 items-center max-w-[calc(100vw-3rem)]" style={{ width }}>
         <AnimatePresence initial={false}>
           {notes.map((note) => (

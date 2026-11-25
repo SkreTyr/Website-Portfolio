@@ -196,7 +196,7 @@ const ThreeDCarousel = ({
                 hover:shadow-md flex flex-col`}
                 >
                   <div
-                    className="relative bg-black p-6 flex items-center justify-center h-48 overflow-hidden"
+                    className="keep-color relative bg-black p-6 flex items-center justify-center h-48 overflow-hidden"
                     style={{
                       backgroundImage: `url(${item.imageUrl})`,
                       backgroundSize: "cover",

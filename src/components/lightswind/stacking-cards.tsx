@@ -78,7 +78,7 @@ export function StackingCards({ items }: StackingCardsProps) {
         >
           <div className="flex flex-col h-[30rem] overflow-hidden rounded-2xl border border-[#ffffff4d] bg-[#151515] shadow-xl">
             <div
-              className="relative h-56 shrink-0 w-full bg-black bg-cover bg-center"
+              className="keep-color relative h-56 shrink-0 w-full bg-black bg-cover bg-center"
               style={{ backgroundImage: `url(${item.imageUrl})` }}
             />
             <div className="p-6 flex-1 overflow-hidden">

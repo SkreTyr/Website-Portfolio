@@ -10,6 +10,16 @@ export interface GlowingCardProps {
   hoverEffect?: boolean;
 }
 
+/** Invert a #rrggbb hex color (used to pre-compensate the light-mode surface invert). */
+function invertHex(hex: string): string {
+  const m = hex.replace("#", "");
+  if (m.length !== 6) return hex;
+  const r = 255 - parseInt(m.slice(0, 2), 16);
+  const g = 255 - parseInt(m.slice(2, 4), 16);
+  const b = 255 - parseInt(m.slice(4, 6), 16);
+  return "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("");
+}
+
 export interface GlowingCardsProps {
   children: React.ReactNode;
   className?: string;
@@ -131,6 +141,14 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
     };
   }, [enableGlow, glowOpacity, canHover]);
 
+  // Light mode (html.dark) inverts the whole surface, which would shift the glow
+  // hue. Pre-invert the glow colors so they render true after the surface filter
+  // — without any filter on the overlay (which would flip the real card images).
+  const isLightMode =
+    typeof document !== 'undefined' &&
+    document.documentElement.classList.contains('dark');
+  const glowFor = (c: string) => (isLightMode ? invertHex(c) : c);
+
   const containerStyle = {
     '--gap': gap,
     '--max-width': maxWidth,
@@ -193,7 +211,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
               {React.Children.map(children, (child) => {
                 if (React.isValidElement(child) && child.type === GlowingCard) {
                   const element = child as React.ReactElement<any>;
-                  const cardGlowColor = element.props.glowColor || "#3b82f6";
+                  const cardGlowColor = glowFor(element.props.glowColor || "#3b82f6");
                   return React.cloneElement(element, {
                     className: cn(
                       element.props.className,
@@ -204,9 +222,9 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
                     style: {
                       ...element.props.style,
                       // String concatenation for background, border, and boxShadow
-                      backgroundColor: cardGlowColor + "15",
+                      backgroundColor: cardGlowColor + "33",
                       borderColor: cardGlowColor,
-                      boxShadow: "0 0 0 1px inset " + cardGlowColor,
+                      boxShadow: "0 0 0 1px inset " + cardGlowColor + ", 0 0 16px " + cardGlowColor,
                     },
                   });
                 }
@@ -220,8 +238,9 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
                     if (!React.isValidElement(inner)) return inner;
                     const innerEl = inner as React.ReactElement<any>;
                     if (innerEl.type === GlowingCard) {
-                      const glow =
-                        (innerEl.props as GlowingCardProps).glowColor || "#3b82f6";
+                      const glow = glowFor(
+                        (innerEl.props as GlowingCardProps).glowColor || "#3b82f6"
+                      );
                       return React.cloneElement(innerEl, {
                         className: cn(
                           innerEl.props.className,
@@ -231,9 +250,9 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
                         ),
                         style: {
                           ...innerEl.props.style,
-                          backgroundColor: glow + "15",
+                          backgroundColor: glow + "33",
                           borderColor: glow,
-                          boxShadow: "0 0 0 1px inset " + glow,
+                          boxShadow: "0 0 0 1px inset " + glow + ", 0 0 16px " + glow,
                         },
                       });
                     }

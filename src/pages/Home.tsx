@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '@/Button'
 import { TypingText } from '@/components/lightswind/typing-text'
@@ -83,21 +84,28 @@ function Home() {
     <div>
 
       {/* sidebar dock: appears once the hero (100vh) is scrolled past, slides in from the left.
-          Exits (outro) back out to the left when the user scrolls back to the hero. */}
-      <AnimatePresence>
-        {showDock && (
-          <div className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40">
-            <motion.div
-              initial={{ opacity: 0, x: -32 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -32 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-            >
-              <Dock items={dockItems} labelPosition="right" />
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+          Exits (outro) back out to the left when the user scrolls back to the hero.
+          Portaled to <body> so it sits outside .theme-surface (the light-mode invert filter
+          would otherwise break position: fixed). AnimatePresence wraps the keyed motion.div
+          directly (a portal must not be AnimatePresence's direct child). */}
+      {createPortal(
+        <div className="dock-root hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-40">
+          <AnimatePresence>
+            {showDock && (
+              <motion.div
+                key="dock"
+                initial={{ opacity: 0, x: -32 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -32 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+              >
+                <Dock items={dockItems} labelPosition="right" className="dock-surface" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>,
+        document.body
+      )}
 
       <section className=" h-screen w-full flex justify-center">
         
@@ -292,7 +300,7 @@ I love building responsive web applications, mastering new coding frameworks, an
             
               <div className=' pb-2 flex items-center justify-center gap-1 text-sm mt-8 text-center group'>
               
-              <a href="#" className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/>
+              <a href="#" className="group text-gray-200 hover:text-blue-400 flex items-center relative"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a>
             </div>
           </div>
         </AutoReveal>
@@ -347,7 +355,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
+              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
   </GlowingCard>
 </AutoReveal>
 
@@ -368,7 +376,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
+              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
   </GlowingCard>
 </AutoReveal>
 
@@ -389,7 +397,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3 group"><a href="#" className='text-gray-300 hover:text-blue-600 relative inline-block text-sm after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</a><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></div> 
+              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
   </GlowingCard>
 </AutoReveal>
      
@@ -409,26 +417,26 @@ I love building responsive web applications, mastering new coding frameworks, an
           <div className='w-1/2 h-auto flex items-center justify-center gap-8 md:gap-12'>
             <AutoReveal>
             <a href="https://www.instagram.com/sjysqx/" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
-              <span className="absolute h-16 w-16 min-[376px]:max-[425px]:h-14 min-[376px]:max-[425px]:w-14 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-gradient-to-tr from-amber-400 via-pink-600 to-purple-700 opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
-              <span className="relative w-12 h-12 min-[376px]:max-[425px]:w-10 min-[376px]:max-[425px]:h-10 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#e4405f] group-hover:opacity-0 transition-opacity duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios/50/FFFFFF/instagram-new.png)", maskImage: "url(https://img.icons8.com/ios/50/FFFFFF/instagram-new.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
+              <span className="keep-color absolute h-16 w-16 min-[376px]:max-[425px]:h-14 min-[376px]:max-[425px]:w-14 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-gradient-to-tr from-amber-400 via-pink-600 to-purple-700 opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
+              <span className="keep-color relative w-12 h-12 min-[376px]:max-[425px]:w-10 min-[376px]:max-[425px]:h-10 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#e4405f] group-hover:opacity-0 transition-opacity duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios/50/FFFFFF/instagram-new.png)", maskImage: "url(https://img.icons8.com/ios/50/FFFFFF/instagram-new.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
               <img width="48" height="48" src="https://img.icons8.com/fluency/96/instagram-new.png" alt="instagram" className="absolute w-12 h-12 min-[376px]:max-[425px]:w-10 min-[376px]:max-[425px]:h-10 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
             </a>
             </AutoReveal>
             <AutoReveal>
-            <a href="https://www.facebook.com/profile.php?id=61584695366129" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
+            <a href="https://www.facebook.com/profile.php?id=61584695366129" target="_blank" rel="noopener noreferrer" className="keep-color group relative flex items-center justify-center">
               <span className="absolute h-16 w-16 min-[376px]:max-[425px]:h-14 min-[376px]:max-[425px]:w-14 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-[#1877f2] opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
               <span className="relative w-12 h-12 min-[376px]:max-[425px]:w-10 min-[376px]:max-[425px]:h-10 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#1877f2] group-hover:opacity-0 transition-opacity duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios/50/FFFFFF/facebook-new.png)", maskImage: "url(https://img.icons8.com/ios/50/FFFFFF/facebook-new.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
               <span className="absolute w-12 h-12 min-[376px]:max-[425px]:w-10 min-[376px]:max-[425px]:h-10 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/facebook-new.png)", maskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/facebook-new.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
             </a>
             </AutoReveal>
             <AutoReveal>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="keep-color group relative flex items-center justify-center">
               <span className="absolute h-16 w-16 min-[376px]:max-[425px]:h-14 min-[376px]:max-[425px]:w-14 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-[#0a66c2] opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
               <span className="relative w-12 h-12 min-[376px]:max-[425px]:w-10 min-[376px]:max-[425px]:h-10 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#0a66c2] group-hover:bg-white transition-colors duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/linkedin.png)", maskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/linkedin.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
             </a>
             </AutoReveal>
             <AutoReveal>
-            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="group relative flex items-center justify-center">
+            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="keep-color group relative flex items-center justify-center">
               <span className="absolute h-16 w-16 min-[376px]:max-[425px]:h-14 min-[376px]:max-[425px]:w-14 max-[375px]:h-10 max-[375px]:w-10 rounded-full bg-[#5865f2] opacity-0 scale-50 transition duration-300 group-hover:opacity-100 group-hover:scale-100" />
               <span className="relative w-12 h-12 min-[376px]:max-[425px]:w-10 min-[376px]:max-[425px]:h-10 max-[375px]:w-8 max-[375px]:h-8 md:w-10 md:h-10 bg-[#5865f2] group-hover:bg-white transition-colors duration-300" style={{ WebkitMaskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/discord.png)", maskImage: "url(https://img.icons8.com/ios-filled/50/FFFFFF/discord.png)", WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} />
             </a>
