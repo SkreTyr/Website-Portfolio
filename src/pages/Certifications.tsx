@@ -5,6 +5,8 @@ import { GlowingCards, GlowingCard } from '@/components/lightswind/glowing-cards
 import ciscoLogo from '@/assets/CiscoLogo.webp'
 import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
+import codedexLightLogo from '@/assets/CodedexLightMode.webp'
+import ThemeImage from '@/components/ThemeImage'
 
 interface Certification {
   key: number
@@ -131,7 +133,7 @@ const Certifications = () => {
     </div>
     <div className='ml-auto flex flex-col items-end'>
       <div className=' w-20 lg:w-24 h-14 border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-        <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+        <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
       </div>
       <span className=' text-xs text-gray-500 mt-1'>2024</span>
     </div>
@@ -154,7 +156,7 @@ const Certifications = () => {
     </div>
     <div className='ml-auto flex flex-col items-end'>
       <div className=' w-20 lg:w-24 h-14 border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-        <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+        <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
       </div>
       <span className=' text-xs text-gray-500 mt-1'>2024</span>
     </div>
@@ -177,7 +179,7 @@ const Certifications = () => {
     </div>
     <div className='ml-auto flex flex-col items-end'>
       <div className=' w-20 lg:w-24 h-14 border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-        <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+        <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
       </div>
       <span className=' text-xs text-gray-500 mt-1'>2024</span>
     </div>
@@ -200,7 +202,7 @@ const Certifications = () => {
     </div>
     <div className='ml-auto flex flex-col items-end'>
       <div className=' w-20 lg:w-24 h-14 border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-        <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+        <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
       </div>
       <span className=' text-xs text-gray-500 mt-1'>2024</span>
     </div>
