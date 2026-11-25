@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useInRouterContext, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 export interface NotificationUser {
@@ -93,9 +94,10 @@ const Notification: React.FC<{
   variant: string;
   onDismiss?: () => void;
   onClick?: () => void;
+  onNavigate?: (href: string) => void;
   allowDismiss: boolean;
   consumeDragClick?: () => boolean;
-}> = ({ notification, showAvatars, showTimestamps, variant, onDismiss, onClick, allowDismiss, consumeDragClick }) => {
+}> = ({ notification, showAvatars, showTimestamps, variant, onDismiss, onClick, onNavigate, allowDismiss, consumeDragClick }) => {
   const getVariantStyles = () => {
     switch (variant) {
       case "minimal":
@@ -134,8 +136,12 @@ const Notification: React.FC<{
         // Ignore the click that fires right after a swipe/drag gesture
         if (consumeDragClick?.()) return;
         if (notification.href) {
-          if (notification.href.startsWith("http")) {
+          if (/^https?:\/\//i.test(notification.href)) {
             window.open(notification.href, "_blank", "noopener,noreferrer");
+          } else if (onNavigate) {
+            // Internal link: navigate via the SPA router so the current theme
+            // (the `.dark` class on <html>) is preserved instead of a full reload.
+            onNavigate(notification.href);
           } else {
             window.location.href = notification.href;
           }
@@ -169,6 +175,33 @@ const Notification: React.FC<{
         </button>
       )}
     </div>
+  );
+};
+
+/**
+ * Wraps Notification with SPA navigation when rendered inside a React Router.
+ * Navigating in-app avoids a full page reload, which would otherwise drop the
+ * active theme (the `.dark` class on <html>) and fall back to dark mode.
+ */
+const RouterNotification: React.FC<React.ComponentProps<typeof Notification>> = (props) => {
+  const navigate = useNavigate();
+  return (
+    <Notification
+      {...props}
+      onNavigate={(href) => {
+        navigate(href);
+        // Preserve the hash-scroll behaviour of a full navigation.
+        const hashIndex = href.indexOf("#");
+        if (hashIndex !== -1) {
+          const id = href.slice(hashIndex + 1);
+          if (id) {
+            window.setTimeout(() => {
+              document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+            }, 80);
+          }
+        }
+      }}
+    />
   );
 };
 
@@ -243,6 +276,10 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const dragMoved = useRef(false);
   const messageIndexRef = useRef(0);
+  // Use SPA navigation for internal links when a router is available, so the
+  // active theme survives the click instead of resetting on a full reload.
+  const inRouter = useInRouterContext();
+  const NotificationComponent = inRouter ? RouterNotification : Notification;
 
   // Clear a specific note's auto-dismiss timer
   const clearNoteTimeout = useCallback((id: string) => {
@@ -430,7 +467,7 @@ export const AnimatedNotification: React.FC<AnimatedNotificationProps> = ({
               className="w-full flex justify-center will-change-transform"
               style={{ touchAction: "pan-y" }}
             >
-              <Notification
+              <NotificationComponent
                 notification={note}
                 showAvatars={showAvatars}
                 showTimestamps={showTimestamps}
