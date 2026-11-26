@@ -35,7 +35,7 @@ const Contact = () => {
       }
       setStatus('sent')
       form.reset()
-      window.setTimeout(() => setStatus('idle'), 2500)
+      window.setTimeout(() => setStatus('idle'), 4500)
     } catch (err) {
       setStatus('error')
       setErrorMsg(err instanceof Error ? err.message : 'Failed to send message.')
@@ -86,7 +86,7 @@ const Contact = () => {
                     {status === 'sending' ? 'Sending...' : 'Send Message'}
                   </span>
                   <span
-                    className={`absolute inset-0 flex items-center justify-center gap-1 text-green-300 transition-all duration-300 ease-out ${
+                    className={`keep-color absolute inset-0 flex items-center justify-center gap-1 text-green-400 transition-all duration-300 ease-out ${
                       status === 'sent' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                     }`}
                   >
