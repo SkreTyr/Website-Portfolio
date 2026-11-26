@@ -4,7 +4,7 @@ import { ArrowLeft, Check } from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
 
 const inputClass =
-  'w-full bg-[#101010] border border-[#ffffff4d] rounded-md p-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-400'
+  'w-full md:w-3/4 self-center bg-[#101010] border border-[#ffffff4d] rounded-md p-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-400'
 
 const Contact = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -44,8 +44,8 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen w-full">
-      <section className="h-auto w-full flex justify-center pt-32 pb-20">
-        <div className="w-full p-5 flex flex-col items-center justify-center lg:w-3/4 2xl:w-2/4">
+      <section className=" h-auto w-full flex justify-center pt-32 pb-20">
+        <div className=" w-full p-5 flex flex-col items-center justify-center lg:w-3/4 2xl:w-2/4">
           <AutoReveal direction="left" className="w-full">
             <Link
               to="/"
@@ -56,7 +56,7 @@ const Contact = () => {
             </Link>
           </AutoReveal>
 
-          <AutoReveal className="w-full">
+          <AutoReveal className=" w-full">
             <h1 className="text-[#f5f5f5] font-bebas text-left mb-2 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
               Get In Touch
             </h1>
@@ -67,7 +67,7 @@ const Contact = () => {
 
             <form
               onSubmit={onSubmit}
-              className="border border-[#ffffff4d] bg-[#151515] p-4 rounded-md flex flex-col gap-4"
+              className="border border-[#ffffff4d] bg-[#151515] p-4 md:pt-20 rounded-md flex flex-col gap-4"
             >
               <input name="name" required placeholder="Name" className={inputClass} />
               <input name="email" type="email" required placeholder="Email" className={inputClass} />
@@ -75,7 +75,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={status === 'sending' || status === 'sent'}
-                className="self-start inline-flex items-center justify-center rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="send-btn self-center inline-flex items-center justify-center rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="relative flex items-center justify-center min-w-[6.5rem]">
                   <span

@@ -204,6 +204,18 @@ html.dark .theme-surface .site-footer .text-gray-500 {
   color: #b5b5b5 !important;
 }
 
+/* ---- Light mode: Send Message button hover (#9e9c9cb2) ----
+   #61634db2 pre-inverts to #9e9c9cb2 after the surface filter. */
+html.dark .theme-surface .send-btn:hover {
+  background-color: #61634db2 !important;
+}
+
+/* ---- Light mode: ImageReveal buttons hover (#9e9c9cb2) ----
+   #61634db2 pre-inverts to #9e9c9cb2 after the surface filter. */
+html.dark .theme-surface .reveal-btn:hover {
+  background-color: #61634db2 !important;
+}
+
 /* ---- Light mode: 3D carousel Prev/Next buttons + dots match container body ----
    Containers render as #d0d0d0 (bg-[#151515] pre-inverts to #2f2f2f). The buttons
    (bg-white/80) and dots (bg-gray-200/500) invert to dark greys that clash, so set

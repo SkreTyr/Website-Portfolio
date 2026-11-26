@@ -10,6 +10,8 @@ import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
 import certificationsReveal from '@/assets/CertificationsReveal.webp'
 import certificationsLightReveal from '@/assets/CertificationsLightReveal.webp'
+import contactFormReveal from '@/assets/ContactFormImageReveal.webp'
+import contactFormLightReveal from '@/assets/ContactFormImageRevealLight.webp'
 import ButtonImage from '@/ButtonImage';
 import { UserRoundPen, Home as HomeIcon, FolderOpen, Mail } from 'lucide-react'
 import Dock from '@/components/lightswind/dock'
@@ -167,7 +169,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 <AutoReveal translate={false} blur={false}>
 <div className={`transition-opacity duration-300 ${typingDone ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}>
 
-  <Button />
+  <Button image={contactFormReveal} lightImage={contactFormLightReveal} />
 
 </div>
 </AutoReveal>
