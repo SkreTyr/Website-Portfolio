@@ -3,24 +3,42 @@ import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
 
-const CONTACT_EMAIL = 'shannmichaelagang@gmail.com'
-
 const inputClass =
   'w-full bg-[#101010] border border-[#ffffff4d] rounded-md p-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-blue-400'
 
 const Contact = () => {
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const data = new FormData(e.currentTarget)
-    const name = String(data.get('name') || '')
-    const email = String(data.get('email') || '')
-    const message = String(data.get('message') || '')
-    const subject = encodeURIComponent(`Portfolio Contact: ${name}`)
-    const body = encodeURIComponent(`${message}\n\nFrom: ${name} (${email})`)
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
-    setSent(true)
+    const form = e.currentTarget
+    const data = new FormData(form)
+    const payload = {
+      name: String(data.get('name') || '').trim(),
+      email: String(data.get('email') || '').trim(),
+      message: String(data.get('message') || '').trim(),
+    }
+
+    setStatus('sending')
+    setErrorMsg('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const json = await res.json().catch(() => ({}))
+      if (!res.ok || !json?.success) {
+        throw new Error(json?.error || 'Something went wrong. Please try again.')
+      }
+      setStatus('sent')
+      form.reset()
+    } catch (err) {
+      setStatus('error')
+      setErrorMsg(err instanceof Error ? err.message : 'Failed to send message.')
+    }
   }
 
   return (
@@ -38,12 +56,13 @@ const Contact = () => {
           </AutoReveal>
 
           <AutoReveal className="w-full">
-            <h1 className="text-[#f5f5f5] font-bebas text-center mb-2 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
+            <h1 className="text-[#f5f5f5] font-bebas text-left mb-2 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
               Get In Touch
             </h1>
-            <p className="text-gray-400 text-sm md:text-base text-center mb-8 max-w-2xl mx-auto">
-              Have a project in mind, a role to fill, or just want to say hello? Drop a message below and it&rsquo;ll open in your email client, ready to send straight to my inbox.
-            </p>
+              <p className="text-gray-400 text-sm md:text-base text-left mb-8 max-w-2xl">
+                Have a project in mind, a role to fill, or just want to say hello? Send a message below and it&rsquo;ll land straight in my inbox.
+              </p>
+            <hr className="border-t border-[#ffffff38] w-full max-w-2xl mb-8" />
 
             <form
               onSubmit={onSubmit}
@@ -54,14 +73,18 @@ const Contact = () => {
               <textarea name="message" required placeholder="Message" rows={5} className={inputClass} />
               <button
                 type="submit"
-                className="self-start inline-flex items-center rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer"
+                disabled={status === 'sending'}
+                className="self-start inline-flex items-center rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
               </button>
-              {sent && (
-                <p className=" text-sm text-blue-300">
-                  Your email client should open with the message pre-filled.
+              {status === 'sent' && (
+                <p className="text-sm text-blue-300">
+                  Thanks! Your message has been sent to my inbox.
                 </p>
+              )}
+              {status === 'error' && (
+                <p className="text-sm text-red-400">{errorMsg}</p>
               )}
             </form>
           </AutoReveal>

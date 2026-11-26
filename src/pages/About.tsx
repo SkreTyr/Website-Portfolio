@@ -18,10 +18,14 @@ const About = () => {
             </Link>
           </AutoReveal>
 
-          <AutoReveal direction="left">
-            <h1 className="text-[#f5f5f5] font-bebas text-center mb-8 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
+          <AutoReveal direction="left" className="w-full">
+            <h1 className="text-[#f5f5f5] font-bebas text-left mb-2 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
               About Me
             </h1>
+            <p className="text-gray-400 text-sm md:text-base text-left mb-8 max-w-2xl">
+              A quick look at who I am, what I do, and the background behind the work.
+            </p>
+            <hr className="border-t border-[#ffffff38] w-full max-w-2xl mb-8" />
           </AutoReveal>
 
           <AutoReveal className="w-full">

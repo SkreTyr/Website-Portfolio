@@ -25,7 +25,7 @@ function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className='relative z-10 w-full border-t border-[#ffffff38] mt-20'>
+    <footer className='site-footer relative z-10 w-full border-t border-[#ffffff38] mt-20'>
       <div className='mx-auto w-11/12 max-w-6xl px-4 py-12 grid gap-10 md:grid-cols-3'>
         <div>
           <h2 className='font-bebas text-2xl text-[#f5f5f5]'>Shann Agang</h2>

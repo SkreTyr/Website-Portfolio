@@ -24,6 +24,7 @@ body {
 
 ::-webkit-scrollbar-track {
   background: #101010;
+  transition: background 400ms ease-in-out;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -39,6 +40,14 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #3a3a3a #101010;
   overflow-x: hidden;
+}
+
+/* ---- Light mode: match the scrollbar track to the page background ---- */
+html.dark ::-webkit-scrollbar-track {
+  background: #efefef;
+}
+html.dark {
+  scrollbar-color: #3a3a3a #efefef;
 }
 
 /* ---- Lenis recommended styles ---- */
@@ -164,6 +173,18 @@ html.dark .theme-surface #ThreeDCarousel .text-gray-600 {
   color: #b8b8b8 !important;
 }
 
+/* ---- Light mode: Milestone subheader (role/dates) darkening ----
+   .text-gray-500 inverts to a pale grey; #b5b5b5 pre-inverts to a darker,
+   readable grey on the light surface. */
+html.dark .theme-surface .milestone-card .text-gray-500 {
+  color: #b5b5b5 !important;
+}
+
+/* ---- Light mode: Footer copyright darkening ---- */
+html.dark .theme-surface .site-footer .text-gray-500 {
+  color: #b5b5b5 !important;
+}
+
 /* ---- Light mode: 3D carousel Prev/Next buttons + dots match container body ----
    Containers render as #d0d0d0 (bg-[#151515] pre-inverts to #2f2f2f). The buttons
    (bg-white/80) and dots (bg-gray-200/500) invert to dark greys that clash, so set
@@ -206,6 +227,12 @@ html.dark .theme-surface .hover\:text-blue-600:hover { color: #da9c14 !important
 html.dark .theme-surface .hover\:text-blue-500:hover { color: #c47d09 !important; }
 html.dark .theme-surface .hover\:text-blue-400:hover { color: #9f5a05 !important; }
 html.dark .theme-surface .hover\:text-blue-300:hover { color: #6c3a02 !important; }
+
+/* group-hover blue variants (e.g. Learn More) must also stay blue in light mode */
+html.dark .theme-surface .group:hover .group-hover\:text-blue-600 { color: #da9c14 !important; }
+html.dark .theme-surface .group:hover .group-hover\:text-blue-500 { color: #c47d09 !important; }
+html.dark .theme-surface .group:hover .group-hover\:text-blue-400 { color: #9f5a05 !important; }
+html.dark .theme-surface .group:hover .group-hover\:text-blue-300 { color: #6c3a02 !important; }
 
 html.dark .theme-surface .after\:bg-blue-300::after { background-color: #6c3a02 !important; }
 /* Learn More underlines are black in light mode (#ffffff pre-invert renders #000). */

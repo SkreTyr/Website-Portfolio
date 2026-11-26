@@ -270,7 +270,7 @@ I love building responsive web applications, mastering new coding frameworks, an
           </div>
         </AutoReveal>
 
-        <AutoReveal rootMargin="0px 0px -15% 0px" className=" group relative cursor-pointer hover:-translate-y-1 row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
+        <AutoReveal rootMargin="0px 0px -15% 0px" className=" milestone-card group relative cursor-pointer hover:-translate-y-1 row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
             <div className='flex items-center gap-5'>
               <Scroll color="#ffffff" size="1em" />
