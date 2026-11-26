@@ -164,6 +164,27 @@ html.dark .theme-surface #ThreeDCarousel .text-gray-600 {
   color: #b8b8b8 !important;
 }
 
+/* ---- Light mode: 3D carousel Prev/Next buttons + dots match container body ----
+   Containers render as #d0d0d0 (bg-[#151515] pre-inverts to #2f2f2f). The buttons
+   (bg-white/80) and dots (bg-gray-200/500) invert to dark greys that clash, so set
+   pre-invert values here: #2f2f2f renders #d0d0d0 (container), #999999 renders
+   #666666 (active dot / container border). */
+html.dark .theme-surface #ThreeDCarousel .bg-white\/80 {
+  background-color: #2f2f2f !important;
+}
+html.dark .theme-surface #ThreeDCarousel .hover\:bg-white:hover {
+  background-color: #262626 !important;
+}
+html.dark .theme-surface #ThreeDCarousel .bg-gray-200 {
+  background-color: #2f2f2f !important;
+}
+html.dark .theme-surface #ThreeDCarousel .hover\:bg-gray-300:hover {
+  background-color: #2a2a2a !important;
+}
+html.dark .theme-surface #ThreeDCarousel .bg-gray-500 {
+  background-color: #999999 !important;
+}
+
 /* ---- Light mode: buttons get a soft dark-grey border (matches containers) ----
    .border-white/30 inverts to a faint grey; #999999 inverts to #666666. */
 html.dark .theme-surface .border-white\/30 {
