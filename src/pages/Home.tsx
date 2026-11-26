@@ -8,8 +8,6 @@ import profileImg from '@/assets/Profile3.webp'
 import ciscoLogo from '@/assets/CiscoLogo.webp'
 import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
-import codedexLightLogo from '@/assets/CodedexLightMode.webp'
-import ThemeImage from '@/components/ThemeImage'
 import certificationsReveal from '@/assets/CertificationsReveal.webp'
 import certificationsLightReveal from '@/assets/CertificationsLightReveal.webp'
 import ButtonImage from '@/ButtonImage';
@@ -205,7 +203,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 <div className="h-full rounded-md">
 <div className=" flex items-center gap-5">
 <UserRoundPen color="#ffffff" size="1em" />
-  <h1 className='text-[#f3f3f3]'>A bit of introduction</h1>
+  <h1 className='text-[#f3f3f3] text-lg md:text-xl font-light'>A bit of introduction</h1>
 </div>
 <hr className="border-t border-[#ffffff38] w-full mt-2" />
 
@@ -245,7 +243,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 
         <AutoReveal rootMargin="0px 0px -15% 0px" className="row-span-3 row-start-8 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:col-span-2 md:row-span-2 md:row-start-4">
           <div className="h-full rounded-md flex flex-col items-center justify-center gap-5">
-            <h1 className='inline-block text-[#f3f3f3]' >Skills & Stacks</h1>
+            <h1 className='inline-block text-[#f3f3f3] text-lg md:text-xl font-light' >Skills & Stacks</h1>
             <hr className="border-t border-[#ffffff38] w-2/4" />
             <LogoLoop logos={[
               { src: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png", alt: "Stack"},
@@ -272,29 +270,29 @@ I love building responsive web applications, mastering new coding frameworks, an
           </div>
         </AutoReveal>
 
-        <AutoReveal rootMargin="0px 0px -15% 0px" className=" row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
+        <AutoReveal rootMargin="0px 0px -15% 0px" className=" group relative cursor-pointer hover:-translate-y-1 row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
             <div className='flex items-center gap-5'>
               <Scroll color="#ffffff" size="1em" />
-              <h1 className=' text-[#f3f3f3]' >Milestone</h1>
+              <h1 className=' text-[#f3f3f3] text-lg md:text-xl font-light' >Milestone</h1>
             </div>
             <hr className="border-t border-[#ffffff38] w-full mt-2" />
             <div className='flex-col text-xs mt-2'>
-              <h1 className='text-white'>Hines</h1>
+              <h1 className='text-sm font-light text-[#f3f3f3]'>Hines</h1>
               <div className='flex justify-between w-full'>
                 <p className='text-gray-500'>Sr. Software Engineer</p>
                 <p className='text-gray-500'>2021-Present</p>
               </div>
             </div>
             <div className='flex-col text-xs mt-4'>
-              <h1 className='text-white'>Hines</h1>
+              <h1 className='text-sm font-light text-[#f3f3f3]'>Hines</h1>
               <div className='flex justify-between w-full'>
                 <p className='text-gray-500'>Sr. Software Engineer</p>
                 <p className='text-gray-500'>2021-Present</p>
               </div>
             </div>
             <div className='flex-col text-xs mt-4'>
-              <h1 className='text-white'>Hines</h1>
+              <h1 className='text-sm font-light text-[#f3f3f3]'>Hines</h1>
               <div className='flex justify-between w-full'>
                 <p className='text-gray-500'>Sr. Software Engineer</p>
                 <p className='text-gray-500'>2021-Present</p>
@@ -303,8 +301,9 @@ I love building responsive web applications, mastering new coding frameworks, an
             
               <div className=' pb-2 flex items-center justify-center gap-1 text-sm mt-8 text-center group'>
               
-              <a href="#" className="group text-gray-200 hover:text-blue-400 flex items-center relative"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a>
+              <a href="#" className="group text-gray-200 group-hover:text-blue-400 flex items-center relative"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></a>
             </div>
+            <a href="#" aria-label="Learn More" className="absolute inset-0 z-20 rounded-md"></a>
           </div>
         </AutoReveal>
 
@@ -358,7 +357,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
 
@@ -379,7 +378,7 @@ I love building responsive web applications, mastering new coding frameworks, an
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
 
@@ -394,13 +393,13 @@ I love building responsive web applications, mastering new coding frameworks, an
       <h1 className=' text-lg'>Codedex</h1>
     </div>
     <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-      <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+      <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-150 md:scale-125'/>
     </div>
     <div className="col-span-2 text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
      
