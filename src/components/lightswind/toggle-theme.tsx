@@ -347,7 +347,7 @@ export const ToggleTheme = ({
                 isDark ? "hover:text-amber-400" : "hover:text-primarylw",
                 className,
                 // Dark mode: light body with a black icon.
-                !isDark && "bg-[#d0d0d0] text-black hover:text-black"
+                !isDark && "bg-[#d0d0d0] text-black hover:text-blue-500"
             )}
             {...props}
         >
