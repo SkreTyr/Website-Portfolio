@@ -23,14 +23,18 @@ export default defineConfig({
         'pwa-maskable-512x512.png',
       ],
       manifest: {
+        id: '/',
         name: 'Shann Agang - Software Engineer',
         short_name: 'Shann Agang',
         description:
           'Portfolio of Shann Agang — Software Engineer building web apps, networks, and reliable digital experiences.',
+        lang: 'en',
+        dir: 'ltr',
+        categories: ['portfolio', 'developer', 'productivity'],
         theme_color: '#151515',
         background_color: '#151515',
         display: 'standalone',
-        orientation: 'portrait-primary',
+        orientation: 'any',
         scope: '/',
         start_url: '/',
         icons: [
