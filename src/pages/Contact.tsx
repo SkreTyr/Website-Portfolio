@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Check } from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
 
 const inputClass =
@@ -73,16 +73,27 @@ const Contact = () => {
               <textarea name="message" required placeholder="Message" rows={5} className={inputClass} />
               <button
                 type="submit"
-                disabled={status === 'sending'}
-                className="self-start inline-flex items-center rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={status === 'sending' || status === 'sent'}
+                className="self-start inline-flex items-center justify-center rounded-md border border-white/30 bg-[#151515] px-5 py-3 text-sm font-normal text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {status === 'sending' ? 'Sending...' : 'Send Message'}
+                <span className="relative flex items-center justify-center min-w-[6.5rem]">
+                  <span
+                    className={`flex items-center gap-2 transition-all duration-300 ease-out ${
+                      status === 'sent' ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0'
+                    }`}
+                  >
+                    {status === 'sending' ? 'Sending...' : 'Send Message'}
+                  </span>
+                  <span
+                    className={`absolute inset-0 flex items-center justify-center gap-1 text-green-400 transition-all duration-300 ease-out ${
+                      status === 'sent' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                    }`}
+                  >
+                    <Check className="w-4 h-4" />
+                    Sent
+                  </span>
+                </span>
               </button>
-              {status === 'sent' && (
-                <p className="text-sm text-blue-300">
-                  Thanks! Your message has been sent to my inbox.
-                </p>
-              )}
               {status === 'error' && (
                 <p className="text-sm text-red-400">{errorMsg}</p>
               )}
