@@ -38,9 +38,12 @@ const Contact = () => {
           </AutoReveal>
 
           <AutoReveal className="w-full">
-            <h1 className="text-[#f5f5f5] font-bebas text-center mb-6 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
+            <h1 className="text-[#f5f5f5] font-bebas text-center mb-2 text-5xl sm:text-4xl md:text-5xl 2xl:text-5xl">
               Get In Touch
             </h1>
+            <p className="text-gray-400 text-sm md:text-base text-center mb-8 max-w-2xl mx-auto">
+              Have a project in mind, a role to fill, or just want to say hello? Drop a message below and it&rsquo;ll open in your email client, ready to send straight to my inbox.
+            </p>
 
             <form
               onSubmit={onSubmit}
