@@ -96,7 +96,7 @@ const Contact = () => {
                 </span>
               </button>
               {status === 'error' && (
-                <p className="text-sm text-red-400">{errorMsg}</p>
+                <p className="keep-color text-sm text-red-400">{errorMsg}</p>
               )}
             </form>
           </AutoReveal>
