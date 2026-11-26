@@ -66,7 +66,7 @@ export const GlowingCard: React.FC<GlowingCardProps> = ({
   return (
     <div
       className={cn(
-        "relative flex-1 min-w-[13rem] w-11 p-2 rounded-2xl text-black dark:text-white",
+        "group relative flex-1 min-w-[13rem] w-11 p-2 rounded-2xl text-black dark:text-white cursor-pointer",
         "bg-background border ",
         "transition-[opacity,box-shadow] duration-400 ease-out",
         className
@@ -188,7 +188,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
           <div
             ref={overlayRef}
             className={cn(
-              "absolute inset-0 pointer-events-none select-none",
+              "absolute inset-0 z-20 pointer-events-none select-none",
               "opacity-0 transition-[opacity] duration-[&lsqb;var(--animation-duration)&rsqb;] ease-out"
             )}
             style={{
@@ -224,7 +224,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
                       // String concatenation for background, border, and boxShadow
                       backgroundColor: cardGlowColor + "33",
                       borderColor: cardGlowColor,
-                      boxShadow: "0 0 0 1px inset " + cardGlowColor + ", 0 0 16px " + cardGlowColor,
+                      boxShadow: "0 0 0 1px inset " + cardGlowColor + ", 0 0 10px " + cardGlowColor + "66",
                     },
                   });
                 }
@@ -252,7 +252,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
                           ...innerEl.props.style,
                           backgroundColor: glow + "33",
                           borderColor: glow,
-                          boxShadow: "0 0 0 1px inset " + glow + ", 0 0 16px " + glow,
+                          boxShadow: "0 0 0 1px inset " + glow + ", 0 0 10px " + glow + "66",
                         },
                       });
                     }
