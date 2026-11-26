@@ -7,7 +7,7 @@ import {
   useState,
   TouchEvent,
 } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "./card";
 
@@ -187,12 +187,12 @@ const ThreeDCarousel = ({
                     else setActive(index);
                   }
                 }}
-                className={`bg-[#151515] rounded-xl absolute top-0 w-full max-w-md transform-gpu transition-[transform,opacity] duration-500 ${
+                className={`group cursor-pointer bg-[#151515] rounded-md absolute top-0 w-full max-w-md transform-gpu transition-[transform,opacity] duration-500 hover:-translate-y-1 ${
                   isMobile ? "cursor-pointer" : ""
                 } ${getCardAnimationClass(index)}`}
               >
                 <Card
-                  className={`overflow-hidden bg-[#151515] h-[${cardHeight}px] border shadow-sm 
+                  className={`overflow-hidden bg-[#151515] h-[${cardHeight}px] rounded-md border border-[#ffffff4d] shadow-sm
                 hover:shadow-md flex flex-col`}
                 >
                   <div
@@ -234,29 +234,25 @@ const ThreeDCarousel = ({
                           <span className='text-gray-200 relative inline-block'>Learn More</span>
                           <ArrowUpRight className="ml-2 w-4 h-4 relative z-10" />
                         </div>
-                      ) : item.to ? (
-                        <Link
-                          to={item.to}
-                          onClick={(e) => e.stopPropagation()}
-                          className="text-gray-500 flex items-center relative group"
-                        >
-                          <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span>
-                          <ArrowUpRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500" />
-                        </Link>
                       ) : (
-                        <a
-                          href={item.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="text-gray-500 flex items-center relative group"
-                        >
-                          <span className='text-gray-200 hover:text-blue-400 relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span>
-                          <ArrowUpRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500" />
-                        </a>
+                        <span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm">
+                          <span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span>
+                          <ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/>
+                        </span>
                       )}
                     </div>
                   </CardContent>
+                  {!item.disabled && (
+                    <a
+                      href={item.to ? undefined : item.link}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openItem(item);
+                      }}
+                      aria-label="Learn More"
+                      className="hidden md:block absolute inset-0 z-20 rounded-md"
+                    />
+                  )}
                 </Card>
               </div>
             ))}
