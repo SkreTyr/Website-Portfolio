@@ -5,8 +5,6 @@ import { GlowingCards, GlowingCard } from '@/components/lightswind/glowing-cards
 import ciscoLogo from '@/assets/CiscoLogo.webp'
 import ibmLogo from '@/assets/IBMLOGO.webp'
 import codedexLogo from '@/assets/CodedexLogo.webp'
-import codedexLightLogo from '@/assets/CodedexLightMode.webp'
-import ThemeImage from '@/components/ThemeImage'
 
 interface Certification {
   key: number
@@ -93,7 +91,7 @@ const Certifications = () => {
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
 
@@ -117,7 +115,7 @@ const Certifications = () => {
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
 
@@ -133,7 +131,7 @@ const Certifications = () => {
     </div>
     <div className='ml-auto flex flex-col items-end'>
       <div className=' w-20 lg:w-24 h-14 border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-        <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+        <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-150 md:scale-125'/>
       </div>
       <span className=' text-xs text-gray-500 mt-1'>2024</span>
     </div>
@@ -141,7 +139,7 @@ const Certifications = () => {
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
 
@@ -156,7 +154,7 @@ const Certifications = () => {
     </div>
     <div className='ml-auto flex flex-col items-end'>
       <div className=' w-20 lg:w-24 h-14 border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-        <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+        <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-150 md:scale-125'/>
       </div>
       <span className=' text-xs text-gray-500 mt-1'>2024</span>
     </div>
@@ -164,7 +162,7 @@ const Certifications = () => {
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
 
@@ -179,7 +177,7 @@ const Certifications = () => {
     </div>
     <div className='ml-auto flex flex-col items-end'>
       <div className=' w-20 lg:w-24 h-14 border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-        <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+        <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-150 md:scale-125'/>
       </div>
       <span className=' text-xs text-gray-500 mt-1'>2024</span>
     </div>
@@ -187,7 +185,7 @@ const Certifications = () => {
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
 
@@ -202,7 +200,7 @@ const Certifications = () => {
     </div>
     <div className='ml-auto flex flex-col items-end'>
       <div className=' w-20 lg:w-24 h-14 border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-        <ThemeImage darkSrc={codedexLogo} lightSrc={codedexLightLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-110'/>
+        <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-150 md:scale-125'/>
       </div>
       <span className=' text-xs text-gray-500 mt-1'>2024</span>
     </div>
@@ -210,7 +208,7 @@ const Certifications = () => {
 </div>
     
     <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><a href="#" className="group text-gray-300 hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 hover:text-blue-500'/></a></div> 
+              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
   </GlowingCard>
 </AutoReveal>
 </GlowingCards>
