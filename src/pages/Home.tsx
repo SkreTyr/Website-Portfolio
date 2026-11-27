@@ -16,7 +16,7 @@ import contactFormLightReveal from '@/assets/ContactFormImageRevealLight.webp'
 import aboutReveal from '@/assets/AboutMePageImageReveal.webp'
 import aboutLightReveal from '@/assets/AboutMePageImageRevealLight.webp'
 import ButtonImage from '@/ButtonImage';
-import { UserRoundPen, Home as HomeIcon, FolderOpen, Mail } from 'lucide-react'
+import { UserRoundPen, Home as HomeIcon, FolderOpen, Mail, Scroll, Layers } from 'lucide-react'
 import Dock from '@/components/lightswind/dock'
 import { CornerDownRight, ArrowUpRight } from 'lucide-react';
 import { MapPin } from 'lucide-react';
@@ -247,7 +247,10 @@ I love building responsive web applications, mastering new coding frameworks, an
 
         <AutoReveal rootMargin="0px 0px -15% 0px" className="row-span-3 row-start-8 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:col-span-2 md:row-span-2 md:row-start-4">
           <div className="h-full rounded-md flex flex-col items-center justify-center gap-5">
-            <h1 className='inline-block text-[#f3f3f3] text-lg md:text-xl font-light' >Skills & Stacks</h1>
+            <div className='flex items-center gap-3'>
+              <Layers color="#f3f3f3" size="1em" />
+              <h1 className='inline-block text-[#f3f3f3] text-lg md:text-xl font-light' >Skills & Stacks</h1>
+            </div>
             <hr className="border-t border-[#ffffff38] w-2/4" />
             <LogoLoop logos={[
               { src: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png", alt: "React"},
@@ -277,6 +280,7 @@ I love building responsive web applications, mastering new coding frameworks, an
         <AutoReveal rootMargin="0px 0px -15% 0px" className=" milestone-card group relative cursor-pointer hover:-translate-y-1 row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
             <div className='flex items-center gap-5'>
+              <Scroll color="#ffffff" size="1em" />
               <h1 className=' text-[#f3f3f3] text-lg md:text-xl font-light' >Milestone</h1>
             </div>
             <hr className="border-t border-[#ffffff38] w-full mt-2" />
