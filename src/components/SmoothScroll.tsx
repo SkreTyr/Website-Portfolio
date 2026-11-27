@@ -10,6 +10,8 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
       smoothWheel: true,
       anchors: true,
       stopInertiaOnNavigate: true,
+      // Let the project's inner scroll container handle its own wheel.
+      prevent: (node) => !!(node as HTMLElement)?.closest?.('.project-scroll'),
     })
     registerLenis(lenis)
 

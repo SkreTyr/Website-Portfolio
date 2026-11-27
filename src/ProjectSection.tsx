@@ -20,7 +20,7 @@ export default function ProjectSection() {
       title: "VEYNS",
       brand: "Classmate's Business",
       description: "A dedicated online ordering system connecting local kitchens directly to customers for fast delivery, real-time tracking, and commission-free ordering.",
-      tags: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
+      tags: ["React", "TypeScript", "Tailwind CSS", "Supabase", "Vercel", "Brevo"],
       imageUrl: veynsImage,
       link: "https://veyns-ubec.vercel.app/",
       to: "/projects/veyns",

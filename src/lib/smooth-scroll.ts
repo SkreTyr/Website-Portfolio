@@ -26,6 +26,15 @@ export const scrollToTop = () => {
   }
 }
 
+export const scrollPageBy = (delta: number) => {
+  if (instance) {
+    // Use the same lerp as the site's wheel scroll so it feels identical.
+    instance.scrollTo(instance.targetScroll + delta, { lerp: 0.1 })
+  } else {
+    window.scrollBy(0, delta)
+  }
+}
+
 export const scrollToEl = (selector: string) => {
   const el = document.querySelector(selector)
   if (!el) {

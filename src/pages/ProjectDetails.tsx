@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
+import Lenis from 'lenis'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
+import { scrollPageBy } from '@/lib/smooth-scroll'
 import veynsImage from '@/assets/VeynsWebsite.webp'
 import pawTrackImage from '@/assets/PawTrack-Preview.webp'
+import smartErgonomics from '@/assets/SmartErgonomics.webp'
+import automotiveComfort from '@/assets/AutomotiveComfort.webp'
 
 interface Chapter {
   title: string
@@ -17,7 +21,7 @@ const projects: Record<
 > = {
   veyns: {
     title: 'Veyns',
-    stack: 'React · TypeScript · Tailwind CSS · Supabase',
+    stack: 'React · TypeScript · Tailwind CSS · Supabase', 
     liveUrl: 'https://veyns-ubec.vercel.app/',
     chapters: [
       {
@@ -49,12 +53,12 @@ const projects: Record<
       {
         title: 'Features',
         text: 'Staff and adopter roles, animal management, a FIFO waitlist with 72-hour reservations, and CSV import/export.',
-        image: pawTrackImage,
+        image: smartErgonomics,
       },
       {
         title: 'Shelter Analytics',
         text: 'Shelter analytics highlight top breeds and average stay length to help shelters make informed decisions.',
-        image: pawTrackImage,
+        image: automotiveComfort,
       },
     ],
   },
@@ -74,22 +78,42 @@ const ProjectDetails = () => {
   useEffect(() => {
     const el = containerRef.current
     if (!el || !project) return
+    const content = el.firstElementChild as HTMLElement | null
 
     const update = () => {
       const idx = Math.round(el.scrollTop / (el.clientHeight || 1))
       setActive(Math.max(0, Math.min(project.chapters.length - 1, idx)))
     }
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
-      el.scrollTop += e.deltaY
-      update()
-    }
     el.addEventListener('scroll', update, { passive: true })
-    el.addEventListener('wheel', onWheel, { passive: false })
+
+    // Desktop: smooth Lenis on the container; at the edges forward the wheel
+    // to the page so the site keeps scrolling while hovering the container.
+    let lenis: Lenis | null = null
+    const onWheelCapture = (e: WheelEvent) => {
+      const atTop = el.scrollTop <= 0
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1
+      if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        scrollPageBy(e.deltaY)
+      }
+    }
+    if (content && window.matchMedia('(pointer: fine)').matches) {
+      el.addEventListener('wheel', onWheelCapture, { capture: true, passive: false })
+      lenis = new Lenis({
+        wrapper: el,
+        content,
+        autoRaf: true,
+        smoothWheel: true,
+        overscroll: true,
+      })
+      lenis.on('scroll', update)
+    }
+
     return () => {
       el.removeEventListener('scroll', update)
-      el.removeEventListener('wheel', onWheel)
+      el.removeEventListener('wheel', onWheelCapture, { capture: true } as any)
+      lenis?.destroy()
     }
   }, [project])
 
@@ -132,7 +156,7 @@ const ProjectDetails = () => {
                               className="md:hidden w-full h-48 object-cover rounded-md border border-[#ffffff4d] mb-4"
                             />
                             <h2
-                              className={`font-mono font-bold text-2xl mb-4 transition-colors duration-300 ${
+                              className={`text-sm font-light mb-4 transition-colors duration-300 ${
                                 active === i ? 'text-[#f3f3f3]' : 'text-gray-600'
                               }`}
                             >
