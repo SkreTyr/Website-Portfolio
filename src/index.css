@@ -273,11 +273,18 @@ html.dark .theme-surface .outline-blue-500 { outline-color: #c47d09 !important; 
 
 html.dark .theme-surface .focus\:border-blue-400:focus { border-color: #9f5a05 !important; }
 
+/* ---- AnimatedNotification container shadow ----
+   Dark mode (default): white glow. Light mode: dark shadow (override below). */
+.animated-notification .bg-\[\#151515\] {
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.35);
+}
+
 /* ---- Light mode: AnimatedNotification (portaled outside .theme-surface) ----
    Match the container body (#d0d0d0) with black title and dark-grey body text. */
 html.dark .animated-notification .bg-\[\#151515\] {
   background-color: #d0d0d0 !important;
   border-color: transparent !important;
+  box-shadow: 0 0 22px rgba(0, 0, 0, 0.35) !important;
 }
 html.dark .animated-notification h3 {
   color: #000000 !important;
@@ -289,12 +296,6 @@ html.dark .animated-notification .text-muted-foreground\/70,
 html.dark .animated-notification .text-muted-foreground\/50 {
   color: #3a3a3a !important;
 }
-/* Keep the left priority accent colored in light mode. The glass variant's
-   dark:border-gray-800/20 (higher specificity) otherwise overrides it to black. */
-html.dark .animated-notification .border-l-red-500 { border-left-color: #ef4444 !important; }
-html.dark .animated-notification .border-l-yellow-500 { border-left-color: #eab308 !important; }
-html.dark .animated-notification .border-l-blue-500 { border-left-color: #3b82f6 !important; }
-html.dark .animated-notification .border-l-primary\/50 { border-left-color: #6b7280 !important; }
 
 /* ---- Light mode: SpeedDial (portaled outside .theme-surface) ----
    Main "+" button matches the toggle-theme body (#151515) with a white icon. */

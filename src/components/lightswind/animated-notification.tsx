@@ -112,16 +112,9 @@ const Notification: React.FC<{
   };
 
   const getPriorityStyles = () => {
-    switch (notification.priority) {
-      case "high":
-        return "border-l-4 border-l-red-500 shadow-red-500/20 dark:border-l-red-500 dark:shadow-red-500/20";
-      case "medium":
-        return "border-l-4 border-l-yellow-500 shadow-yellow-500/20 dark:border-l-yellow-500 dark:shadow-yellow-500/20";
-      case "low":
-        return "border-l-4 border-l-blue-500 shadow-[0_4px_15px_color-mix(in_srgb,var(--primarylw)_20%,transparent)] dark:border-l-blue-500 dark:shadow-[0_4px_15px_color-mix(in_srgb,var(--primarylw)_20%,transparent)]";
-      default:
-        return "border-l-4 border-l-primary/50 shadow-primary/20 dark:border-l-primary/50 dark:shadow-primary/20";
-    }
+    // Left accent color and priority-tinted shadows removed; the container
+    // shadow is now theme-based (white in dark, dark in light) via CSS.
+    return "";
   };
 
   return (
@@ -243,7 +236,7 @@ async function generateNotification(
     user,
     message: text,
     href,
-    timestamp: new Date().toLocaleTimeString(),
+    timestamp: new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
     priority: (["low", "medium", "high"] as const)[Math.floor(Math.random() * 3)],
   };
 }

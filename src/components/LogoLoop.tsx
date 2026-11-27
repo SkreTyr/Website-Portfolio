@@ -259,6 +259,9 @@ const createEngine = (
   setLayout: (layout: LoopLayout) => void
 ) => {
   const query = typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  // Phones: cap to ~30fps so the per-frame transform writes don't fight the
+  // particle background / smooth-scroll / carousel for main-thread time.
+  const minFrameMs = typeof window !== 'undefined' && window.innerWidth < 768 ? 1000 / 30 : 0;
   const st: EngineState = {
     offset: 0,
     velocity: 0,
@@ -711,6 +714,11 @@ const createEngine = (
   const frame = (now: number) => {
     st.raf = 0;
     if (st.destroyed || !st.geo || st.period <= 0) return;
+    // Skip this tick on phones to hold a steady ~30fps (avoids janky 60fps drops).
+    if (minFrameMs && st.last && now - st.last < minFrameMs) {
+      st.raf = requestAnimationFrame(frame);
+      return;
+    }
     const cfg = config.current;
     const dt = st.last ? clamp((now - st.last) / 1000, 0, 0.1) : 0;
     st.last = now;
@@ -1169,7 +1177,7 @@ export const LogoLoop = memo<LogoLoopProps>(
 
     const lists = useMemo(() => {
       const itemClass = cx(
-        'group/item relative flex-none text-[length:var(--logoloop-logoHeight)] leading-none group-data-[intro]/loop:opacity-0',
+        'group/item relative flex-none text-[length:var(--logoloop-logoHeight)] leading-none [contain:layout_paint] [backface-visibility:hidden] group-data-[intro]/loop:opacity-0',
         vertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]'
       );
       const contentClass = (item: LogoItem) =>
