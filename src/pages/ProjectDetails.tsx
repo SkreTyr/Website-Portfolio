@@ -104,6 +104,7 @@ const ProjectDetails = () => {
         wrapper: el,
         content,
         autoRaf: true,
+        lerp: 0.4,
         smoothWheel: true,
         overscroll: true,
       })
@@ -141,7 +142,7 @@ const ProjectDetails = () => {
                 <div className="relative border border-[#ffffff4d] bg-[#151515] rounded-md h-[600px] overflow-hidden">
                   <div
                     ref={containerRef}
-                    className="project-scroll h-full overflow-y-auto overscroll-contain"
+                    className="project-scroll h-full overflow-y-auto overscroll-auto md:overscroll-contain"
                   >
                     <div className="grid md:grid-cols-2 gap-8 p-6 items-start">
                       <div className="flex flex-col">
