@@ -10,6 +10,12 @@ const projects: Record<string, { title: string; description: string; stack: stri
     stack: 'React · TypeScript · Tailwind CSS',
     liveUrl: 'https://veyns-ubec.vercel.app/',
   },
+  pawtrack: {
+    title: 'PawTrack',
+    description:
+      'A pet shelter and adoption tracker that helps shelters manage animals, process adoptions, and run a first-in-line waitlist with timed reservations, plus CSV import/export and shelter analytics like top breeds and average stay.',
+    stack: 'Java · Swing · SQLite · Maven',
+  },
 }
 
 const ProjectDetails = () => {
