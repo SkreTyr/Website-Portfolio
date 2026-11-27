@@ -305,3 +305,16 @@ html.dark .speed-dial-root .bg-\[\#f3f3f3\] {
 html.dark .speed-dial-root .text-\[\#151515\] {
   color: #ffffff !important;
 }
+
+/* ---- Mobile perf: drop the LogoLoop fade mask ----
+   The mask-image on the animating track forces a full re-composite every frame,
+   which tanks FPS on phones. Disabling it under 768px removes that cost. */
+@media (max-width: 767px) {
+  .group\/loop {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+  .group\/loop li {
+    contain: layout paint;
+  }
+}
