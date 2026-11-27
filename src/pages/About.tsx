@@ -63,12 +63,12 @@ const About = () => {
               <div className="flex flex-col gap-14">
                 {[
                   { title: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript'] },
-                  { title: 'Backend', items: ['Node.js', 'Express', 'Python', 'Java', 'C++'] },
+                  { title: 'Backend', items: ['Node.js', 'Express', 'Python', 'Java', 'C++', 'Swing', 'Maven'] },
                   { title: 'Database', items: ['SQL', 'SQLite', 'PostgreSQL', 'MongoDB', 'Firebase', 'Supabase'] },
                   { title: 'DevOps & Cloud', items: ['Docker', 'Vercel', 'Cloudflare', 'GitHub Actions'] },
                   { title: 'AI & Machine Learning', items: ['Python', 'TensorFlow', 'PyTorch', 'scikit-learn'] },
                   { title: 'Security & Identity', items: ['OAuth', 'JWT', 'bcrypt', 'Role-based Access'] },
-                  { title: 'CMS, No-Code & More', items: ['WordPress', 'Webflow', 'Canva', 'Notion', 'Adobe Illustrator', 'Adobe Photoshop', 'MS Office'] },
+                  { title: 'CMS, No-Code & More', items: ['WordPress', 'Webflow', 'Canva', 'Notion', 'Adobe Illustrator', 'Adobe Photoshop', 'MS Office', 'Excalidraw', 'Wix'] },
                   { title: 'Developer Tools', items: ['Git', 'GitHub', 'Visual Studio Code', 'Postman', 'Figma'] },
                 ].map((cat) => (
                   <div key={cat.title}>
