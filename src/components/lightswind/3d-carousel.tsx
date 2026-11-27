@@ -259,28 +259,31 @@ const ThreeDCarousel = ({
           </div>
 
           <button
-            className="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-transform hover:scale-110"
+            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-transform hover:scale-110"
             onClick={() => setActive((prev) => (prev - 1 + items.length) % items.length)}
             aria-label="Previous"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
-            className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-transform hover:scale-110"
+            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-transform hover:scale-110"
             onClick={() => setActive((prev) => (prev + 1) % items.length)}
             aria-label="Next"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
+        </div>
 
-          <div className="absolute bottom-6 left-0 right-0 flex justify-center items-center space-x-3 z-30">
-            <button
-              className="hidden min-[325px]:flex max-[425px]:flex lg:hidden w-8 h-8 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-transform hover:scale-110"
-              onClick={() => setActive((prev) => (prev - 1 + items.length) % items.length)}
-              aria-label="Previous"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <button
+            className="md:hidden flex w-10 h-10 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-transform hover:scale-110"
+            onClick={() => setActive((prev) => (prev - 1 + items.length) % items.length)}
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <div className="flex justify-center items-center gap-3">
             {items.map((_, idx) => (
               <button
                 key={idx}
@@ -293,14 +296,15 @@ const ThreeDCarousel = ({
                 aria-label={`Go to item ${idx + 1}`}
               />
             ))}
-            <button
-              className="hidden min-[325px]:flex max-[425px]:flex lg:hidden w-8 h-8 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-transform hover:scale-110"
-              onClick={() => setActive((prev) => (prev + 1) % items.length)}
-              aria-label="Next"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
           </div>
+
+          <button
+            className="md:hidden flex w-10 h-10 bg-white/80 rounded-full items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-transform hover:scale-110"
+            onClick={() => setActive((prev) => (prev + 1) % items.length)}
+            aria-label="Next"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>
