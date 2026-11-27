@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, UserRoundPen, CornerDownRight, MapPin, MailDot, GraduationCap } from 'lucide-react'
+import { ArrowLeft} from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
 import profileImg from '@/assets/Profile3.webp'
+
 
 const About = () => {
   return (
@@ -28,44 +29,62 @@ const About = () => {
             <hr className="border-t border-[#ffffff38] w-full max-w-2xl mb-8" />
           </AutoReveal>
 
-          <AutoReveal className="w-full">
-            <div className="border border-[#ffffff4d] bg-[#151515] p-4 rounded-md">
-              <div className="flex items-center gap-5">
-                <UserRoundPen color="#ffffff" />
-                <h2 className="text-[#f5f5f5]">A bit of introduction</h2>
-              </div>
-              <hr className="border-t border-[#ffffff38] w-full mt-2 mb-4" />
-
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-5">
-                  <CornerDownRight color="grey" />
-                  <h3 className="text-[#f3f3f3]">Shann Michael D. Agang</h3>
-                </div>
-                <div className="flex items-center gap-5">
-                  <MapPin color="grey" />
-                  <h3 className="text-[#f3f3f3]">Luz, Cebu City, Philippines</h3>
-                </div>
-                <div className="flex items-center gap-5">
-                  <MailDot color="grey" />
-                  <h3 className="text-[#f3f3f3]">Shannmichaelagang@gmail.com</h3>
-                </div>
-                <div className="flex items-center gap-5">
-                  <GraduationCap color="grey" />
-                  <h3 className="text-[#f3f3f3]">Computer Engineering</h3>
-                </div>
-              </div>
-
-              <hr className="border-t border-[#ffffff38] w-full mt-6 mb-4" />
-
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                <div className="w-40 h-40 shrink-0 rounded-md overflow-hidden border border-[#ffffff4d]">
-                  <img src={profileImg} alt="Profile Picture" className="w-full h-full object-cover" />
-                </div>
-                <p className="text-[#d0d0d0] text-base">
-                  I am a Computer Engineering student at the University of Cebu specializing in software
-                  design, local databases, and network infrastructure. I focus on building clean, reliable
-                  systems using a first-principles approach.
+          <AutoReveal className=" w-full">
+            <div className="border border-[#ffffff4d] bg-[#151515] p-6 rounded-md flex flex-col md:flex-row items-center gap-6">
+              <img
+                src={profileImg}
+                alt="Shann Agang"
+                className="order-1 md:order-2 self-start w-48 h-56 md:w-64 md:h-80 object-cover rounded-md border border-[#ffffff4d] flex-shrink-0"
+              />
+              <div className="order-2 md:order-1 flex-1">
+                <h1 className="text-[#f3f3f3] text-lg md:text-xl font-light mb-3">Hey, Shann here! A little more about me.</h1>
+                <p className="text-[#d0d0d0] text-sm md:text-base mb-3">
+                  I grew up in Cebu City and have always been curious about how things work, whether it was exploring design, experimenting with technology, or watching how people interact with the world around them. That curiosity grew into a passion for creating experiences that feel both functional and meaningful.
                 </p>
+                <p className="text-[#d0d0d0] text-sm md:text-base mb-3">
+                  I&rsquo;m a Computer Engineering student focused on full-stack web development, with a soft spot for the front-end. I enjoy crafting digital solutions through coding and design, and I believe technology should not only work well but also feel natural, intuitive, and enjoyable to use.
+                </p>
+                <p className="text-[#d0d0d0] text-sm md:text-base mb-3">
+                  My goal is to keep growing by learning advanced frameworks, improving problem-solving, and practicing through real projects. I want to build user-friendly, interactive websites that prioritize accessibility, performance, and aesthetics, and I&rsquo;m committed to lifelong learning and refining my craft through feedback and iteration.
+                </p>
+                <p className="text-[#d0d0d0] text-sm md:text-base">
+                  Beyond the technical side, I value connection and storytelling. Every project is a chance to share ideas and make a difference, no matter how small, so I enjoy collaborating, exchanging perspectives, and balancing creativity with clarity.
+                </p>
+              </div>
+
+            </div>
+          </AutoReveal>
+
+          <AutoReveal className="w-full mt-6">
+            <div className="border border-[#ffffff4d] bg-[#151515] p-6 rounded-md">
+              <h1 className="text-[#f3f3f3] text-lg md:text-xl font-light mb-2">Tech Stack</h1>
+              <p className="text-gray-400 text-sm md:text-base mb-4">The tools, frameworks, and platforms I use across front-end, back-end, infrastructure, and AI.</p>
+              <hr className="border-t border-[#ffffff38] w-full mb-6" />
+              <div className="flex flex-col gap-14">
+                {[
+                  { title: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript'] },
+                  { title: 'Backend', items: ['Node.js', 'Express', 'Python', 'Java', 'C++'] },
+                  { title: 'Database', items: ['SQL', 'SQLite', 'PostgreSQL', 'MongoDB', 'Firebase', 'Supabase'] },
+                  { title: 'DevOps & Cloud', items: ['Docker', 'Vercel', 'Cloudflare', 'GitHub Actions'] },
+                  { title: 'AI & Machine Learning', items: ['Python', 'TensorFlow', 'PyTorch', 'scikit-learn'] },
+                  { title: 'Security & Identity', items: ['OAuth', 'JWT', 'bcrypt', 'Role-based Access'] },
+                  { title: 'CMS, No-Code & More', items: ['WordPress', 'Webflow', 'Canva', 'Notion', 'Adobe Illustrator', 'Adobe Photoshop', 'MS Office'] },
+                  { title: 'Developer Tools', items: ['Git', 'GitHub', 'Visual Studio Code', 'Postman', 'Figma'] },
+                ].map((cat) => (
+                  <div key={cat.title}>
+                    <h2 className="text-[#f3f3f3] text-sm font-light mb-2">{cat.title}</h2>
+                    <div className="flex flex-wrap gap-2">
+                      {cat.items.map((it) => (
+                        <span
+                          key={it}
+                          className="border border-[#ffffff4d] bg-[#101010] px-2 py-1 rounded-md text-xs text-gray-400 transition-colors duration-200 hover:bg-[#1f1f1f] hover:text-white hover:border-[#ffffff80]"
+                        >
+                          {it}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </AutoReveal>
