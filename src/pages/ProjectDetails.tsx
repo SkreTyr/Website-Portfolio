@@ -126,6 +126,11 @@ const ProjectDetails = () => {
                             key={i}
                             className="min-h-[600px] flex flex-col justify-center"
                           >
+                            <img
+                              src={c.image}
+                              alt={c.title}
+                              className="md:hidden w-full h-48 object-cover rounded-md border border-[#ffffff4d] mb-4"
+                            />
                             <h2
                               className={`font-mono font-bold text-2xl mb-4 transition-colors duration-300 ${
                                 active === i ? 'text-[#f3f3f3]' : 'text-gray-600'
