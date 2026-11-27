@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '@/Button'
@@ -24,7 +25,6 @@ import { GraduationCap } from 'lucide-react';
 import { LogoLoop } from '@/components/LogoLoop';
 import { ChevronDown } from 'lucide-react';
 import AutoReveal from '@/components/AutoReveal'
-import { Scroll } from 'lucide-react';
 import { AnimatedCopyButton } from "@/components/lightswind/animated-copy-button"
 import ProjectSection from '@/ProjectSection';
 import { GlowingCards, GlowingCard } from "@/components/lightswind/glowing-cards"
@@ -277,29 +277,28 @@ I love building responsive web applications, mastering new coding frameworks, an
         <AutoReveal rootMargin="0px 0px -15% 0px" className=" milestone-card group relative cursor-pointer hover:-translate-y-1 row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
             <div className='flex items-center gap-5'>
-              <Scroll color="#ffffff" size="1em" />
               <h1 className=' text-[#f3f3f3] text-lg md:text-xl font-light' >Milestone</h1>
             </div>
             <hr className="border-t border-[#ffffff38] w-full mt-2" />
             <div className='flex-col text-xs mt-2'>
-              <h1 className='text-sm font-light text-[#f3f3f3]'>Hines</h1>
+              <h1 className='text-sm font-light text-[#f3f3f3]'>College</h1>
               <div className='flex justify-between w-full'>
-                <p className='text-gray-500'>Sr. Software Engineer</p>
-                <p className='text-gray-500'>2021-Present</p>
+                <p className='text-gray-500'>BS Computer Engineering</p>
+                <p className='text-gray-500'>2024-Present</p>
               </div>
             </div>
             <div className='flex-col text-xs mt-4'>
-              <h1 className='text-sm font-light text-[#f3f3f3]'>Hines</h1>
+              <h1 className='text-sm font-light text-[#f3f3f3]'>Senior High School</h1>
               <div className='flex justify-between w-full'>
-                <p className='text-gray-500'>Sr. Software Engineer</p>
-                <p className='text-gray-500'>2021-Present</p>
+                <p className='text-gray-500'>STEM</p>
+                <p className='text-gray-500'>2022-2024</p>
               </div>
             </div>
             <div className='flex-col text-xs mt-4'>
-              <h1 className='text-sm font-light text-[#f3f3f3]'>Hines</h1>
+              <h1 className='text-sm font-light text-[#f3f3f3]'>Junior High School</h1>
               <div className='flex justify-between w-full'>
-                <p className='text-gray-500'>Sr. Software Engineer</p>
-                <p className='text-gray-500'>2021-Present</p>
+                <p className='text-gray-500'>Student</p>
+                <p className='text-gray-500'>2018-2022</p>
               </div>
             </div>
             
@@ -307,7 +306,7 @@ I love building responsive web applications, mastering new coding frameworks, an
               
               <a href="#" className="group text-gray-200 group-hover:text-blue-400 flex items-center relative"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></a>
             </div>
-            <a href="#" aria-label="Learn More" className="absolute inset-0 z-20 rounded-md"></a>
+            <Link to="/milestone" aria-label="Learn More" className="absolute inset-0 z-20 rounded-md"></Link>
           </div>
         </AutoReveal>
 
