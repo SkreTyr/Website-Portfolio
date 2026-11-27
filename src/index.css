@@ -306,6 +306,28 @@ html.dark .speed-dial-root .text-\[\#151515\] {
   color: #ffffff !important;
 }
 
+/* ---- ProjectDetails scroll container: match the site scrollbar ---- */
+.project-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #8a8a8a #151515;
+}
+.project-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.project-scroll::-webkit-scrollbar-track {
+  background: #151515;
+}
+.project-scroll::-webkit-scrollbar-thumb {
+  background: #8a8a8a;
+  border-radius: 4px;
+}
+html.dark .project-scroll {
+  scrollbar-color: #8a8a8a #2f2f2f;
+}
+html.dark .project-scroll::-webkit-scrollbar-track {
+  background: #2f2f2f;
+}
+
 /* ---- Mobile perf: drop the LogoLoop fade mask ----
    The mask-image on the animating track forces a full re-composite every frame,
    which tanks FPS on phones. Disabling it under 768px removes that cost. */
