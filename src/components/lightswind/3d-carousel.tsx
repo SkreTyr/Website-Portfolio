@@ -207,10 +207,10 @@ const ThreeDCarousel = ({
                    </div>
 
                   <CardContent className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-xl font-bold mb-1 text-white">
+                    <h3 className="text-xl font-light mb-1 text-white">
                       {item.title}
                     </h3>
-                    <p className="text-gray-500 text-sm font-medium mb-2">
+                    <p className="text-gray-500 text-sm font-light mb-2">
                       {item.brand}
                     </p>
                     <p className="text-gray-600 text-sm flex-grow">
