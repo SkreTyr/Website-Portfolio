@@ -12,6 +12,8 @@ import certificationsReveal from '@/assets/CertificationsReveal.webp'
 import certificationsLightReveal from '@/assets/CertificationsLightReveal.webp'
 import contactFormReveal from '@/assets/ContactFormImageReveal.webp'
 import contactFormLightReveal from '@/assets/ContactFormImageRevealLight.webp'
+import aboutReveal from '@/assets/AboutMePageImageReveal.webp'
+import aboutLightReveal from '@/assets/AboutMePageImageRevealLight.webp'
 import ButtonImage from '@/ButtonImage';
 import { UserRoundPen, Home as HomeIcon, FolderOpen, Mail } from 'lucide-react'
 import Dock from '@/components/lightswind/dock'
@@ -236,7 +238,7 @@ I love building responsive web applications, mastering new coding frameworks, an
     
 <hr className="border-t border-[#ffffff38] w-full mt-10" />
 
-<div className=' w-full md:mb-20 md:pb-20 mt-4 text-sm md:text-base md:overflow-hidden md:h-fit'><p className='text-[#d0d0d0] '>I am a Computer Engineering student at the University of Cebu specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
+<div className=' w-full md:mb-20 md:pb-20 mt-4 text-sm md:text-base md:overflow-hidden md:h-fit'><p className='text-[#d0d0d0] text-justify'>I am a Computer Engineering student specializing in software design, local databases, and network infrastructure. I focus on building clean, reliable systems using a first-principles approach.</p></div>
 
 
       </div> 
@@ -248,26 +250,26 @@ I love building responsive web applications, mastering new coding frameworks, an
             <h1 className='inline-block text-[#f3f3f3] text-lg md:text-xl font-light' >Skills & Stacks</h1>
             <hr className="border-t border-[#ffffff38] w-2/4" />
             <LogoLoop logos={[
-              { src: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png", alt: "Stack"},
-              { src: "https://img.icons8.com/fluency/48/typescript--v1.png", alt: "Stack"},
-              { src: "https://img.icons8.com/color/48/html-5--v1.png", alt: "Stack"},
-              { src: "https://img.icons8.com/color/96/css3.png", alt: "Stack"},
-              { src: "https://img.icons8.com/color/96/javascript--v1.png", alt: "Stack"},
-              { src: "https://img.icons8.com/color/96/python--v1.png", alt: "Stack"},
-              { src: "https://img.icons8.com/color/96/java-coffee-cup-logo--v1.png", alt: "Stack"},
-              { src: "https://img.icons8.com/fluency/96/c-plus-plus-logo.png", alt: "Stack"},
-              { src: "https://img.icons8.com/fluency/96/sql.png", alt: "Stack"}
+              { src: "https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png", alt: "React"},
+              { src: "https://img.icons8.com/fluency/48/typescript--v1.png", alt: "TypeScript"},
+              { src: "https://img.icons8.com/color/48/html-5--v1.png", alt: "HTML5"},
+              { src: "https://img.icons8.com/color/96/css3.png", alt: "CSS3"},
+              { src: "https://img.icons8.com/color/96/javascript--v1.png", alt: "JavaScript"},
+              { src: "https://img.icons8.com/color/96/python--v1.png", alt: "Python"},
+              { src: "https://img.icons8.com/color/96/java-coffee-cup-logo--v1.png", alt: "Java"},
+              { src: "https://img.icons8.com/fluency/96/c-plus-plus-logo.png", alt: "C++"},
+              { src: "https://img.icons8.com/fluency/96/sql.png", alt: "SQL"}
             ]} speed={60} direction="left" logoHeight={40} gap={80} fadeOut scaleOnHover />
 
             <LogoLoop logos={[
-              { src: 'https://img.icons8.com/glyph-neue/64/FFFFFF/github.png', alt: 'Logo' },
-              { src: 'https://img.icons8.com/cute-clipart/64/canva-app.png', alt: 'Logo' },
-              { src: 'https://img.icons8.com/color/96/adobe-illustrator--v1.png', alt: 'Logo' },
-              { src: 'https://img.icons8.com/color/96/adobe-photoshop--v1.png', alt: 'Logo' },
-              { src: 'https://img.icons8.com/ios-filled/50/FFFFFF/notion.png', alt: 'Logo' },
-              { src: 'https://img.icons8.com/color/96/visual-studio-code-2019.png', alt: 'Logo' },
-              { src: 'https://img.icons8.com/fluency/96/docker.png', alt: 'Logo' },
-              { src: 'https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-cloudflare-provides-content-delivery-network-services-ddos-mitigation-logo-color-tal-revivo.png', alt: 'Logo' }
+              { src: 'https://img.icons8.com/glyph-neue/64/FFFFFF/github.png', alt: 'GitHub' },
+              { src: 'https://img.icons8.com/cute-clipart/64/canva-app.png', alt: 'Canva' },
+              { src: 'https://img.icons8.com/color/96/adobe-illustrator--v1.png', alt: 'Adobe Illustrator' },
+              { src: 'https://img.icons8.com/color/96/adobe-photoshop--v1.png', alt: 'Adobe Photoshop' },
+              { src: 'https://img.icons8.com/ios-filled/50/FFFFFF/notion.png', alt: 'Notion' },
+              { src: 'https://img.icons8.com/color/96/visual-studio-code-2019.png', alt: 'Visual Studio Code' },
+              { src: 'https://img.icons8.com/fluency/96/docker.png', alt: 'Docker' },
+              { src: 'https://img.icons8.com/external-tal-revivo-color-tal-revivo/96/external-cloudflare-provides-content-delivery-network-services-ddos-mitigation-logo-color-tal-revivo.png', alt: 'Cloudflare' }
             ]} speed={60} direction="right" logoHeight={40} gap={80} fadeOut scaleOnHover />
           </div>
         </AutoReveal>
@@ -309,7 +311,7 @@ I love building responsive web applications, mastering new coding frameworks, an
           </div>
         </AutoReveal>
 
-<AutoReveal className=" row-span-2 row-start-16 md:col-start-2 md:row-start-6  justify-center flex"><ButtonImage label="About Me" href="/about"/></AutoReveal>
+<AutoReveal className=" row-span-2 row-start-16 md:col-start-2 md:row-start-6  justify-center flex"><ButtonImage label="About Me" href="/about" image={aboutReveal} lightImage={aboutLightReveal}/></AutoReveal>
 
       </div>
 
