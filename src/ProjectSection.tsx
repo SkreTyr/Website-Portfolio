@@ -6,16 +6,6 @@ import pawTrackImage from "./assets/PawTrack-Preview.webp";
 
 export default function ProjectSection() {
   return <div className=''><ThreeDCarousel items={[  {
-      id: 1,
-      title: "VEYNS",
-      brand: "By Geoff Perez",
-      description: "A dedicated online ordering system connecting local kitchens directly to customers for fast delivery, real-time tracking, and commission-free ordering.",
-      tags: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
-      imageUrl: veynsImage,
-      link: "https://veyns-ubec.vercel.app/",
-      to: "/projects/veyns",
-    },
-    {
       id: 2,
       title: "PawTrack",
       brand: "Capstone Project",
@@ -24,6 +14,16 @@ export default function ProjectSection() {
       imageUrl: pawTrackImage,
       link: "#",
       to: "/projects/pawtrack",
+    },
+    {
+      id: 1,
+      title: "VEYNS",
+      brand: "Classmate's Business",
+      description: "A dedicated online ordering system connecting local kitchens directly to customers for fast delivery, real-time tracking, and commission-free ordering.",
+      tags: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
+      imageUrl: veynsImage,
+      link: "https://veyns-ubec.vercel.app/",
+      to: "/projects/veyns",
     },
     {
       id: 3,
