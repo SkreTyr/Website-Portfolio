@@ -5,6 +5,7 @@ import Contact from '@/pages/Contact'
 import Certifications from '@/pages/Certifications'
 import About from '@/pages/About'
 import Projects from '@/pages/Projects'
+import Milestone from '@/pages/Milestone'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/projects/:id" element={<ProjectDetails />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/milestone" element={<Milestone />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/certifications" element={<Certifications />} />
       <Route path="/about" element={<About />} />
