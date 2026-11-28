@@ -195,7 +195,7 @@ A dedicated computer engineering student, I combine a strong technical foundatio
 
 <div className={`transition-opacity duration-300 ease-out ${atTop && typingDone ? 'opacity-100' : 'opacity-0 invisible pointer-events-none'}`}>
                   <h3 className='text-gray-400 opacity-4 text-sm'>Scroll Down</h3>
-                  <ChevronDown className='text-gray-400 w-4 h-4 animate-bounce md:mt-2 block mx-auto' />
+                  <ChevronDown className='text-gray-400 w-4 h-4 animate-bounce block mx-auto' />
                 </div>
         </div>
       </section>
@@ -221,7 +221,7 @@ A dedicated computer engineering student, I combine a strong technical foundatio
 
     <AutoReveal className="row-span-4 row-start-4 border border-[#ffffff4d] bg-[#151515]  p-2 rounded-md  md:col-span-2 md:row-span-3">
 <div className="h-full rounded-md">
-<div className=" flex items-center gap-5">
+<div className=" flex items-center gap-2">
 <UserRoundPen color="#ffffff" size="1em" />
   <h1 className='text-[#f3f3f3] text-lg md:text-xl font-light'>A bit of introduction</h1>
 </div>
@@ -314,7 +314,7 @@ A dedicated computer engineering student, I combine a strong technical foundatio
 
         <AutoReveal rootMargin="0px 0px -15% 0px" className=" milestone-card group relative cursor-pointer hover:-translate-y-1 row-span-2 row-start-11 border border-[#ffffff4d] bg-[#151515] p-2 rounded-md md:row-span-2 md:col-start-3 md:row-start-4 md:pb-5 xl:pb-20">
           <div className="md:max-xl:pb-20 rounded-md">
-            <div className='flex items-center gap-5'>
+            <div className='flex items-center gap-2'>
               <Scroll color="#ffffff" size="1em" />
               <h1 className=' text-[#f3f3f3] text-lg md:text-xl font-light' >Milestone</h1>
             </div>
@@ -383,69 +383,59 @@ A dedicated computer engineering student, I combine a strong technical foundatio
           </h1>
 </AutoReveal>
 <GlowingCards padding='' className="md:px-10 lg:px-0">
-<AutoReveal className="flex-1 min-w-[13rem] w-4/5">
-<GlowingCard glowColor="#60a5fa" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
-      
-    
-<div className="grid grid-cols-2 grid-rows-2 gap-4">
-    <div  className=' flex space-x-2 items-center'>
-      <BadgeCheck className="w-6 h-5 text-blue-500" />
-      <h1 className=' text-lg'>NetAcad</h1>
-    </div>
-    <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
-      <img src={ciscoLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover'/>
-    </div>
-    <div className="col-span-2 text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
-</div>
-    
-    <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
-  </GlowingCard>
-</AutoReveal>
+  {[
+    { issuer: 'NetAcad (Cisco)', image: ciscoLogo, glow: '#60a5fa' },
+    { issuer: 'NetAcad (IBM)', image: ibmLogo, glow: '#4ade80' },
+    { issuer: 'Codedex', image: codedexLogo, glow: '#facc15' },
+  ].map((cert, i) => (
+    <AutoReveal key={i} className="flex-1 min-w-[13rem] w-4/5 sm:max-w-[calc((100%-2.5rem)/2)]">
+      <GlowingCard
+        glowColor={cert.glow}
+        className="group relative border border-[#ffffff4d] bg-[#151515] p-5 rounded-md w-full"
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-2 min-w-0">
+            <BadgeCheck className="w-5 h-5 shrink-0 text-blue-500 drop-shadow-[0_0_6px_#3b82f6]" />
+            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 truncate">
+              {cert.issuer}
+            </span>
+          </div>
+          <div className="w-20 h-16 shrink-0 border border-[#ffffff4d] p-1 rounded-md overflow-hidden bg-black/30">
+            <img
+              src={cert.image}
+              alt="Logo"
+              loading="lazy"
+              decoding="async"
+              className={`w-full h-full object-contain ${
+                cert.issuer.includes('Codedex') || cert.issuer.includes('Cisco') ? 'scale-150' : 'scale-110'
+              }`}
+            />
+          </div>
+        </div>
 
+        <h1 className="mt-4 text-xl text-[#f3f3f3] font-normal leading-tight">
+          Network Support and Security
+        </h1>
 
-<AutoReveal className="flex-1 min-w-[13rem] w-4/5">
-<GlowingCard glowColor="#4ade80" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
-      
-    
-<div className="grid grid-cols-2 grid-rows-2 gap-4">
-    <div  className=' flex space-x-2 items-center'>
-      <BadgeCheck className="w-6 h-5 text-blue-500" />
-      <h1 className=' text-lg'>NetAcad</h1>
-    </div>
-    <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-2  rounded-md' >
-      <img src={ibmLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover'/>
-    </div>
-    <div className="col-span-2 text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
-</div>
-    
-    <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
-  </GlowingCard>
-</AutoReveal>
+        <div className="mt-3 flex items-center gap-2 text-xs text-gray-500">
+          <span className="px-2 py-0.5 rounded border border-[#ffffff33] bg-black/30">2024</span>
+          <span className="h-1 w-1 rounded-full bg-gray-600" />
+          <span>Authenticated</span>
+        </div>
 
+        <div className="flex justify-center mt-3">
+          <span className="text-gray-300 group-hover:text-blue-400 flex items-center relative text-sm transition-colors">
+            <span className="learn-more-underline relative inline-block after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-white after:transition-[width] after:duration-300 group-hover:after:w-full">
+              Learn More
+            </span>
+            <ArrowUpRight className="text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-400" />
+          </span>
+        </div>
 
-<AutoReveal className="flex-1 min-w-[13rem] w-4/5 sm:max-w-[calc((100%-2.5rem)/2)]">
-<GlowingCard glowColor="#facc15" className="border border-[#ffffff4d] bg-[#151515] p-2 rounded-md pb-4 w-full">
-      
-    
-<div className="grid grid-cols-2 grid-rows-2 gap-4">
-    <div  className=' flex space-x-2 items-center'>
-      <BadgeCheck className="w-6 h-5 text-blue-500" />
-      <h1 className=' text-lg'>Codedex</h1>
-    </div>
-    <div className=' w-20 lg:w-24 h-14 ml-auto border border-[#ffffff4d]  p-1  rounded-md overflow-hidden' >
-      <img src={codedexLogo} alt='Logo' loading="lazy" decoding="async" className='w-full h-full object-cover scale-150 md:scale-125'/>
-    </div>
-    <div className="col-span-2 text-lg text-[#d0d0d0]">Network Support and<br></br> Security</div>
-</div>
-    
-    <hr className="border-t border-[#ffffff38] w-full mt-2 " />
-              <div className="flex justify-center mt-3"><span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm"><span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span><ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/></span></div><a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md"></a> 
-  </GlowingCard>
-</AutoReveal>
-     
-
+        <a href="#" aria-label="Learn More" className="absolute inset-0 z-10 rounded-md" />
+      </GlowingCard>
+    </AutoReveal>
+  ))}
 </GlowingCards>
   <ButtonImage label="More Certifications" href="/certifications" image={certificationsReveal} lightImage={certificationsLightReveal} />
                 </div>
