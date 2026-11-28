@@ -132,9 +132,11 @@ html.dark .theme-surface .keep-color {
 /* The fixed background lives outside .theme-surface (so it isn't clipped by the
    filter). Invert it too so the whole page — hero and the rest — matches in the
    white theme, and match the body color behind it. */
-html.dark .page-solid-bg,
-html.dark .page-particle-container {
+html.dark .page-solid-bg {
   filter: invert(1);
+}
+html.dark .page-particle-container {
+  filter: invert(1) blur(0.8px);
 }
 html.dark body {
   background: #efefef;
