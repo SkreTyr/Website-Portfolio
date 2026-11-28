@@ -190,7 +190,7 @@ const GLIDE_TAU = 0.8;
 const DRAG_THRESHOLD = 6;
 const MAX_FLING = 4000;
 const INTRO_TIME = 0.7;
-const INTRO_STAGGER = 0.45;
+const INTRO_STAGGER = 0;
 const HALF_SQRT_PI = Math.sqrt(Math.PI) / 2;
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
@@ -217,11 +217,11 @@ const fadeMask = (size: number, vertical: boolean) => {
   const span = clamp(size, 0, 0.5) * 100;
   if (span <= 0) return undefined;
   const stops: string[] = [];
-  for (let i = 0; i <= 12; i++) {
-    stops.push(`rgba(0,0,0,${smootherstep(i / 12).toFixed(4)}) ${((span * i) / 12).toFixed(3)}%`);
+  for (let i = 0; i <= 6; i++) {
+    stops.push(`rgba(0,0,0,${smootherstep(i / 6).toFixed(4)}) ${((span * i) / 6).toFixed(3)}%`);
   }
-  for (let i = 12; i >= 0; i--) {
-    stops.push(`rgba(0,0,0,${smootherstep(i / 12).toFixed(4)}) ${(100 - (span * i) / 12).toFixed(3)}%`);
+  for (let i = 6; i >= 0; i--) {
+    stops.push(`rgba(0,0,0,${smootherstep(i / 6).toFixed(4)}) ${(100 - (span * i) / 6).toFixed(3)}%`);
   }
   return `linear-gradient(${vertical ? 'to bottom' : 'to right'}, ${stops.join(', ')})`;
 };
@@ -1189,7 +1189,7 @@ export const LogoLoop = memo<LogoLoopProps>(
       );
       const contentClass = (item: LogoItem) =>
         cx(
-          'inline-flex items-center rounded text-inherit no-underline transition-[opacity,filter,color] duration-[350ms] ease-[ease] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current motion-reduce:transition-none',
+          'inline-flex items-center rounded text-inherit no-underline transition-[opacity,color] duration-[350ms] ease-[ease] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current motion-reduce:transition-none',
           labels === 'below'
             ? 'flex-col gap-[calc(var(--logoloop-logoHeight)*0.22)]'
             : 'gap-[calc(var(--logoloop-logoHeight)*0.3)]',
