@@ -55,7 +55,7 @@ export function AnimatedCopyButton({
     <button
       onClick={handleCopy}
       className={cn(
-        "relative flex items-center justify-center rounded-md transition-colors hover:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "group relative flex items-center justify-center rounded-md transition-all duration-300 ease-out hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         sizes[size],
         className
       )}
@@ -80,7 +80,7 @@ export function AnimatedCopyButton({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="absolute flex items-center justify-center text-gray-400"
+            className="absolute flex items-center justify-center text-gray-400 transition-colors group-hover:text-blue-500"
           >
             <Copy className={iconSizes[size]} />
           </motion.div>

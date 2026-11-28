@@ -295,7 +295,7 @@ const createEngine = (
     scrollT: 0,
     visible: typeof IntersectionObserver === 'undefined',
     introStart: -1,
-    introDone: !config.current.intro,
+    introDone: !config.current.intro || (typeof window !== 'undefined' && window.innerWidth < 768),
     itemMode: false,
     active: null,
     raf: 0,
@@ -447,7 +447,9 @@ const createEngine = (
     }
     const extra = cfg.links ? 2 : 0;
     geo.lead = (Math.max(0, Math.ceil((-geo.uMin - L / 2) / P)) + extra) * P;
-    const copies = Math.max(2, Math.ceil((geo.uMax + L / 2 + geo.lead) / P) + 2 + (extra ? 1 : 0));
+    const computedCopies = Math.max(2, Math.ceil((geo.uMax + L / 2 + geo.lead) / P) + 2 + (extra ? 1 : 0));
+    // Phones: cap to 2 copies so the per-frame item count stays minimal.
+    const copies = typeof window !== 'undefined' && window.innerWidth < 768 ? Math.min(2, computedCopies) : computedCopies;
     const primary = Math.min(copies - 1, Math.floor((geo.lead + L / 2) / P));
     st.geo = geo;
     root.style.setProperty('--logoloop-pad', `${Math.ceil(pad)}px`);
@@ -1230,7 +1232,7 @@ export const LogoLoop = memo<LogoLoopProps>(
               ) : (
                 <img
                   className={cx(
-                    'pointer-events-none block h-[var(--logoloop-logoHeight)] w-auto object-contain [-webkit-user-drag:none] [image-rendering:-webkit-optimize-contrast]',
+                    'pointer-events-none block h-[var(--logoloop-logoHeight)] w-auto object-contain [-webkit-user-drag:none]',
                     zoomClass
                   )}
                   src={item.src}

@@ -30,11 +30,11 @@ const About = () => {
           </AutoReveal>
 
           <AutoReveal className=" w-full">
-            <div className="border border-[#ffffff4d] bg-[#151515] p-6 rounded-md flex flex-col md:flex-row items-center gap-6">
+            <div className="flex flex-col md:flex-row items-start md:items-stretch gap-6">
               <img
                 src={profileImg}
                 alt="Shann Agang"
-                className="order-1 md:order-2 self-start w-48 h-56 md:w-64 md:h-80 object-cover rounded-md border border-[#ffffff4d] flex-shrink-0"
+                className="order-1 md:order-2 self-start md:self-stretch w-48 h-56 md:w-64 md:h-auto object-cover rounded-md border border-[#ffffff4d] flex-shrink-0"
               />
               <div className="order-2 md:order-1 flex-1">
                 <h1 className="text-[#f3f3f3] text-lg md:text-xl font-light mb-3">Hey, Shann here! A little more about me.</h1>
@@ -55,8 +55,8 @@ const About = () => {
             </div>
           </AutoReveal>
 
-          <AutoReveal className="w-full mt-6">
-            <div className="border border-[#ffffff4d] bg-[#151515] p-6 rounded-md">
+          <AutoReveal className="w-full mt-6 pt-20">
+            <div>
               <h1 className="text-[#f3f3f3] text-lg md:text-xl font-light mb-2">Tech Stack</h1>
               <p className="text-gray-400 text-sm md:text-base mb-4">The tools, frameworks, and platforms I use across front-end, back-end, infrastructure, and AI.</p>
               <hr className="border-t border-[#ffffff38] w-full mb-6" />
@@ -77,7 +77,7 @@ const About = () => {
                       {cat.items.map((it) => (
                         <span
                           key={it}
-                          className="border border-[#ffffff4d] bg-[#101010] px-2 py-1 rounded-md text-xs text-gray-400 transition-colors duration-200 hover:bg-[#1f1f1f] hover:text-white hover:border-[#ffffff80]"
+                          className="px-2 py-1 text-xs text-gray-400 transition-colors duration-200 hover:text-white"
                         >
                           {it}
                         </span>
