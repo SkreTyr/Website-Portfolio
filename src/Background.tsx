@@ -107,6 +107,7 @@ export const ParticleBackground: React.FC = () => {
           z-index: -2; 
           pointer-events: none;
           opacity: 0.8;
+          filter: blur(0.8px);
         }
 
         .animation-wrapper {
