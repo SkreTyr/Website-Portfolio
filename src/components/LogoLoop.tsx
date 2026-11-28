@@ -734,6 +734,11 @@ const createEngine = (
       }
       root.removeAttribute('data-intro');
     }
+    // Intro skipped (e.g. phones): make sure the CSS intro guard is cleared so
+    // items don't stay stuck at opacity-0.
+    if (st.introDone && root.hasAttribute('data-intro')) {
+      root.removeAttribute('data-intro');
+    }
     if (st.introStart >= 0) {
       if ((now - st.introStart) / 1000 >= INTRO_TIME + INTRO_STAGGER) {
         st.introStart = -2;
