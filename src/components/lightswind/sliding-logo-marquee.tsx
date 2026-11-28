@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useRef, useState, useMemo, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 // Import your actual utility
 import { cn } from "@/lib/utils"; // Assuming this is your actual path
 import { Pause, Play } from "lucide-react";
 
-const GLIDE_TAU = 1.8;
 const MAX_FLING = 4000;
 
 // --- Interfaces (Kept for completeness) ---
@@ -65,34 +64,80 @@ export function SlidingLogoMarquee({
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
-  const drag = useRef({ active: false, startX: 0, startTx: 0, width: 1, moved: false });
   const movedRef = useRef(false);
   const samples = useRef<[number, number][]>([]);
   const rafRef = useRef(0);
-  const glideRaf = useRef(0);
-  const rateRef = useRef(1);
+  const offsetRef = useRef(0);
+  const velRef = useRef(0);
+  const targetRef = useRef(0);
+  const baseRef = useRef(0);
+  const widthRef = useRef(1);
+  const draggingRef = useRef(false);
+  const pendingRef = useRef(false);
+  const startXRef = useRef(0);
+  const startOffsetRef = useRef(0);
+  const lastRef = useRef(0);
 
-  useEffect(() => () => {
-    cancelAnimationFrame(rafRef.current);
-    cancelAnimationFrame(glideRaf.current);
-  }, []);
-
-  // Match LogoLoop speed (px/s): set the CSS duration from the measured copy width.
+  // Base auto-scroll speed (px/s), signed by direction.
   useEffect(() => {
+    baseRef.current = (reverse ? 1 : -1) * (speed || 1);
+    targetRef.current = baseRef.current;
+  }, [speed, reverse]);
+
+  // Measure the exact seamless loop period and disable the CSS animation (we drive
+  // it via rAF). The period is the distance from copy 1's first item to copy 2's
+  // first item (copyWidth + N*gap) — using offsetWidth/2 is short by half a gap,
+  // which caused the ~1cm jump at the loop reset.
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el) return;
+    el.style.animation = 'none';
     const measure = () => {
-      const el = listRef.current;
-      const c = containerRef.current;
-      if (!el || !c) return;
-      const w = el.scrollWidth / 2;
-      if (w > 0) c.style.setProperty('--duration', `${w / (speed || 1)}s`);
+      const lis = el.children;
+      const n = Math.floor(lis.length / 2);
+      let w = el.offsetWidth / 2;
+      if (n > 0 && lis.length >= 2) {
+        const a = (lis[0] as HTMLElement).offsetLeft;
+        const b = (lis[n] as HTMLElement).offsetLeft;
+        if (b > a) w = b - a;
+      }
+      if (w > 0) widthRef.current = w;
     };
     measure();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    ro?.observe(el);
     window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, [speed, items]);
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [items]);
 
-  // CORE FIX: Duplicating the items for a seamless loop
-  const duplicatedItems = useMemo(() => [...items, ...items], [items]);
+  // Single rAF engine: eases velocity toward the target, then applies the transform.
+  // No handoff to a CSS animation, so there is never a snap/jump.
+  useEffect(() => {
+    const tick = (now: number) => {
+      const dt = lastRef.current ? Math.min(0.05, (now - lastRef.current) / 1000) : 0;
+      lastRef.current = now;
+      const el = listRef.current;
+      if (el) {
+        if (!draggingRef.current) {
+          const target = targetRef.current;
+          velRef.current += (target - velRef.current) * (1 - Math.exp(-dt / 0.25));
+          if (Math.abs(velRef.current - target) < 0.5) velRef.current = target;
+          offsetRef.current += velRef.current * dt;
+        }
+        const w = widthRef.current || 1;
+        let tx = offsetRef.current % w;
+        if (tx > 0) tx -= w;
+        offsetRef.current = tx;
+        el.style.transform = `translateX(${tx}px)`;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
 
   const handleItemClick = (item: SlidingLogoMarqueeItem) => {
     if (movedRef.current) {
@@ -109,99 +154,46 @@ export function SlidingLogoMarquee({
     setIsPlaying(!isPlaying);
   };
 
-  const currentTx = () => {
-    const el = listRef.current;
-    if (!el) return 0;
-    const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
-    return m.m41;
-  };
-
-  const setRate = (r: number) => {
-    rateRef.current = r;
-    listRef.current?.getAnimations().forEach((a) => a.updatePlaybackRate(r));
-  };
-
-  // Smoothly ramp the marquee speed (used for the hover stop/start).
-  const rampTo = (target: number, dur = 600) => {
-    cancelAnimationFrame(rafRef.current);
-    const from = rateRef.current;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / dur);
-      const e = 1 - Math.pow(1 - t, 3);
-      setRate(from + (target - from) * e);
-      if (t < 1) rafRef.current = requestAnimationFrame(tick);
-      else setRate(target);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-  };
-
-  const handoff = (el: HTMLUListElement, w: number, tx: number) => {
-    const progress = ((-tx / w) % 1 + 1) % 1;
-    const D = w / (speed || 1);
-    // Restore the CSS animation first, THEN apply the negative delay. Setting the
-    // `animation` shorthand afterwards would reset the delay and snap to the start.
-    el.style.animation = '';
-    el.style.transform = '';
-    el.style.animationDelay = `${-progress * D}s`;
-    setRate(1);
-  };
-
   const onPointerDown = (e: React.PointerEvent) => {
     if (!draggable || (e.pointerType === 'mouse' && e.button !== 0)) return;
-    const el = listRef.current;
-    if (!el) return;
-    cancelAnimationFrame(rafRef.current);
-    cancelAnimationFrame(glideRaf.current);
-    const startTx = currentTx();
-    drag.current = {
-      active: true,
-      startX: e.clientX,
-      startTx,
-      width: el.scrollWidth / 2 || 1,
-      moved: false,
-    };
-    movedRef.current = false;
+    pendingRef.current = true;
+    draggingRef.current = false;
+    startXRef.current = e.clientX;
     samples.current = [[performance.now(), e.clientX]];
-    // Fully disable the CSS animation so the inline transform actually applies
-    // (a paused animation still overrides inline transforms).
-    el.style.animation = 'none';
-    el.style.transform = `translateX(${startTx}px)`;
-    setRate(0);
+    movedRef.current = false;
+    // Ease the auto-scroll to a smooth stop as the grab begins.
+    targetRef.current = 0;
     (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
-    const d = drag.current;
-    if (!d.active) return;
-    const dx = e.clientX - d.startX;
-    if (Math.abs(dx) > 3) {
-      d.moved = true;
-      movedRef.current = true;
+    if (!pendingRef.current && !draggingRef.current) return;
+    const el = listRef.current;
+    if (!el) return;
+    const dx = e.clientX - startXRef.current;
+    if (!draggingRef.current) {
+      draggingRef.current = true;
+      startOffsetRef.current = offsetRef.current;
     }
+    if (Math.abs(dx) > 3) movedRef.current = true;
     const now = performance.now();
     samples.current.push([now, e.clientX]);
     while (samples.current.length > 2 && now - samples.current[0][0] > 100) samples.current.shift();
-    const el = listRef.current;
-    if (!el) return;
-    const w = d.width || 1;
-    let tx = d.startTx + dx;
+    const w = widthRef.current || 1;
+    let tx = startOffsetRef.current + dx;
     tx = ((tx % w) + w) % w;
     if (tx > 0) tx -= w;
+    offsetRef.current = tx;
     el.style.transform = `translateX(${tx}px)`;
   };
 
   const endDrag = (e: React.PointerEvent) => {
-    const d = drag.current;
-    if (!d.active) return;
-    d.active = false;
+    if (!pendingRef.current && !draggingRef.current) return;
+    pendingRef.current = false;
+    draggingRef.current = false;
     try {
       (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId);
     } catch {}
-    const el = listRef.current;
-    if (!el) return;
-    const w = d.width || 1;
-
     let v = 0;
     const s = samples.current;
     const now = performance.now();
@@ -210,40 +202,17 @@ export function SlidingLogoMarquee({
       const [t1, x1] = s[s.length - 1];
       if (t1 > t0 && now - t1 < 80) v = (x1 - x0) / (t1 - t0);
     }
-
-    if (!d.moved || Math.abs(v) < 0.02) {
-      handoff(el, w, currentTx());
-      return;
-    }
-
-    // Inertial glide (LogoLoop-style): continue from the exact release point with
-    // the release velocity, decaying smoothly, then hand off to the CSS loop.
-    let tx = currentTx();
-    let vel = Math.max(-MAX_FLING, Math.min(MAX_FLING, v * 1000));
-    let last = performance.now();
-    const start = last;
-    const glide = (t: number) => {
-      const dt = Math.min(0.05, (t - last) / 1000);
-      last = t;
-      tx += vel * dt;
-      vel *= Math.exp(-dt / GLIDE_TAU);
-      tx = ((tx % w) + w) % w;
-      if (tx > 0) tx -= w;
-      el.style.transform = `translateX(${tx}px)`;
-      if (Math.abs(vel) > 6 && t - start < 2600) {
-        glideRaf.current = requestAnimationFrame(glide);
-      } else {
-        handoff(el, w, tx);
-      }
-    };
-    glideRaf.current = requestAnimationFrame(glide);
+    // Release velocity becomes the new velocity; the engine eases it back to the
+    // base speed smoothly (fast fling -> gradual slow-down, no jump).
+    velRef.current = Math.max(-MAX_FLING, Math.min(MAX_FLING, v * 1000));
+    targetRef.current = baseRef.current;
   };
 
   const onEnter = (e: React.PointerEvent) => {
-    if (e.pointerType !== 'touch' && pauseOnHover && !drag.current.active) rampTo(0);
+    if (e.pointerType !== 'touch' && pauseOnHover && !draggingRef.current) targetRef.current = 0;
   };
   const onLeave = (e: React.PointerEvent) => {
-    if (e.pointerType !== 'touch' && pauseOnHover && !drag.current.active) rampTo(1);
+    if (e.pointerType !== 'touch' && pauseOnHover && !draggingRef.current) targetRef.current = baseRef.current;
   };
 
   const blurDivs = Array.from({ length: animationSteps }, (_, index) => (
