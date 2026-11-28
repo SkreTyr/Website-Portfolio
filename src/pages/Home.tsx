@@ -22,7 +22,7 @@ import { CornerDownRight, ArrowUpRight } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 import { MailDot } from 'lucide-react';
 import { GraduationCap } from 'lucide-react';
-import { LogoLoop } from '@/components/LogoLoop';
+import { SlidingLogoMarquee } from '@/components/lightswind/sliding-logo-marquee';
 import { ChevronDown } from 'lucide-react';
 import AutoReveal from '@/components/AutoReveal'
 import { AnimatedCopyButton } from "@/components/lightswind/animated-copy-button"
@@ -268,28 +268,47 @@ A dedicated computer engineering student, I combine a strong technical foundatio
               <h1 className='inline-block text-[#f3f3f3] text-lg md:text-xl font-light' >Skills & Stacks</h1>
             </div>
             <hr className="border-t border-[#ffffff38] w-2/4" />
-            <LogoLoop logos={[
-              { src: reactLogo, alt: "React"},
-              { src: tsLogo, alt: "TypeScript"},
-              { src: htmlLogo, alt: "HTML5"},
-              { src: cssLogo, alt: "CSS3"},
-              { src: jsLogo, alt: "JavaScript"},
-              { src: pythonLogo, alt: "Python"},
-              { src: javaLogo, alt: "Java"},
-              { src: cppLogo, alt: "C++"},
-              { src: sqlLogo, alt: "SQL"}
-            ]} speed={60} direction="left" logoHeight={40} gap={80} fadeOut scaleOnHover />
+            <SlidingLogoMarquee
+              speed={40}
+              height="48px"
+              gap="80px"
+              enableBlur={false}
+              showControls={false}
+              draggable={true}
+              clickable={false}
+              items={[
+                { id: 'react', content: <img src={reactLogo} alt="React" className="h-10 w-auto object-contain" /> },
+                { id: 'ts', content: <img src={tsLogo} alt="TypeScript" className="h-10 w-auto object-contain" /> },
+                { id: 'html', content: <img src={htmlLogo} alt="HTML5" className="h-10 w-auto object-contain" /> },
+                { id: 'css', content: <img src={cssLogo} alt="CSS3" className="h-10 w-auto object-contain" /> },
+                { id: 'js', content: <img src={jsLogo} alt="JavaScript" className="h-10 w-auto object-contain" /> },
+                { id: 'python', content: <img src={pythonLogo} alt="Python" className="h-10 w-auto object-contain" /> },
+                { id: 'java', content: <img src={javaLogo} alt="Java" className="h-10 w-auto object-contain" /> },
+                { id: 'cpp', content: <img src={cppLogo} alt="C++" className="h-10 w-auto object-contain" /> },
+                { id: 'sql', content: <img src={sqlLogo} alt="SQL" className="h-10 w-auto object-contain" /> },
+              ]}
+            />
 
-            <LogoLoop logos={[
-              { src: githubLogo, alt: 'GitHub' },
-              { src: canvaLogo, alt: 'Canva' },
-              { src: illustratorLogo, alt: 'Adobe Illustrator' },
-              { src: photoshopLogo, alt: 'Adobe Photoshop' },
-              { src: notionLogo, alt: 'Notion' },
-              { src: vscodeLogo, alt: 'Visual Studio Code' },
-              { src: dockerLogo, alt: 'Docker' },
-              { src: cloudflareLogo, alt: 'Cloudflare' }
-            ]} speed={60} direction="right" logoHeight={40} gap={80} fadeOut scaleOnHover />
+            <SlidingLogoMarquee
+              speed={40}
+              height="48px"
+              gap="80px"
+              enableBlur={false}
+              showControls={false}
+              reverse
+              draggable={true}
+              clickable={false}
+              items={[
+                { id: 'github', content: <img src={githubLogo} alt="GitHub" className="h-10 w-auto object-contain" /> },
+                { id: 'canva', content: <img src={canvaLogo} alt="Canva" className="h-10 w-auto object-contain" /> },
+                { id: 'illustrator', content: <img src={illustratorLogo} alt="Adobe Illustrator" className="h-10 w-auto object-contain" /> },
+                { id: 'photoshop', content: <img src={photoshopLogo} alt="Adobe Photoshop" className="h-10 w-auto object-contain" /> },
+                { id: 'notion', content: <img src={notionLogo} alt="Notion" className="h-10 w-auto object-contain" /> },
+                { id: 'vscode', content: <img src={vscodeLogo} alt="Visual Studio Code" className="h-10 w-auto object-contain" /> },
+                { id: 'docker', content: <img src={dockerLogo} alt="Docker" className="h-10 w-auto object-contain" /> },
+                { id: 'cloudflare', content: <img src={cloudflareLogo} alt="Cloudflare" className="h-10 w-auto object-contain" /> },
+              ]}
+            />
           </div>
         </AutoReveal>
 
