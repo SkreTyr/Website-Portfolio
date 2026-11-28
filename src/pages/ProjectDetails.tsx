@@ -26,7 +26,7 @@ interface Chapter {
 
 const projects: Record<
   string,
-  { title: string; stack: string; liveUrl?: string; chapters: Chapter[] }
+  { title: string; stack: string; liveUrl?: string; sourceUrl?: string; chapters: Chapter[] }
 > = {
   veyns: {
     title: 'Veyns',
@@ -63,6 +63,7 @@ const projects: Record<
   pawtrack: {
     title: 'PawTrack',
     stack: 'Java · Swing · SQLite · Maven',
+    sourceUrl: 'https://github.com/syqenov/cpe314--69323--capstone-team-03',
     chapters: [
       {
         title: 'Overview',
@@ -100,7 +101,7 @@ const projects: Record<
         image: pawData,
       },
       {
-        title: 'Under the Hood',
+        title: 'Tech Stack',
         text: 'Built with Java and Swing on top of an SQLite database and managed with Maven, keeping the desktop app lightweight, portable, and easy to run locally. The single-file database means a new machine can be up and running in minutes without any server setup.',
         image: pawUnderTheHood,
       },
@@ -184,17 +185,36 @@ const ProjectDetails = () => {
 
               <div className="w-full max-w-6xl mx-auto">
                 <div className="relative border border-[#ffffff4d] bg-[#151515] rounded-md h-[600px] overflow-hidden">
+                  <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-end justify-between gap-4 p-6 pb-10 bg-gradient-to-b from-[#151515] via-[#151515]/85 to-transparent">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-blue-400 mb-1">Project</p>
+                      <h2 className="font-bebas text-2xl md:text-3xl text-white leading-none">{project.title}</h2>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bebas text-3xl md:text-4xl text-white/80 leading-none">
+                        {String(active + 1).padStart(2, '0')}
+                        <span className="text-white/30 text-lg"> / {String(project.chapters.length).padStart(2, '0')}</span>
+                      </p>
+                      <p className="text-[10px] uppercase tracking-widest text-gray-500 mt-1">
+                        {project.chapters[active]?.title}
+                      </p>
+                    </div>
+                  </div>
+
                   <div
                     ref={containerRef}
                     className="project-scroll h-full overflow-y-auto overscroll-auto md:overscroll-contain"
                   >
-                    <div className="grid md:grid-cols-2 gap-8 p-6 items-start">
+                    <div className="grid md:grid-cols-2 gap-8 p-6 pt-24 items-start">
                       <div className="flex flex-col">
                         {project.chapters.map((c, i) => (
                           <div
                             key={i}
-                            className="min-h-[600px] flex flex-col justify-center"
+                            className="relative min-h-[600px] flex flex-col justify-center"
                           >
+                            <span className="pointer-events-none select-none absolute top-10 right-0 font-bebas text-[120px] leading-none text-white/5">
+                              {String(i + 1).padStart(2, '0')}
+                            </span>
                             <img
                               src={c.image}
                               alt={c.title}
@@ -202,7 +222,7 @@ const ProjectDetails = () => {
                             />
                             <AutoReveal direction="left">
                               <h2
-                                className={`text-sm font-light mb-4 transition-colors duration-300 ${
+                                className={`font-['Inter'] text-lg md:text-xl font-semibold tracking-tight mb-3 transition-colors duration-300 ${
                                   active === i ? 'text-[#f3f3f3]' : 'text-gray-600'
                                 }`}
                               >
@@ -211,13 +231,37 @@ const ProjectDetails = () => {
                             </AutoReveal>
                             <AutoReveal direction="left">
                               <p
-                                className={`text-sm md:text-base leading-[1.5] transition-colors duration-300 ${
+                                className={`text-sm md:text-base font-light leading-[1.5] transition-colors duration-300 ${
                                   active === i ? 'text-[#d0d0d0]' : 'text-gray-600'
                                 }`}
                               >
                                 {c.text}
                               </p>
                             </AutoReveal>
+                            {i === project.chapters.length - 1 && (
+                              <div className="md:hidden mt-4 flex flex-col items-start gap-2">
+                                {project.liveUrl && (
+                                  <a
+                                    href={project.liveUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="inline-block text-blue-400 hover:text-blue-300 text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-[width] after:duration-300 hover:after:w-full"
+                                  >
+                                    Visit Live Site
+                                  </a>
+                                )}
+                                {project.sourceUrl && (
+                                  <a
+                                    href={project.sourceUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="inline-block text-blue-400 hover:text-blue-300 text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-[width] after:duration-300 hover:after:w-full"
+                                  >
+                                    Source Code
+                                  </a>
+                                )}
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
@@ -225,33 +269,49 @@ const ProjectDetails = () => {
                     </div>
                   </div>
 
-                  <div className="pointer-events-none hidden md:block absolute right-6 top-1/2 -translate-y-1/2 h-80 w-[calc(50%-3rem)] max-w-sm rounded-md overflow-hidden border border-[#ffffff4d] bg-[#101010]">
-                    {project.chapters.map((c, i) => (
-                      <img
-                        key={i}
-                        src={c.image}
-                        alt={c.title}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                          active === i ? 'opacity-100' : 'opacity-0'
-                        }`}
-                      />
-                    ))}
+                  <div className="pointer-events-none hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 w-[calc(50%-3rem)] max-w-sm flex-col gap-3">
+                    <div className="relative h-72 rounded-md overflow-hidden border border-[#ffffff4d] bg-[#101010]">
+                      {project.chapters.map((c, i) => (
+                        <img
+                          key={i}
+                          src={c.image}
+                          alt={c.title}
+                          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                            active === i ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <div className="pointer-events-none flex flex-col items-center gap-2">
+                      <span className="h-px w-20 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-gray-600">Selected Work</span>
+                    </div>
+                  </div>
+
+                  <div className="hidden md:flex absolute bottom-6 right-6 gap-4">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-block text-blue-400 hover:text-blue-300 text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-[width] after:duration-300 hover:after:w-full"
+                      >
+                        Visit Live Site
+                      </a>
+                    )}
+                    {project.sourceUrl && (
+                      <a
+                        href={project.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-block text-blue-400 hover:text-blue-300 text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-[width] after:duration-300 hover:after:w-full"
+                      >
+                        Source Code
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
-
-              {project.liveUrl && (
-                <div className="mt-8 text-center">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-block text-blue-400 hover:text-blue-300 text-sm relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1px] after:w-0 after:bg-blue-300 after:transition-[width] after:duration-300 hover:after:w-full"
-                  >
-                    Visit Live Site
-                  </a>
-                </div>
-              )}
             </AutoReveal>
           ) : (
             <AutoReveal>
