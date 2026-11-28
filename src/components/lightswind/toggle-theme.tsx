@@ -42,6 +42,7 @@ export const ToggleTheme = ({
 }: ToggleThemeProps) => {
     const [isDark, setIsDark] = useState(false)
     const buttonRef = useRef<HTMLButtonElement>(null)
+    const busyRef = useRef(false)
 
     useEffect(() => {
         const updateTheme = () => {
@@ -78,7 +79,22 @@ export const ToggleTheme = ({
     }, [animationType])
 
     const toggleTheme = useCallback(async () => {
-        if (!buttonRef.current) return
+        if (!buttonRef.current || busyRef.current) return
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+        // Reduced-motion / unsupported: skip the View Transition (plain swap).
+        if (reduceMotion || typeof document.startViewTransition !== 'function') {
+            busyRef.current = true
+            const newTheme = !isDark
+            setIsDark(newTheme)
+            document.documentElement.classList.toggle('dark')
+            localStorage.setItem('theme', newTheme ? 'dark' : 'light')
+            window.setTimeout(() => { busyRef.current = false }, 350)
+            return
+        }
+
+        busyRef.current = true
 
         // Wait for the DOM update to complete within the View Transition
         await document.startViewTransition(() => {
@@ -336,6 +352,7 @@ export const ToggleTheme = ({
                 break
         }
 
+        window.setTimeout(() => { busyRef.current = false }, duration + 150)
     }, [isDark, duration, animationType])
 
     return (
