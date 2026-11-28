@@ -101,44 +101,62 @@ const Milestone = () => {
           </AutoReveal>
 
           <AutoReveal className="w-full">
-            <div className="border border-[#ffffff4d] bg-[#151515] p-6 rounded-md w-full max-w-2xl mx-auto">
-              <div className="relative" ref={timelineRef}>
-                <span className="absolute left-[7px] top-2 bottom-2 w-px bg-[#ffffff38]" />
+            <div className="relative w-full max-w-2xl mx-auto" ref={timelineRef}>
+                <span className="keep-color absolute left-4 md:left-1/2 top-2 bottom-2 w-px bg-[#ffffff38] md:-translate-x-1/2" />
                 <span
-                  className="keep-color absolute left-[7px] top-2 w-px bg-blue-500"
+                  className="keep-color absolute left-4 md:left-1/2 top-2 w-px bg-blue-500 md:-translate-x-1/2"
                   style={{ height: `calc((100% - 1rem) * ${progress})` }}
                 />
-                <div className="flex flex-col gap-16">
-                  {milestones.map((m, i) => (
-                    <div key={i} className="relative pl-8">
-                      <span
-                        className={`keep-color absolute left-0 top-1 w-4 h-4 rounded-full border-2 border-[#151515] ${
-                          progress >= i / Math.max(1, milestones.length - 1)
-                            ? 'bg-blue-500'
-                            : 'bg-gray-600'
+                <div className="flex flex-col gap-10 md:gap-6">
+                  {milestones.map((m, i) => {
+                    const reached = progress >= i / Math.max(1, milestones.length - 1)
+                    const isLeft = i % 2 === 0
+                    return (
+                      <div
+                        key={i}
+                        className={`relative pl-10 md:pl-0 md:flex md:w-full ${
+                          isLeft ? 'md:justify-start' : 'md:justify-end'
                         }`}
-                      />
-                      <div className="border border-[#ffffff38] bg-[#101010] p-4 rounded-md transition-colors duration-200 hover:border-[#ffffff80]">
-                        <div className="flex justify-between items-start gap-2">
-                          <h2 className="text-[#f3f3f3] text-base font-light">{m.title}</h2>
-                          <span className="text-xs text-gray-500 whitespace-nowrap">{m.period}</span>
-                        </div>
-                        <p className="text-sm text-blue-400 font-light">{m.role}</p>
-                        <p className="text-sm text-gray-400 mt-2">
-                          {m.description.split(m.school).map((part, idx) => (
-                            <span key={idx}>
-                              {part}
-                              {idx < m.description.split(m.school).length - 1 && (
-                                <span className="text-blue-400">{m.school}</span>
-                              )}
+                      >
+                        <span
+                          className={`keep-color absolute left-4 md:left-1/2 top-4 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-[#151515] transition-colors duration-300 ${
+                            reached ? 'bg-blue-500' : 'bg-gray-600'
+                          }`}
+                        />
+                        <div className="group relative border border-[#ffffff4d] bg-[#151515] p-5 rounded-lg transition-all duration-300 hover:border-[#ffffff80] hover:-translate-y-0.5 md:w-[46%]">
+                          <div className="flex justify-between items-start gap-4">
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className={`keep-color h-1.5 w-1.5 rounded-full transition-colors duration-300 ${
+                                    reached ? 'bg-blue-500' : 'bg-gray-600'
+                                  }`}
+                                />
+                                <h2 className="font-['Inter'] text-lg font-normal text-[#f3f3f3] leading-tight">
+                                  {m.title}
+                                </h2>
+                              </div>
+                              <p className="text-sm text-blue-400 font-light mt-1 whitespace-nowrap">{m.role}</p>
+                            </div>
+                            <span className="shrink-0 ml-4 text-[10px] uppercase tracking-wide text-gray-400 whitespace-nowrap px-2 py-0.5 rounded border border-[#ffffff33] bg-black/30">
+                              {m.period}
                             </span>
-                          ))}
-                        </p>
+                          </div>
+                          <p className="text-sm text-gray-400 font-light mt-3 leading-relaxed">
+                            {m.description.split(m.school).map((part, idx) => (
+                              <span key={idx}>
+                                {part}
+                                {idx < m.description.split(m.school).length - 1 && (
+                                  <span className="text-blue-400">{m.school}</span>
+                                )}
+                              </span>
+                            ))}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
-              </div>
             </div>
           </AutoReveal>
         </div>
