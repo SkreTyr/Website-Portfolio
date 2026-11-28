@@ -242,17 +242,6 @@ const ThreeDCarousel = ({
                       )}
                     </div>
                   </CardContent>
-                  {!item.disabled && (
-                    <a
-                      href={item.to ? undefined : item.link}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openItem(item);
-                      }}
-                      aria-label="Learn More"
-                      className="hidden md:block absolute inset-0 z-20 rounded-md"
-                    />
-                  )}
                 </Card>
               </div>
             ))}

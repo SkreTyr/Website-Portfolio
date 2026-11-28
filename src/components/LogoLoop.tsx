@@ -842,7 +842,9 @@ const createEngine = (
   };
 
   const onEnter = (e: PointerEvent) => {
-    st.hovered = true;
+    // Touch fires pointerenter with no pointerleave, which would leave the loop
+    // paused forever. Only real (non-touch) hover should pause the marquee.
+    st.hovered = e.pointerType !== 'touch';
     if (e.pointerType !== 'touch') {
       st.pointerInside = true;
       st.pointer = local(e);
