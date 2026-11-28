@@ -1,3 +1,4 @@
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft} from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
@@ -5,6 +6,18 @@ import profileImg from '@/assets/Profile3.webp'
 
 
 const About = () => {
+  const sentenceRef = useRef<HTMLSpanElement>(null)
+  const [imgH, setImgH] = useState<number | undefined>(undefined)
+
+  useEffect(() => {
+    const measure = () => {
+      if (sentenceRef.current) setImgH(sentenceRef.current.getBoundingClientRect().height)
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
   return (
     <div className="min-h-screen w-full">
       <section className="h-auto w-full flex justify-center pt-32 pb-20">
@@ -26,7 +39,7 @@ const About = () => {
             <p className="text-gray-400 text-sm md:text-base text-left mb-8 max-w-2xl">
               A quick look at who I am, what I do, and the background behind the work.
             </p>
-            <hr className="border-t border-[#ffffff38] w-full max-w-2xl mb-8" />
+            <hr className="border-t border-[#ffffff38] w-full mb-8" />
           </AutoReveal>
 
           <AutoReveal className=" w-full">
@@ -34,15 +47,16 @@ const About = () => {
               <img
                 src={profileImg}
                 alt="Shann Agang"
-                className="order-1 md:order-2 self-start md:self-stretch w-48 h-56 md:w-64 md:h-auto object-cover rounded-md border border-[#ffffff4d] flex-shrink-0"
+                style={{ ['--img-h' as string]: imgH ? `${imgH}px` : undefined } as React.CSSProperties}
+                className="order-1 md:order-2 self-start w-48 h-56 md:w-64 md:h-80 object-cover rounded-md border border-[#ffffff4d] flex-shrink-0"
               />
               <div className="order-2 md:order-1 flex-1">
-                <h1 className="text-[#f3f3f3] text-lg md:text-xl font-light mb-3">Hey, Shann here! A little more about me.</h1>
+                <h1 className="text-[#f3f3f3] text-xl md:text-2xl font-normal mb-3">Hey, Shann here! A little more about me.</h1>
                 <p className="text-[#d0d0d0] text-sm md:text-base mb-3">
                   I grew up in Cebu City and have always been curious about how things work, whether it was exploring design, experimenting with technology, or watching how people interact with the world around them. That curiosity grew into a passion for creating experiences that feel both functional and meaningful.
                 </p>
                 <p className="text-[#d0d0d0] text-sm md:text-base mb-3">
-                  I&rsquo;m a Computer Engineering student focused on full-stack web development, with a soft spot for the front-end. I enjoy crafting digital solutions through coding and design, and I believe technology should not only work well but also feel natural, intuitive, and enjoyable to use.
+                  I&rsquo;m a Computer Engineering student focused on full-stack web development, with a soft spot for the front-end. I enjoy crafting digital solutions through coding and design, and I <span ref={sentenceRef}>believe technology should not only work well but also feel natural, intuitive, and enjoyable to use.</span>
                 </p>
                 <p className="text-[#d0d0d0] text-sm md:text-base mb-3">
                   My goal is to keep growing by learning advanced frameworks, improving problem-solving, and practicing through real projects. I want to build user-friendly, interactive websites that prioritize accessibility, performance, and aesthetics, and I&rsquo;m committed to lifelong learning and refining my craft through feedback and iteration.
@@ -55,7 +69,7 @@ const About = () => {
             </div>
           </AutoReveal>
 
-          <AutoReveal className="w-full mt-6 pt-20">
+          <AutoReveal className="w-full mt-6 pt-32">
             <div>
               <h1 className="text-[#f3f3f3] text-lg md:text-xl font-light mb-2">Tech Stack</h1>
               <p className="text-gray-400 text-sm md:text-base mb-4">The tools, frameworks, and platforms I use across front-end, back-end, infrastructure, and AI.</p>
@@ -77,7 +91,7 @@ const About = () => {
                       {cat.items.map((it) => (
                         <span
                           key={it}
-                          className="px-2 py-1 text-xs text-gray-400 transition-colors duration-200 hover:text-white"
+                          className="border border-[#ffffff4d] bg-[#101010] px-2 py-1 rounded-md text-xs text-gray-400 transition-colors duration-200 hover:bg-[#1f1f1f] hover:text-white hover:border-[#ffffff80]"
                         >
                           {it}
                         </span>
