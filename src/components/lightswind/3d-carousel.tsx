@@ -172,19 +172,21 @@ const ThreeDCarousel = ({
             {items.map((item, index) => (
               <div
                 key={item.id}
-                role={isMobile ? "button" : undefined}
-                tabIndex={isMobile ? 0 : -1}
+                role="button"
+                tabIndex={0}
                 onClick={() => {
-                  if (!isMobile || didSwipeRef.current) return;
-                  if (index === active) openItem(item);
-                  else setActive(index);
+                  if (didSwipeRef.current) return;
+                  if (isMobile && index !== active) {
+                    setActive(index);
+                    return;
+                  }
+                  openItem(item);
                 }}
                 onKeyDown={(e) => {
-                  if (!isMobile) return;
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    if (index === active) openItem(item);
-                    else setActive(index);
+                    if (isMobile && index !== active) setActive(index);
+                    else openItem(item);
                   }
                 }}
                 className={`group cursor-pointer bg-[#151515] rounded-md absolute top-0 w-full max-w-md transform-gpu transition-[transform,opacity] duration-500 hover:-translate-y-1 ${
@@ -192,7 +194,8 @@ const ThreeDCarousel = ({
                 } ${getCardAnimationClass(index)}`}
               >
                 <Card
-                  className={`overflow-hidden bg-[#151515] h-[${cardHeight}px] rounded-md border border-[#ffffff4d] shadow-sm
+                  style={{ height: cardHeight }}
+                  className={`overflow-hidden bg-[#151515] rounded-md border border-[#ffffff4d] shadow-sm
                 hover:shadow-md flex flex-col`}
                 >
                   <div
@@ -207,13 +210,13 @@ const ThreeDCarousel = ({
                    </div>
 
                   <CardContent className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-xl font-light mb-1 text-white">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm font-light mb-2">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-blue-400 mb-1">
                       {item.brand}
                     </p>
-                    <p className="text-gray-600 text-sm flex-grow">
+                    <h3 className="font-['Inter'] text-lg font-semibold text-white leading-tight mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm font-light flex-grow">
                       {item.description}
                     </p>
 
@@ -222,7 +225,7 @@ const ThreeDCarousel = ({
                         {item.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-[#101010] text-[#f5f5f5] rounded-md text-xs animate-pulse-slow outline outline-1 outline-blue-500"
+                            className="px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wide text-gray-300 border border-[#ffffff33] bg-black/40"
                           >
                             {tag}
                           </span>
@@ -231,13 +234,13 @@ const ThreeDCarousel = ({
 
                       {item.disabled ? (
                         <div className="text-gray-500 flex items-center relative cursor-not-allowed">
-                          <span className='text-gray-200 relative inline-block'>Learn More</span>
+                          <span className='text-gray-400 relative inline-block'>Learn More</span>
                           <ArrowUpRight className="ml-2 w-4 h-4 relative z-10" />
                         </div>
                       ) : (
-                        <span className="text-gray-300 group-hover:text-blue-600 flex items-center relative text-sm">
-                          <span className='relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-blue-200 after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span>
-                          <ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-500'/>
+                        <span className="text-gray-200 group-hover:text-blue-400 flex items-center relative text-sm transition-colors">
+                          <span className='learn-more-underline relative inline-block after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:h-[1px] after:w-1/2 after:bg-white after:transition-[width] after:duration-300 group-hover:after:w-full'>Learn More</span>
+                          <ArrowUpRight className='text-gray-500 ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1 group-hover:text-blue-400'/>
                         </span>
                       )}
                     </div>
