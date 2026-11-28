@@ -4,10 +4,19 @@ import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
 import { scrollPageBy } from '@/lib/smooth-scroll'
-import veynsImage from '@/assets/VeynsWebsite.webp'
-import pawTrackImage from '@/assets/PawTrack-Preview.webp'
-import smartErgonomics from '@/assets/SmartErgonomics.webp'
-import automotiveComfort from '@/assets/AutomotiveComfort.webp'
+import veynsOverview from '@/assets/VeynsOverview.webp'
+import veynsMyRole from '@/assets/VeynsMyRole.webp'
+import veynsFeatures from '@/assets/VeynsFeatures.webp'
+import veynsWorkflow from '@/assets/VeynsWorkflow.webp'
+import veynsUnderTheHood from '@/assets/VeynsUnderTheHood.webp'
+import pawOverview from '@/assets/PawTrackOverview.webp'
+import pawMyRole from '@/assets/PawTrackMyRole.webp'
+import pawFeatures from '@/assets/PawTrackFeatures.webp'
+import pawAnalytics from '@/assets/PawTrackAnalytics.webp'
+import pawWorkFlow from '@/assets/PawTrackWorkFlow.webp'
+import pawWaitlist from '@/assets/PawTrackWaitlist.webp'
+import pawData from '@/assets/PawTrackData.webp'
+import pawUnderTheHood from '@/assets/PawTrackUnderTheHood.webp'
 
 interface Chapter {
   title: string
@@ -26,18 +35,28 @@ const projects: Record<
     chapters: [
       {
         title: 'Overview',
-        text: 'A kiosk management system built for retail environments, handling product catalog management, transactions, and reporting with a clean, responsive interface.',
-        image: veynsImage,
+        text: 'A kiosk management system built for retail environments, handling product catalog management, transactions, and reporting with a clean, responsive interface. It brings the entire ordering flow into one place so staff spend less time switching between tools and more time serving customers.',
+        image: veynsOverview,
+      },
+      {
+        title: 'My Role',
+        text: 'I focused on Quality Assurance and testing — planning test cases, running regression checks, and verifying the ordering flow from menu browsing through checkout. I logged and tracked defects, validated fixes, and made sure each release was stable before it reached real customers.',
+        image: veynsMyRole,
       },
       {
         title: 'Features',
-        text: 'Real-time product browsing, fast checkout, and clear reporting help staff and customers move through orders smoothly.',
-        image: veynsImage,
+        text: 'Real-time product browsing, fast checkout, and clear reporting help staff and customers move through orders smoothly. The catalog stays in sync across the floor, payments are confirmed instantly, and every sale is logged for accurate end-of-day reporting without manual reconciliation.',
+        image: veynsFeatures,
       },
       {
-        title: 'Result',
-        text: 'A responsive, commission-free ordering experience that connects local kitchens directly to their customers.',
-        image: veynsImage,
+        title: 'Workflow',
+        text: 'The flow is simple: a customer browses the live menu, places an order, and the kitchen receives it instantly with status updates synced across the counter and the customer’s screen. Staff manage the catalog and track each order from preparation to handoff, all without switching between separate tools.',
+        image: veynsWorkflow,
+      },
+      {
+        title: 'Tech Stack',
+        text: 'Built with React and TypeScript on top of Tailwind CSS for a consistent, responsive layout, with Supabase handling data and Vercel serving the production build. Brevo powers transactional email so customers receive order updates right in their inbox.',
+        image: veynsUnderTheHood,
       },
     ],
   },
@@ -47,18 +66,43 @@ const projects: Record<
     chapters: [
       {
         title: 'Overview',
-        text: 'A pet shelter and adoption tracker that helps shelters manage animals, process adoptions, and run a first-in-line waitlist with timed reservations.',
-        image: pawTrackImage,
+        text: 'A pet shelter and adoption tracker that helps shelters manage animals, process adoptions, and run a first-in-line waitlist with timed reservations. It was designed to replace scattered spreadsheets and paper logs with one reliable desktop tool that staff can trust day to day.',
+        image: pawOverview,
+      },
+      {
+        title: 'My Role',
+        text: 'I owned the front-end experience — shaping the GUI design, wiring up the dashboard navigation, building the analytics interface, and crafting the import UI. My focus was turning complex shelter data into clean, intuitive screens that staff could pick up with minimal training. I also had a hand in the MainFrame, login and security, GUI development, and analytics, helping lay the groundwork the rest of the app was built on.',
+        image: pawMyRole,
       },
       {
         title: 'Features',
-        text: 'Staff and adopter roles, animal management, a FIFO waitlist with 72-hour reservations, and CSV import/export.',
-        image: smartErgonomics,
+        text: 'Staff and adopter roles, animal management, a FIFO waitlist with 72-hour reservations, and CSV import/export. Each role sees only the controls it needs, so volunteers can log in without risking sensitive shelter data or the integrity of the queue.',
+        image: pawFeatures,
       },
       {
         title: 'Shelter Analytics',
-        text: 'Shelter analytics highlight top breeds and average stay length to help shelters make informed decisions.',
-        image: automotiveComfort,
+        text: 'Shelter analytics highlight top breeds and average stay length to help shelters make informed decisions. By turning everyday records into clear charts, the dashboard shows which animals wait longest and where capacity is being strained.',
+        image: pawAnalytics,
+      },
+      {
+        title: 'Adoption Workflow',
+        text: 'Adopters browse available animals, filter by species and age, and submit applications that staff review and approve in a single guided flow. Status updates keep applicants informed at every step, reducing no-shows and repeated phone calls to the front desk.',
+        image: pawWorkFlow,
+      },
+      {
+        title: 'Waitlist & Reservations',
+        text: 'A first-in-line waitlist holds a match for 72 hours, automatically expiring stale reservations so the next adopter in line is notified in time. The timer keeps the process fair and prevents animals from being quietly held indefinitely by a single household.',
+        image: pawWaitlist,
+      },
+      {
+        title: 'Data & Reporting',
+        text: 'CSV import and export let shelters migrate records and share reports, while built-in metrics surface occupancy, adoption rate, and average length of stay. Because everything lives in a local SQLite file, backups are simple and the data stays fully under the shelter’s control.',
+        image: pawData,
+      },
+      {
+        title: 'Under the Hood',
+        text: 'Built with Java and Swing on top of an SQLite database and managed with Maven, keeping the desktop app lightweight, portable, and easy to run locally. The single-file database means a new machine can be up and running in minutes without any server setup.',
+        image: pawUnderTheHood,
       },
     ],
   },
@@ -156,20 +200,24 @@ const ProjectDetails = () => {
                               alt={c.title}
                               className="md:hidden w-full h-48 object-cover rounded-md border border-[#ffffff4d] mb-4"
                             />
-                            <h2
-                              className={`text-sm font-light mb-4 transition-colors duration-300 ${
-                                active === i ? 'text-[#f3f3f3]' : 'text-gray-600'
-                              }`}
-                            >
-                              {c.title}
-                            </h2>
-                            <p
-                              className={`text-sm md:text-base leading-[1.5] transition-colors duration-300 ${
-                                active === i ? 'text-[#d0d0d0]' : 'text-gray-600'
-                              }`}
-                            >
-                              {c.text}
-                            </p>
+                            <AutoReveal direction="left">
+                              <h2
+                                className={`text-sm font-light mb-4 transition-colors duration-300 ${
+                                  active === i ? 'text-[#f3f3f3]' : 'text-gray-600'
+                                }`}
+                              >
+                                {c.title}
+                              </h2>
+                            </AutoReveal>
+                            <AutoReveal direction="left">
+                              <p
+                                className={`text-sm md:text-base leading-[1.5] transition-colors duration-300 ${
+                                  active === i ? 'text-[#d0d0d0]' : 'text-gray-600'
+                                }`}
+                              >
+                                {c.text}
+                              </p>
+                            </AutoReveal>
                           </div>
                         ))}
                       </div>

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import AutoReveal from '@/components/AutoReveal'
-import ProjectStacking from '@/ProjectStacking'
 
 const Projects = () => {
   return (
@@ -26,10 +25,6 @@ const Projects = () => {
               A selection of projects I&rsquo;ve designed and built — from web apps to network and software work.
             </p>
             <hr className="border-t border-[#ffffff38] w-full max-w-2xl mb-8" />
-          </AutoReveal>
-
-          <AutoReveal className="w-full">
-            <ProjectStacking />
           </AutoReveal>
         </div>
       </section>

@@ -74,12 +74,12 @@ export function AutoReveal({
     }
     rafId = requestAnimationFrame(recheck)
 
-    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true, capture: true })
     window.addEventListener('resize', onScroll)
 
     return () => {
       cancelAnimationFrame(rafId)
-      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', onScroll, true)
       window.removeEventListener('resize', onScroll)
     }
   }, [threshold])
